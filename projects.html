@@ -1,46 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Projects - Your Name</title>
+    <meta charset="UTF-8">
+    <title>Projects – Your Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a> | 
-        <a href="projects.html">Projects</a> | 
-        <a href="about.html">About</a>
+        <div class="nav-container">
+            <div class="nav-brand">Your Name</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
     </nav>
-    
-    <h1>Commercial Real Estate Investment Scorer</h1>
-    
-    <h2>Project Overview</h2>
-    <p>A GIS-based tool that identifies high-potential multifamily investment opportunities in Austin, TX using economic and demographic data analysis.</p>
-    
-    <h2>Key Insights</h2>
-    <ul>
-        <li>Identified 15 high-potential census tracts with investment scores > 80</li>
-        <li>Strong correlation between income levels and investment potential</li>
-        <li>Location within 5 miles of downtown showed 40% higher average scores</li>
-    </ul>
-    
-    <h2>Visualizations</h2>
-    <div style="text-align: center;">
-        <img src="images/austin_investment_scores.png" alt="Investment Scores Map" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <p><em>Investment potential scores across Austin census tracts</em></p>
-    </div>
-    
-    <div style="text-align: center; margin-top: 2rem;">
-        <img src="images/austin_score_analysis.png" alt="Score Analysis" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <p><em>Relationship analysis between key factors and investment scores</em></p>
-    </div>
-    
-    <h2>Interactive Demo</h2>
-    <p>Explore the interactive map to see detailed investment scores:</p>
-    <a href="projects/cre-investment-scorer/austin_investment_interactive_map.html" style="background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">View Interactive Map</a>
-    
-    <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
-        <h3>Technical Stack</h3>
-        <p>Python • GeoPandas • Folium • Census API • Pandas • Matplotlib</p>
-    </div>
-</body>
-</html>
+
+    <main>
+        <div class="wrapper">
+            <section class="section">
+                <div class="section--alt content-section">
+                    <h1 class="page-title">Austin Multifamily Investment Scorer</h1>
+                    <p class="page-subtitle">
+                        A GIS-driven scoring model that ranks Austin census tracts by
+                        multifamily investment potential.
+                    </p>
+
+                    <div class="content-grid">
+                        <!-- Text content -->
+                        <div>
+                            <h2>Project overview</h2>
+                            <p>
+                                This project builds a quantitative investment score for every
+                                census tract in Austin, TX. The score blends demographics,
+                                rental demand, and proximity to downtown to highlight high-
+                                potential locations for multifamily development.
+                            </p>
+
+                            <h2>What the model uses</h2>
+                            <ul>
+                                <li>Median income and rent levels from Census / ACS data</li>
+                                <li>Renter share of households as a proxy for demand</li>
+                                <li>Distance to downtown Austin and major job centers</li>
+                                <li>Normalised composite score on a 0–100 scale</li>
+                            </ul>
+
+                            <h2>Tools & stack</h2>
+                            <ul>
+                                <li>Python, Pandas, GeoPandas, NumPy</li>
+                                <li>Folium for interactive web mapping</li>
+                                <li>Matplotlib for distribution and correlation plots</li>
+                                <li>Public census & demographic datasets</li>
+                            </ul>
+
+                            <div class="interactive-demo">
+                                <p>
+                                    Explore the interactive map and drill down into individual
+                                    census tracts.
+                                </p>
+                                <a href="austin_investment_interactive_map.html"
+                                   class="btn btn-primary">
+                                    Open interactive investment map
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Visuals -->
+                        <div>
+                            <div class="visual-grid">
+                                <div class="visual-item">
+                                    <img src="austin_investment_scores.png"
+                                         alt="Austin investment scores map">
+                                    <p>
+                                        Investment scores across Austin census tracts. Darker
+                                        green areas indicate stronger multifamily potential.
+                                    </p>
+                                </div>
+
+                                <div class="visual-item">
+                                    <img src="austin_score_analysis.png"
+                                         alt="Score analysis charts">
+                                    <p>
+                                        Distribution of scores and relationships with income,
+                                        renter share, and distance from downtown.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Key takeaways</h2>
+                    <ul>
+                        <li>
+                            Tracts within roughly 5 miles of downtown show consistently
+                            higher scores, reflecting strong demand and accessibility.
+                        </li>
+                        <li>
+                            Higher renter share tends to correlate with better investment
