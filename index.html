@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Name - Data Science Portfolio</title>
+    <meta charset="UTF-8">
+    <title>Your Name – Data Science & GIS Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <h1>Your Name</h1>
+            <div class="nav-brand">Your Name</div>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -17,60 +20,114 @@
     </nav>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Data Scientist & GIS Analyst</h1>
-                <p>Transforming complex data into actionable business insights through economics, data science, and spatial analysis</p>
-                <a href="projects.html" class="btn">View My Projects</a>
-            </div>
-        </section>
+        <div class="wrapper">
+            <!-- Hero -->
+            <section class="section">
+                <div class="section--alt">
+                    <div class="hero">
+                        <div>
+                            <div class="hero-tagline">
+                                <span></span>
+                                <strong>Data science · Economics · GIS</strong>
+                            </div>
+                            <h1 class="hero-title">
+                                Turning messy spatial data into clear investment insights.
+                            </h1>
+                            <p class="hero-subtitle">
+                                I build analytical tools that combine economics, data science,
+                                and geospatial analysis to support better real-estate and
+                                business decisions.
+                            </p>
+                            <div class="btn-row">
+                                <a href="projects.html" class="btn btn-primary">
+                                    View featured projects
+                                </a>
+                                <a href="about.html" class="btn btn-secondary">
+                                    More about me
+                                </a>
+                            </div>
 
-        <section class="content-section">
-            <div class="container">
-                <h2>Featured Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3>Commercial Real Estate Investment Scorer</h3>
-                        <p>GIS-based tool for identifying high-potential multifamily investment markets using economic and demographic data analysis.</p>
-                        <div class="tech-stack">
-                            <div class="tech-tags">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">GIS</span>
-                                <span class="tech-tag">Economics</span>
-                                <span class="tech-tag">Data Analysis</span>
+                            <div class="tag-row">
+                                <span class="tag">Python</span>
+                                <span class="tag">Pandas</span>
+                                <span class="tag">GeoPandas</span>
+                                <span class="tag">ArcGIS / Remote Sensing</span>
+                                <span class="tag">Econometrics</span>
                             </div>
                         </div>
-                        <a href="projects.html" class="btn">View Project</a>
-                    </div>
-                    
-                    <div class="project-card">
-                        <h3>Retail Trade Area Analysis</h3>
-                        <p>Drive-time analysis and cannibalization prediction for optimal retail location planning and market expansion.</p>
-                        <div class="tech-stack">
-                            <div class="tech-tags">
-                                <span class="tech-tag">Network Analysis</span>
-                                <span class="tech-tag">GIS</span>
-                                <span class="tech-tag">Spatial Analysis</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-secondary">Coming Soon</a>
-                    </div>
 
-                    <div class="project-card">
-                        <h3>Delivery Route Optimizer</h3>
-                        <p>Vehicle routing algorithms to minimize delivery times and fuel costs for logistics operations.</p>
-                        <div class="tech-stack">
-                            <div class="tech-tags">
-                                <span class="tech-tag">Optimization</span>
-                                <span class="tech-tag">Algorithms</span>
-                                <span class="tech-tag">Logistics</span>
+                        <div>
+                            <div class="section--alt" style="padding:1.4rem 1.3rem;">
+                                <p class="section-subtitle" style="margin-bottom:0.7rem;">
+                                    Highlight
+                                </p>
+                                <h2 class="section-title" style="font-size:1.05rem;">
+                                    Austin Multifamily Investment Scoring Tool
+                                </h2>
+                                <p style="font-size:0.9rem; color:#4b5563; margin:0.6rem 0 0.8rem;">
+                                    Built a census-tract–level scoring model to identify
+                                    high-potential multifamily investment locations in Austin, TX
+                                    using demographics, rental demand, and distance to downtown.
+                                </p>
+                                <p class="project-meta">
+                                    Python · GeoPandas · Folium · Census API
+                                </p>
+                                <div class="btn-row" style="margin-top:0.75rem;">
+                                    <a href="projects.html" class="btn btn-secondary">
+                                        Read case study
+                                    </a>
+                                    <a href="austin_investment_interactive_map.html"
+                                       class="btn btn-secondary">
+                                        Open interactive map
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-secondary">Coming Soon</a>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+            </section>
+
+            <!-- Projects overview -->
+            <section class="section">
+                <div class="section-heading">
+                    <h2 class="section-title">Selected work</h2>
+                    <p class="section-subtitle">
+                        A sample of projects across investment analytics, remote sensing,
+                        and business data science.
+                    </p>
+                </div>
+
+                <div class="project-grid">
+                    <article class="project-card">
+                        <h3>Austin Multifamily Investment Scorer</h3>
+                        <p>
+                            Combines census data, rental demand, and distance to CBD to
+                            generate an investment score for each census tract in Austin.
+                        </p>
+                        <p class="project-meta">
+                            GeoPandas · Folium · Matplotlib · Census API
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Real estate</span>
+                            <span class="tag">GIS</span>
+                            <span class="tag">Scoring model</span>
+                        </div>
+                        <div class="btn-row" style="margin-top:0.9rem;">
+                            <a href="projects.html" class="btn btn-secondary">View details</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <h3>Remote Sensing: Lake Mead Water Analysis</h3>
+                        <p>
+                            Used Landsat NDWI and time-series analysis to quantify surface
+                            water loss in Lake Mead and communicate drought risk visually.
+                        </p>
+                        <p class="project-meta">
+                            Python · ArcGIS Pro · Raster analysis
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Remote sensing</span>
+                            <span class="tag">Time series</span>
+                        </div>
+                    </articl
