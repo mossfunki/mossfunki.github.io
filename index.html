@@ -1,16 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Name - Portfolio</title>
+    <title>Your Name - Data Science Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a> | 
-        <a href="projects.html">Projects</a> | 
-        <a href="about.html">About</a>
+        <div class="nav-container">
+            <h1>Your Name</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
     </nav>
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is my data science and GIS portfolio website.</p>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Data Scientist & GIS Analyst</h1>
+                <p>Transforming complex data into actionable business insights through economics, data science, and spatial analysis</p>
+                <a href="projects.html" class="btn">View My Projects</a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>Commercial Real Estate Investment Scorer</h3>
+                        <p>GIS-based tool for identifying high-potential multifamily investment markets using economic and demographic data analysis.</p>
+                        <div class="tech-stack">
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">GIS</span>
+                                <span class="tech-tag">Economics</span>
+                                <span class="tech-tag">Data Analysis</span>
+                            </div>
+                        </div>
+                        <a href="projects.html" class="btn">View Project</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Retail Trade Area Analysis</h3>
+                        <p>Drive-time analysis and cannibalization prediction for optimal retail location planning and market expansion.</p>
+                        <div class="tech-stack">
+                            <div class="tech-tags">
+                                <span class="tech-tag">Network Analysis</span>
+                                <span class="tech-tag">GIS</span>
+                                <span class="tech-tag">Spatial Analysis</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary">Coming Soon</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Delivery Route Optimizer</h3>
+                        <p>Vehicle routing algorithms to minimize delivery times and fuel costs for logistics operations.</p>
+                        <div class="tech-stack">
+                            <div class="tech-tags">
+                                <span class="tech-tag">Optimization</span>
+                                <span class="tech-tag">Algorithms</span>
+                                <span class="tech-tag">Logistics</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-secondary">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
