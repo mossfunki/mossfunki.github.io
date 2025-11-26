@@ -10,9 +10,37 @@
         <a href="projects.html">Projects</a> | 
         <a href="about.html">About</a>
     </nav>
-    <h1>My Projects</h1>
-    <p>Here are my data science and GIS projects.</p>
-    <h2>Commercial Real Estate Investment Scorer</h2>
-    <p>GIS-based analysis of Austin, TX multifamily investment opportunities.</p>
+    
+    <h1>Commercial Real Estate Investment Scorer</h1>
+    
+    <h2>Project Overview</h2>
+    <p>A GIS-based tool that identifies high-potential multifamily investment opportunities in Austin, TX using economic and demographic data analysis.</p>
+    
+    <h2>Key Insights</h2>
+    <ul>
+        <li>Identified 15 high-potential census tracts with investment scores > 80</li>
+        <li>Strong correlation between income levels and investment potential</li>
+        <li>Location within 5 miles of downtown showed 40% higher average scores</li>
+    </ul>
+    
+    <h2>Visualizations</h2>
+    <div style="text-align: center;">
+        <img src="images/austin_investment_scores.png" alt="Investment Scores Map" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p><em>Investment potential scores across Austin census tracts</em></p>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <img src="images/austin_score_analysis.png" alt="Score Analysis" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p><em>Relationship analysis between key factors and investment scores</em></p>
+    </div>
+    
+    <h2>Interactive Demo</h2>
+    <p>Explore the interactive map to see detailed investment scores:</p>
+    <a href="projects/cre-investment-scorer/austin_investment_interactive_map.html" style="background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">View Interactive Map</a>
+    
+    <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+        <h3>Technical Stack</h3>
+        <p>Python • GeoPandas • Folium • Census API • Pandas • Matplotlib</p>
+    </div>
 </body>
 </html>
