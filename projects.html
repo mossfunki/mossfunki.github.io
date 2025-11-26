@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Projects – Your Name</title>
+    <title>Projects – Benjamin Lab</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <div class="nav-brand">Your Name</div>
+            <div class="nav-brand">Benjamin Lab</div>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -20,82 +20,70 @@
 
     <main>
         <div class="wrapper">
+            <!-- Overview -->
             <section class="section">
-                <div class="section--alt content-section">
-                    <h1 class="page-title">Austin Multifamily Investment Scorer</h1>
-                    <p class="page-subtitle">
-                        A GIS-driven scoring model that ranks Austin census tracts by
-                        multifamily investment potential.
+                <div class="section-heading">
+                    <h1 class="section-title">Projects</h1>
+                    <p class="section-subtitle">
+                        Analytics, GIS, and automation work where I’ve turned raw data
+                        into tools people actually use.
                     </p>
+                </div>
 
-                    <div class="content-grid">
-                        <!-- Text content -->
-                        <div>
-                            <h2>Project overview</h2>
-                            <p>
-                                This project builds a quantitative investment score for every
-                                census tract in Austin, TX. The score blends demographics,
-                                rental demand, and proximity to downtown to highlight high-
-                                potential locations for multifamily development.
-                            </p>
-
-                            <h2>What the model uses</h2>
-                            <ul>
-                                <li>Median income and rent levels from Census / ACS data</li>
-                                <li>Renter share of households as a proxy for demand</li>
-                                <li>Distance to downtown Austin and major job centers</li>
-                                <li>Normalised composite score on a 0–100 scale</li>
-                            </ul>
-
-                            <h2>Tools & stack</h2>
-                            <ul>
-                                <li>Python, Pandas, GeoPandas, NumPy</li>
-                                <li>Folium for interactive web mapping</li>
-                                <li>Matplotlib for distribution and correlation plots</li>
-                                <li>Public census & demographic datasets</li>
-                            </ul>
-
-                            <div class="interactive-demo">
-                                <p>
-                                    Explore the interactive map and drill down into individual
-                                    census tracts.
-                                </p>
-                                <a href="austin_investment_interactive_map.html"
-                                   class="btn btn-primary">
-                                    Open interactive investment map
-                                </a>
-                            </div>
+                <div class="project-grid">
+                    <article class="project-card" id="austin">
+                        <h3>Austin Multifamily Investment Scorer</h3>
+                        <p>
+                            GIS-based scoring model that ranks Austin census tracts by
+                            multifamily investment potential, combining demographics,
+                            rental demand, and distance to the CBD.
+                        </p>
+                        <p class="project-meta">
+                            Python · GeoPandas · Folium · Matplotlib · Census/ACS
+                        </p>
+                        <div class="btn-row" style="margin-top:0.9rem;">
+                            <a href="#austin-detail" class="btn btn-secondary">
+                                View case study
+                            </a>
+                            <a href="austin_investment_interactive_map.html" class="btn btn-secondary">
+                                Interactive map
+                            </a>
                         </div>
+                    </article>
 
-                        <!-- Visuals -->
-                        <div>
-                            <div class="visual-grid">
-                                <div class="visual-item">
-                                    <img src="austin_investment_scores.png"
-                                         alt="Austin investment scores map">
-                                    <p>
-                                        Investment scores across Austin census tracts. Darker
-                                        green areas indicate stronger multifamily potential.
-                                    </p>
-                                </div>
+                    <article class="project-card" id="humboldt">
+                        <h3>Humboldt County Site Selection Map</h3>
+                        <p>
+                            Built an interactive map for the Humboldt County Economic
+                            Development Department to visualize economic and demographic
+                            conditions around unincorporated parcels and support
+                            business recruitment.
+                        </p>
+                        <p class="project-meta">
+                            GIS Analyst / Data Visualization Intern · 2025
+                        </p>
+                        <ul>
+                            <li>Integrated multiple spatial datasets with Python & GeoPandas.</li>
+                            <li>Designed layered map views with hover popups and overlays.</li>
+                            <li>Delivered a tool that non-technical staff can explore in a browser.</li>
+                        </ul>
+                    </article>
 
-                                <div class="visual-item">
-                                    <img src="austin_score_analysis.png"
-                                         alt="Score analysis charts">
-                                    <p>
-                                        Distribution of scores and relationships with income,
-                                        renter share, and distance from downtown.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="project-card" id="tutoring">
+                        <h3>Tutoring Center Impact Analytics</h3>
+                        <p>
+                            Analytical pipeline for the Institutional Research office to
+                            track tutoring trends, service usage, and academic outcomes for
+                            thousands of students.
+                        </p>
+                        <p class="project-meta">
+                            Research Analyst Student Intern · 2025
+                        </p>
+                        <ul>
+                            <li>Cleaned and merged 140k+ rows of CSV data with Python (Pandas, NumPy).</li>
+                            <li>Built visualizations in Matplotlib/Seaborn and Tableau dashboards.</li>
+                            <li>Insights contributed to a 25% increase in student engagement.</li>
+                        </ul>
+                    </article>
 
-                    <h2>Key takeaways</h2>
-                    <ul>
-                        <li>
-                            Tracts within roughly 5 miles of downtown show consistently
-                            higher scores, reflecting strong demand and accessibility.
-                        </li>
-                        <li>
-                            Higher renter share tends to correlate with better investment
+                    <article class="project-card" id="terraqua
