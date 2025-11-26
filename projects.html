@@ -86,4 +86,122 @@
                         </ul>
                     </article>
 
-                    <article class="project-card" id="terraqua
+                    <article class="project-card" id="terraquant">
+                        <h3>Solar ETL & Sales Analytics Automation</h3>
+                        <p>
+                            Automated the flow of sales data into live dashboards for a
+                            solar company, reducing the time spent transforming and
+                            analyzing data by roughly 45%.
+                        </p>
+                        <p class="project-meta">
+                            Consultant / Founder · TerraQuant Consulting
+                        </p>
+                        <ul>
+                            <li>Designed an hourly-updating ETL pipeline for sales data.</li>
+                            <li>Leveraged Python automation scripting and cloud tools.</li>
+                            <li>Freed up internal staff time for interpretation instead of wrangling.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Austin detail section -->
+            <section class="section">
+                <div class="section--alt content-section" id="austin-detail">
+                    <h1 class="page-title">Austin Multifamily Investment Scorer</h1>
+                    <p class="page-subtitle">
+                        A census-tract–level scoring model that highlights where
+                        multifamily investment is most promising in Austin, TX.
+                    </p>
+
+                    <div class="content-grid">
+                        <!-- Text content -->
+                        <div>
+                            <h2>Project overview</h2>
+                            <p>
+                                This project builds a quantitative investment score for each
+                                census tract in Austin. The score blends demographics,
+                                rental demand, and accessibility into a single 0–100 metric
+                                to help investors and planners compare locations quickly.
+                            </p>
+
+                            <h2>Key inputs</h2>
+                            <ul>
+                                <li>Median income and rent levels from Census / ACS data.</li>
+                                <li>Renter share as a proxy for multifamily demand.</li>
+                                <li>Distance to downtown Austin and major employment centers.</li>
+                                <li>Composite score normalized across tracts.</li>
+                            </ul>
+
+                            <h2>What I built</h2>
+                            <ul>
+                                <li>GeoPandas workflow to join demographic data with tract geometries.</li>
+                                <li>Scoring functions to standardize variables and combine them into a single index.</li>
+                                <li>Interactive Folium web map with hover popups and tract-level details.</li>
+                                <li>Exploratory plots to show distributions and relationships between drivers and scores.</li>
+                            </ul>
+
+                            <div class="interactive-demo">
+                                <p>
+                                    Explore the interactive Austin map and inspect investment
+                                    scores for individual tracts.
+                                </p>
+                                <a href="austin_investment_interactive_map.html"
+                                   class="btn btn-primary">
+                                    Open interactive map
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Visuals -->
+                        <div>
+                            <div class="visual-grid">
+                                <div class="visual-item">
+                                    <img src="austin_investment_scores.png"
+                                         alt="Austin investment scores map">
+                                    <p>
+                                        Investment scores across Austin census tracts. Darker
+                                        green areas indicate stronger multifamily potential.
+                                    </p>
+                                </div>
+
+                                <div class="visual-item">
+                                    <img src="austin_score_analysis.png"
+                                         alt="Score analysis charts">
+                                    <p>
+                                        Distribution of scores and relationships with income,
+                                        renter share, and distance from downtown.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Takeaways</h2>
+                    <ul>
+                        <li>
+                            Tracts within roughly five miles of downtown show consistently
+                            higher scores, reflecting strong demand and accessibility.
+                        </li>
+                        <li>
+                            Renter share and proximity to job centers are strong drivers of
+                            multifamily potential, but high scores also depend on income
+                            levels that can support new supply.
+                        </li>
+                        <li>
+                            The scoring framework is portable—by swapping in local data,
+                            it can be adapted to other metros or asset classes.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrapper">
+            © 2025 Benjamin Lab · Portfolio
+        </div>
+    </footer>
+</body>
+</html>
