@@ -96,7 +96,7 @@ nav a:hover{
 
 /* 🔑 THIS IS THE FIX */
 main{
-  padding-top: 4rem);
+  padding-top: calc(var(--nav-height) + 24px) !important;;
   padding-bottom: 4rem;
 }
 
