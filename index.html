@@ -1,127 +1,131 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Benjamin Lab – Data Science · Economics · GIS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Benjamin Lab — Data · Economics · GIS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-brand">Benjamin Lab</div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
+
+  <nav>
+    <div class="nav-container">
+      <div class="nav-brand">Benjamin Lab</div>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="wrapper">
+
+    <section class="section hero">
+      <div>
+        <div class="hero-tagline"><span></span> Data · Economics · GIS</div>
+        <h1 class="hero-title">
+          Studying systems, space, and data to understand real-world outcomes.
+        </h1>
+        <p class="hero-subtitle">
+          Economics student with a focus on data science and GIS. Interested in
+          applied analysis, spatial data, and evidence-based decision making.
+        </p>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#work">View Work</a>
+          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
         </div>
-    </nav>
 
-    <main>
-        <div class="wrapper">
-            <!-- Hero -->
-            <section class="section">
-                <div class="section--alt">
-                    <div class="hero">
-                        <div>
-                            <div class="hero-tagline">
-                                <span></span>
-                                <strong>Economics · Data Science · GIS</strong>
-                            </div>
-                            <h1 class="hero-title">
-                                I build data & spatial tools that turn complex systems into clear decisions.
-                            </h1>
-                            <p class="hero-subtitle">
-                                Detail-oriented and mission-driven economics student with a concentration in
-                                data science and GIS. I design pipelines, dashboards, and geospatial tools
-                                that help organizations act on their data instead of just storing it.
-                            </p>
-                            <div class="btn-row">
-                                <a href="projects.html" class="btn btn-primary">
-                                    View projects
-                                </a>
-                                <a href="about.html" class="btn btn-secondary">
-                                    Learn more about me
-                                </a>
-                            </div>
+        <div class="tag-row">
+          <span class="tag">Data Analysis</span>
+          <span class="tag">GIS</span>
+          <span class="tag">Remote Sensing</span>
+          <span class="tag">Economics</span>
+        </div>
+      </div>
+    </section>
 
-                            <div class="tag-row">
-                                <span class="tag">Python · ETL</span>
-                                <span class="tag">GeoPandas · Folium</span>
-                                <span class="tag">ArcGIS & ENVI</span>
-                                <span class="tag">SQL · Tableau</span>
-                                <span class="tag">Machine Learning</span>
-                            </div>
-                        </div>
+    <section id="work" class="section section--alt">
+      <div class="section-heading">
+        <h2 class="section-title">Selected Work</h2>
+        <span class="section-subtitle">Projects & coursework</span>
+      </div>
 
-                        <div>
-                            <div class="section--alt" style="padding:1.4rem 1.3rem;">
-                                <p class="section-subtitle" style="margin-bottom:0.7rem;">
-                                    Current focus
-                                </p>
-                                <h2 class="section-title" style="font-size:1.05rem;">
-                                    Founder · TerraQuant Consulting
-                                </h2>
-                                <p style="font-size:0.9rem; color:#4b5563; margin:0.6rem 0 0.8rem;">
-                                    Building a data-driven analytics and spatial intelligence firm helping
-                                    public agencies, developers, and environmental organizations make
-                                    evidence-based decisions through economic modeling and geospatial analysis.
-                                </p>
-                                <p class="project-meta">
-                                    Recent work: automated an hourly-updating sales ETL pipeline for Six Rivers
-                                    Solar, cutting reporting time by ~45%.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Lake Mead Surface Water Change</h3>
+          <p>
+            Landsat-based NDWI analysis (2000–2023) measuring surface water decline
+            and spatial variability.
+          </p>
+          <span class="project-meta">ArcGIS Pro · ENVI · Remote Sensing</span>
+        </div>
 
-            <!-- Projects overview -->
-            <section class="section">
-                <div class="section-heading">
-                    <h2 class="section-title">Selected work</h2>
-                    <p class="section-subtitle">
-                        A sample of analytics, GIS, and automation projects I’ve built.
-                    </p>
-                </div>
+        <div class="project-card">
+          <h3>Jakobshavn Glacier Retreat</h3>
+          <p>
+            Time-series analysis of glacier retreat, elevation change, and ice
+            velocity using satellite imagery.
+          </p>
+          <span class="project-meta">Landsat · DEMs · GIS</span>
+        </div>
 
-                <div class="project-grid">
-                    <article class="project-card">
-                        <h3>Austin Multifamily Investment Scorer</h3>
-                        <p>
-                            Census-tract–level scoring model that ranks multifamily investment
-                            opportunities across Austin using income, renter demand, and
-                            proximity to downtown.
-                        </p>
-                        <p class="project-meta">
-                            Python · GeoPandas · Folium · Matplotlib
-                        </p>
-                        <div class="tag-row">
-                            <span class="tag">Real estate analytics</span>
-                            <span class="tag">GIS</span>
-                            <span class="tag">Scoring model</span>
-                        </div>
-                        <div class="btn-row" style="margin-top:0.9rem;">
-                            <a href="projects.html#austin" class="btn btn-secondary">View details</a>
-                            <a href="austin_investment_interactive_map.html" class="btn btn-secondary">
-                                Interactive map
-                            </a>
-                        </div>
-                    </article>
+        <div class="project-card">
+          <h3>Humboldt County Business Mapping</h3>
+          <p>
+            Built a spatial database and interactive map identifying unincorporated
+            parcels for business development.
+          </p>
+          <span class="project-meta">Spatial Databases · Mapping</span>
+        </div>
+      </div>
+    </section>
 
-                    <article class="project-card">
-                        <h3>Humboldt County Site Selection Map</h3>
-                        <p>
-                            Interactive geospatial tool for the Humboldt County Economic Development
-                            Department mapping unincorporated parcels with economic and demographic
-                            overlays to support business recruitment and land-use planning.
-                        </p>
-                        <p class="project-meta">
-                            Python · GeoPandas · Folium · Economic development
-                        </p>
-                        <div class="tag-row">
-                            <span cla
+    <section id="about" class="section">
+      <div class="content-grid">
+        <div>
+          <h2 class="section-title">About</h2>
+          <p class="hero-subtitle">
+            My work sits at the intersection of economics, data science, and spatial
+            analysis. I’m especially interested in how environmental change,
+            infrastructure, and policy interact across space.
+          </p>
+        </div>
+        <div class="highlight-box">
+          <p>
+            Tools: Python, ArcGIS Pro, ENVI, SQL<br />
+            Coursework: Data Analysis, Visualization, Machine Learning, Remote Sensing
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section--alt">
+      <h2 class="section-title">Contact</h2>
+      <p class="hero-subtitle">
+        Reach out for collaborations, research, or opportunities.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="mailto:your@email.com">Email</a>
+        <a class="btn btn-secondary" href="#">LinkedIn</a>
+        <a class="btn btn-secondary" href="#">GitHub</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Benjamin Lab
+  </footer>
+
+</body>
+</html>
+
   
