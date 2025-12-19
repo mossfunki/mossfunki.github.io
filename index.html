@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Benjamin Lab — Data · Economics · GIS</title>
+  <title>Benjamin Lab — Applied Data & GIS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Fonts -->
@@ -14,118 +14,87 @@
 </head>
 <body>
 
-  <nav>
-    <div class="nav-container">
-      <div class="nav-brand">Benjamin Lab</div>
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrapper">
+
+  <!-- HERO -->
+  <section class="section hero">
+    <div>
+      <h1 class="hero-title">
+        Applied data & GIS analysis for real-world spatial decisions.
+      </h1>
+      <p class="hero-subtitle">
+        I work at the intersection of economics, data science, and GIS—using spatial
+        analysis and visualization to understand patterns, tradeoffs, and outcomes.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="projects.html">View Projects</a>
+        <a class="btn btn-secondary" href="Ben-Resume.pdf" target="_blank" rel="noopener">
+          Resume (PDF)
+        </a>
+      </div>
     </div>
-  </nav>
+  </section>
 
-  <main class="wrapper">
+  <!-- FEATURED PROJECT -->
+  <section class="section section--alt">
+    <div class="section-heading">
+      <h2 class="section-title">Featured Project</h2>
+      <span class="section-subtitle">Applied GIS & spatial analysis</span>
+    </div>
 
-    <section class="section hero">
+    <div class="content-grid">
       <div>
-        <div class="hero-tagline"><span></span> Data · Economics · GIS</div>
-        <h1 class="hero-title">
-          Studying systems, space, and data to understand real-world outcomes.
-        </h1>
+        <h3 class="proj-title">Austin Investment Opportunity Map</h3>
         <p class="hero-subtitle">
-          Economics student with a focus on data science and GIS. Interested in
-          applied analysis, spatial data, and evidence-based decision making.
+          An interactive GIS application analyzing neighborhood-level investment
+          potential using spatial indicators, scoring models, and comparative
+          visualization.
         </p>
 
+        <ul class="project-bullets">
+          <li>Spatial scoring & normalization</li>
+          <li>Interactive web mapping</li>
+          <li>Policy & investment context</li>
+        </ul>
+
         <div class="btn-row">
-          <a class="btn btn-primary" href="#work">View Work</a>
-          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
-        </div>
-
-        <div class="tag-row">
-          <span class="tag">Data Analysis</span>
-          <span class="tag">GIS</span>
-          <span class="tag">Remote Sensing</span>
-          <span class="tag">Economics</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="work" class="section section--alt">
-      <div class="section-heading">
-        <h2 class="section-title">Selected Work</h2>
-        <span class="section-subtitle">Projects & coursework</span>
-      </div>
-
-      <div class="project-grid">
-        <div class="project-card">
-          <h3>Lake Mead Surface Water Change</h3>
-          <p>
-            Landsat-based NDWI analysis (2000–2023) measuring surface water decline
-            and spatial variability.
-          </p>
-          <span class="project-meta">ArcGIS Pro · ENVI · Remote Sensing</span>
-        </div>
-
-        <div class="project-card">
-          <h3>Jakobshavn Glacier Retreat</h3>
-          <p>
-            Time-series analysis of glacier retreat, elevation change, and ice
-            velocity using satellite imagery.
-          </p>
-          <span class="project-meta">Landsat · DEMs · GIS</span>
-        </div>
-
-        <div class="project-card">
-          <h3>Humboldt County Business Mapping</h3>
-          <p>
-            Built a spatial database and interactive map identifying unincorporated
-            parcels for business development.
-          </p>
-          <span class="project-meta">Spatial Databases · Mapping</span>
+          <a class="btn btn-primary"
+             href="austin_investment_interactive_map.html"
+             target="_blank" rel="noopener">
+            View Interactive Map
+          </a>
+          <a class="btn btn-secondary" href="projects.html">
+            All Projects
+          </a>
         </div>
       </div>
-    </section>
 
-    <section id="about" class="section">
-      <div class="content-grid">
-        <div>
-          <h2 class="section-title">About</h2>
-          <p class="hero-subtitle">
-            My work sits at the intersection of economics, data science, and spatial
-            analysis. I’m especially interested in how environmental change,
-            infrastructure, and policy interact across space.
-          </p>
-        </div>
-        <div class="highlight-box">
-          <p>
-            Tools: Python, ArcGIS Pro, ENVI, SQL<br />
-            Coursework: Data Analysis, Visualization, Machine Learning, Remote Sensing
-          </p>
-        </div>
+      <div class="highlight-box">
+        <strong>Tools & methods</strong><br>
+        GIS · Spatial Analysis · Scoring Models · Visualization<br>
+        ArcGIS Pro · Web Mapping · Python
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" class="section section--alt">
-      <h2 class="section-title">Contact</h2>
-      <p class="hero-subtitle">
-        Reach out for collaborations, research, or opportunities.
-      </p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="mailto:sunnyreligion@gmail.com">Email</a>
-        <a class="btn btn-secondary" href="#">www.linkedin.com/in/benjamin-lab-577792240</a>
-        <a class="btn btn-secondary" href="#">https://github.com/mossfunki</a>
-      </div>
-    </section>
+</main>
 
-  </main>
-
-  <footer>
-    © 2026 Benjamin Lab
-  </footer>
+<footer>
+  © 2025 Benjamin Lab
+</footer>
 
 </body>
 </html>
 
-  
