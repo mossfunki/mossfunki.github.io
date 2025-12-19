@@ -1,26 +1,17 @@
-<!-- case-austin-investment-map.html (FULL FILE — CHUNK 1) -->
+<!-- case-austin-investment-map.html (FULL FILE with two images included) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Benjamin Lab — Applied Data & GIS</title>
+  <title>Case Study — Austin Investment Opportunity Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Fonts (keep these) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet (ensure style.css is in the repo root) -->
-  <link rel="stylesheet" href="/style.css">
-
-  <!-- Optional: small inline critical styles (safe to keep) -->
-  <style>
-    /* ensure basic readable layout even if external CSS fails briefly */
-    html,body{height:100%;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#2b2b23;background:#f3efe7}
-    .nav-brand{font-family:Merriweather,serif;font-weight:700}
-    a { color: #556b3a; text-decoration:none; }
-  </style>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
 
@@ -41,7 +32,7 @@
     <h1 class="section-title">Austin Investment Opportunity Map</h1>
     <p class="hero-subtitle">
       An applied GIS case study combining spatial indicators into a neighborhood-level
-      investment score, delivered through an interactive web map.
+      investment score, delivered through an interactive web map plus supporting visuals.
     </p>
   </section>
 
@@ -79,7 +70,7 @@
       patterns across Austin.
     </p>
 
-    <div class="figure">
+    <div class="figure" aria-hidden="false">
       <iframe
         src="austin_investment_interactive_map.html"
         title="Austin Investment Interactive Map"
@@ -101,6 +92,24 @@
   </section>
 
   <section class="section section--alt">
+    <h2 class="section-title">Supporting Visuals</h2>
+    <p class="hero-subtitle">Two key figures used alongside the map in presentations and briefings.</p>
+
+    <div class="figure">
+      <img src="austin_investment_scores.png" alt="Austin investment scores chart" loading="lazy">
+    </div>
+
+    <div class="figure">
+      <img src="austin_score_analysis.png" alt="Austin score analysis figure" loading="lazy">
+    </div>
+
+    <div class="btn-row" style="margin-top:0.6rem;">
+      <a class="btn btn-secondary" href="austin_investment_scores.png" target="_blank" rel="noopener">Download Scores Chart</a>
+      <a class="btn btn-secondary" href="austin_score_analysis.png" target="_blank" rel="noopener">Download Analysis Figure</a>
+    </div>
+  </section>
+
+  <section class="section">
     <h2 class="section-title">Outcome</h2>
     <p class="hero-subtitle">
       The map revealed clear spatial clusters of high investment potential near transit
