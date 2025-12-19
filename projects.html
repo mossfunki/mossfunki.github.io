@@ -1,3 +1,4 @@
+
 <!-- projects.html (FULL FILE) -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,72 +12,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
 
   <style>
-    .projects-wrapper {
-      max-width:1100px;
-      margin:0 auto;
-      padding:6rem 1.25rem 4rem;
-    }
-
-    .filter-bar {
-      display:flex;
-      gap:.5rem;
-      margin-bottom:1.5rem;
-      flex-wrap:wrap;
-    }
-
-    .filter-btn {
-      border:1px solid var(--border);
-      background:transparent;
-      padding:.35rem .75rem;
-      cursor:pointer;
-      font-size:.85rem;
-      color:var(--muted);
-    }
-
-    .filter-btn.active {
-      background:var(--accent);
-      color:#fff;
-      border-color:var(--accent);
-    }
-
-    .projects-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:1rem;
-    }
-
-    .proj-card {
-      border:1px solid var(--border);
-      background:var(--panel);
-      padding:1rem;
-      cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      gap:.6rem;
-      min-height:120px;
-    }
-
-    .proj-card h3 {
-      font-family:Merriweather, serif;
-      color:var(--accent-2);
-      font-size:1.05rem;
-      margin-bottom:.25rem;
-    }
-
-    .proj-card p {
-      color:var(--muted);
-      font-size:.9rem;
-    }
-
-    .proj-tag {
-      font-size:.75rem;
-      margin-top:auto;
-      color:var(--muted);
-    }
-
+    /* Small page-specific adjustments */
+    .projects-wrapper { max-width:1100px; margin:0 auto; padding:6rem 1.25rem 4rem; }
+    .filter-bar { display:flex; gap:.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+    .filter-btn { border:1px solid var(--border); background:transparent; padding:.35rem .75rem; cursor:pointer; font-size:.85rem; color:var(--muted); }
+    .filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+    .proj-card { border:1px solid var(--border); background:var(--panel); padding:1rem; cursor:pointer; display:flex; flex-direction:column; gap:.6rem; min-height:120px; }
+    .proj-card h3 { font-family:Merriweather, serif; color:var(--accent-2); font-size:1.05rem; margin-bottom:.25rem; }
+    .proj-card p { color:var(--muted); font-size:.9rem; }
+    .proj-tag { font-size:.75rem; margin-top:auto; color:var(--muted); }
     .proj-actions { display:flex; gap:.5rem; margin-top:.6rem; }
     .proj-actions a { text-decoration:none; padding:.35rem .6rem; border:1px solid var(--border); color:var(--accent-2); font-size:.85rem; display:inline-block; }
     .proj-actions a.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
