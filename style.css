@@ -88,7 +88,7 @@ nav a:hover {
 .section-subtitle { color: var(--muted); font-size: 0.95rem; }
 
 /* Hero */
-.hero { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+.hero { display: grid; gap: 2rem; grid-template-columns: 1fr; }
 @media (min-width: 800px) { .hero { grid-template-columns: 1.5fr 1fr; } }
 .hero-title {
   font-family: "Merriweather", Georgia, serif;
