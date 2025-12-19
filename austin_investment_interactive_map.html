@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet -->
+  <!-- Main stylesheet (ensure style.css is at your repo root) -->
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -26,109 +26,119 @@
   </div>
 </nav>
 
-<main class="wrapper">
+<main class="wrapper case-wrapper">
 
   <!-- HEADER -->
-  <section class="section">
-    <h1 class="section-title">Austin Investment Opportunity Map</h1>
-    <p class="hero-subtitle">
-      An applied GIS project that combines spatial indicators into a neighborhood-level
-      investment score, presented through an interactive map and supporting visuals.
-    </p>
-  </section>
+  <header class="section case-hero">
+    <div>
+      <h1 class="section-title">Austin Investment Opportunity Map</h1>
+      <p class="hero-subtitle">
+        An applied GIS project that produces a neighborhood-level investment score and
+        an interactive web map for exploration and stakeholder briefings. Below the map
+        you'll find the two supporting figures used in analysis and presentation.
+      </p>
 
-  <!-- OVERVIEW -->
+      <div class="case-tools" style="margin-top:.6rem; color:var(--muted);">
+        <strong>Role:</strong> Data & GIS lead ·
+        <strong>Tools:</strong> ArcGIS Pro · Python · Leaflet/Mapbox · QGIS
+      </div>
+    </div>
+
+    <aside class="highlight-box" style="min-width:220px;">
+      <strong>Quick links</strong>
+      <ul style="margin-top:.6rem; color:var(--muted);">
+        <li><a href="austin_investment_interactive_map.html" target="_blank" rel="noopener">Open interactive map</a></li>
+        <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+    </aside>
+  </header>
+
+  <!-- OVERVIEW / METHOD -->
   <section class="section section--alt">
     <div class="content-grid">
       <div>
-        <h2 class="section-title">Overview</h2>
+        <h2 class="section-title">Overview & Method</h2>
         <p class="hero-subtitle">
-          This project was developed to help identify neighborhoods in Austin with
-          strong investment potential while balancing accessibility, land use, and
-          socioeconomic context. The goal was transparency, interpretability, and
-          spatial clarity.
+          The project compiles demographic, built-environment, and accessibility indicators,
+          standardizes them, and combines them into a composite investment score at the
+          neighborhood scale. Results are presented via an interactive map plus two
+          concise figures used in briefings.
         </p>
 
-        <h2 class="section-title" style="margin-top:1.25rem;">Methodology</h2>
-        <ul class="project-bullets">
-          <li>Compiled demographic, land-use, and accessibility indicators</li>
-          <li>Standardized variables and constructed a composite score</li>
-          <li>Validated results through sensitivity analysis</li>
-          <li>Delivered results via interactive web mapping</li>
+        <ul class="project-bullets" style="margin-top:.8rem;">
+          <li>Data: ACS, OpenStreetMap, local parcel & land-use data</li>
+          <li>Processing: Python (pandas, geopandas), spatial joins, zonal statistics</li>
+          <li>Mapping: lightweight web map with responsive popups and decile filters</li>
         </ul>
       </div>
 
       <div class="highlight-box">
-        <strong>Tools & stack</strong><br>
-        GIS · Spatial Analysis · Python<br>
-        ArcGIS Pro · Web Mapping<br>
-        Census & open spatial data
+        <strong>Deliverables</strong><br>
+        Interactive map, score summary figure, analysis figure, reproducible scripts
       </div>
     </div>
   </section>
 
-  <!-- INTERACTIVE MAP -->
+  <!-- MAP -->
   <section class="section">
     <h2 class="section-title">Interactive Map</h2>
     <p class="hero-subtitle">
-      Use the map below to explore neighborhood scores, inspect indicator values,
-      and compare spatial patterns across Austin.
+      Explore neighborhood scores, inspect indicator values, and filter by decile or category.
+      If the embedded view doesn't load, open the full map in a new tab.
     </p>
 
-    <div class="figure">
+    <div class="figure" style="margin-top:.8rem;">
       <iframe
         src="austin_investment_interactive_map.html"
         title="Austin Investment Interactive Map"
-        style="width:100%; height:420px; border:0;"
+        style="width:100%; height:460px; border:0;"
         loading="lazy">
       </iframe>
     </div>
 
-    <div class="btn-row">
-      <a class="btn btn-primary"
-         href="austin_investment_interactive_map.html"
-         target="_blank" rel="noopener">
-        Open Full Map
-      </a>
-      <a class="btn btn-secondary" href="projects.html">
-        Back to Projects
-      </a>
+    <div class="btn-row" style="margin-top:.6rem;">
+      <a class="btn btn-primary" href="austin_investment_interactive_map.html" target="_blank" rel="noopener">Open Full Map</a>
+      <a class="btn btn-secondary" href="projects.html">Back to Projects</a>
     </div>
   </section>
 
-  <!-- SUPPORTING VISUALS -->
+  <!-- SUPPORTING FIGURES (explicitly part of this case study) -->
   <section class="section section--alt">
-    <h2 class="section-title">Supporting Analysis</h2>
-    <p class="hero-subtitle">
-      The following figures were used alongside the interactive map in analysis and
-      presentations to communicate score behavior and distributions.
-    </p>
+    <h2 class="section-title">Supporting Figures</h2>
+    <p class="hero-subtitle">Two compact figures used alongside the interactive map in analysis and presentations.</p>
 
-    <div class="figure">
-      <img
-        src="austin_investment_scores.png"
-        alt="Austin investment score summary"
-        loading="lazy">
+    <!-- Responsive two-column layout on wide screens, stacked on small screens -->
+    <div style="display:grid; gap:1rem; grid-template-columns:1fr; margin-top:1rem;">
+      <div class="figure" style="max-width:100%; padding:.6rem;">
+        <figure style="margin:0;">
+          <img src="austin_investment_scores.png" alt="Austin investment score summary" loading="lazy" style="width:100%;height:auto;display:block;">
+          <figcaption style="margin-top:.5rem; color:var(--muted); font-size:0.9rem;">
+            Figure — Neighborhood-level composite scores (summary chart).
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="figure" style="max-width:100%; padding:.6rem;">
+        <figure style="margin:0;">
+          <img src="austin_score_analysis.png" alt="Austin score analysis visualizations" loading="lazy" style="width:100%;height:auto;display:block;">
+          <figcaption style="margin-top:.5rem; color:var(--muted); font-size:0.9rem;">
+            Figure — Analysis visuals: distributions, correlations, and sensitivity checks.
+          </figcaption>
+        </figure>
+      </div>
     </div>
 
-    <div class="figure">
-      <img
-        src="austin_score_analysis.png"
-        alt="Austin score analysis visualization"
-        loading="lazy">
-    </div>
+    <!-- On larger screens, place images side-by-side -->
+    <style>
+      @media(min-width:1000px){
+        section.section--alt > div[style] { grid-template-columns: 1fr 1fr; }
+        .figure { margin: 0.5rem; }
+      }
+    </style>
 
-    <div class="btn-row">
-      <a class="btn btn-secondary"
-         href="austin_investment_scores.png"
-         target="_blank" rel="noopener">
-        Download Scores Chart
-      </a>
-      <a class="btn btn-secondary"
-         href="austin_score_analysis.png"
-         target="_blank" rel="noopener">
-        Download Analysis Figure
-      </a>
+    <div class="btn-row" style="margin-top:.6rem;">
+      <a class="btn btn-secondary" href="austin_investment_scores.png" target="_blank" rel="noopener">Download Scores Chart</a>
+      <a class="btn btn-secondary" href="austin_score_analysis.png" target="_blank" rel="noopener">Download Analysis Figure</a>
     </div>
   </section>
 
@@ -136,10 +146,9 @@
   <section class="section">
     <h2 class="section-title">Outcome & Use</h2>
     <p class="hero-subtitle">
-      The project revealed clear spatial clustering of high investment potential near
-      transit corridors and mixed-use areas. Score rankings remained stable across
-      reasonable weighting variations, supporting use as an exploratory and
-      prioritization tool rather than a prescriptive ranking.
+      The map and supporting figures were used for stakeholder briefings and exploratory
+      prioritization. Top deciles align with transit corridors and mixed-use nodes; the
+      scoring approach performed robustly under alternative weighting schemes.
     </p>
   </section>
 
@@ -151,4 +160,3 @@
 
 </body>
 </html>
-
