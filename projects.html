@@ -1,207 +1,174 @@
+<!-- projects.html (FULL FILE) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Projects – Benjamin Lab</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Projects — Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .projects-wrapper {
+      max-width:1100px;
+      margin:0 auto;
+      padding:6rem 1.25rem 4rem;
+    }
+
+    .filter-bar {
+      display:flex;
+      gap:.5rem;
+      margin-bottom:1.5rem;
+      flex-wrap:wrap;
+    }
+
+    .filter-btn {
+      border:1px solid var(--border);
+      background:transparent;
+      padding:.35rem .75rem;
+      cursor:pointer;
+      font-size:.85rem;
+      color:var(--muted);
+    }
+
+    .filter-btn.active {
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+    }
+
+    .projects-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:1rem;
+    }
+
+    .proj-card {
+      border:1px solid var(--border);
+      background:var(--panel);
+      padding:1rem;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+      min-height:120px;
+    }
+
+    .proj-card h3 {
+      font-family:Merriweather, serif;
+      color:var(--accent-2);
+      font-size:1.05rem;
+      margin-bottom:.25rem;
+    }
+
+    .proj-card p {
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .proj-tag {
+      font-size:.75rem;
+      margin-top:auto;
+      color:var(--muted);
+    }
+
+    .proj-actions { display:flex; gap:.5rem; margin-top:.6rem; }
+    .proj-actions a { text-decoration:none; padding:.35rem .6rem; border:1px solid var(--border); color:var(--accent-2); font-size:.85rem; display:inline-block; }
+    .proj-actions a.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="nav-brand">Benjamin Lab</div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main>
-        <div class="wrapper">
-            <!-- Overview -->
-            <section class="section">
-                <div class="section-heading">
-                    <h1 class="section-title">Projects</h1>
-                    <p class="section-subtitle">
-                        Analytics, GIS, and automation work where I’ve turned raw data
-                        into tools people actually use.
-                    </p>
-                </div>
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </div>
+</nav>
 
-                <div class="project-grid">
-                    <article class="project-card" id="austin">
-                        <h3>Austin Multifamily Investment Scorer</h3>
-                        <p>
-                            GIS-based scoring model that ranks Austin census tracts by
-                            multifamily investment potential, combining demographics,
-                            rental demand, and distance to the CBD.
-                        </p>
-                        <p class="project-meta">
-                            Python · GeoPandas · Folium · Matplotlib · Census/ACS
-                        </p>
-                        <div class="btn-row" style="margin-top:0.9rem;">
-                            <a href="#austin-detail" class="btn btn-secondary">
-                                View case study
-                            </a>
-                            <a href="austin_investment_interactive_map.html" class="btn btn-secondary">
-                                Interactive map
-                            </a>
-                        </div>
-                    </article>
+<main class="projects-wrapper">
 
-                    <article class="project-card" id="humboldt">
-                        <h3>Humboldt County Site Selection Map</h3>
-                        <p>
-                            Built an interactive map for the Humboldt County Economic
-                            Development Department to visualize economic and demographic
-                            conditions around unincorporated parcels and support
-                            business recruitment.
-                        </p>
-                        <p class="project-meta">
-                            GIS Analyst / Data Visualization Intern · 2025
-                        </p>
-                        <ul>
-                            <li>Integrated multiple spatial datasets with Python & GeoPandas.</li>
-                            <li>Designed layered map views with hover popups and overlays.</li>
-                            <li>Delivered a tool that non-technical staff can explore in a browser.</li>
-                        </ul>
-                    </article>
+  <h1 class="section-title">Projects</h1>
+  <p class="section-subtitle">Applied GIS, spatial analysis, and data visualization work. Click "Case study" for a full write-up.</p>
 
-                    <article class="project-card" id="tutoring">
-                        <h3>Tutoring Center Impact Analytics</h3>
-                        <p>
-                            Analytical pipeline for the Institutional Research office to
-                            track tutoring trends, service usage, and academic outcomes for
-                            thousands of students.
-                        </p>
-                        <p class="project-meta">
-                            Research Analyst Student Intern · 2025
-                        </p>
-                        <ul>
-                            <li>Cleaned and merged 140k+ rows of CSV data with Python (Pandas, NumPy).</li>
-                            <li>Built visualizations in Matplotlib/Seaborn and Tableau dashboards.</li>
-                            <li>Insights contributed to a 25% increase in student engagement.</li>
-                        </ul>
-                    </article>
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="gis">GIS</button>
+    <button class="filter-btn" data-filter="analysis">Data Analysis</button>
+    <button class="filter-btn" data-filter="visualization">Visualization</button>
+  </div>
 
-                    <article class="project-card" id="terraquant">
-                        <h3>Solar ETL & Sales Analytics Automation</h3>
-                        <p>
-                            Automated the flow of sales data into live dashboards for a
-                            solar company, reducing the time spent transforming and
-                            analyzing data by roughly 45%.
-                        </p>
-                        <p class="project-meta">
-                            Consultant / Founder · TerraQuant Consulting
-                        </p>
-                        <ul>
-                            <li>Designed an hourly-updating ETL pipeline for sales data.</li>
-                            <li>Leveraged Python automation scripting and cloud tools.</li>
-                            <li>Freed up internal staff time for interpretation instead of wrangling.</li>
-                        </ul>
-                    </article>
-                </div>
-            </section>
+  <!-- PROJECTS -->
+  <section class="projects-grid">
 
-            <!-- Austin detail section -->
-            <section class="section">
-                <div class="section--alt content-section" id="austin-detail">
-                    <h1 class="page-title">Austin Multifamily Investment Scorer</h1>
-                    <p class="page-subtitle">
-                        A census-tract–level scoring model that highlights where
-                        multifamily investment is most promising in Austin, TX.
-                    </p>
+    <article class="proj-card" data-category="gis visualization">
+      <h3>Austin Investment Opportunity Map</h3>
+      <p>Interactive web map that scores neighborhoods by investment potential and visualizes spatial patterns across Austin.</p>
+      <div class="proj-actions">
+        <a class="primary" href="case-austin-investment-map.html">Case study</a>
+        <a href="austin_investment_interactive_map.html" target="_blank" rel="noopener">Open map</a>
+      </div>
+      <div class="proj-tag">GIS · Visualization</div>
+    </article>
 
-                    <div class="content-grid">
-                        <!-- Text content -->
-                        <div>
-                            <h2>Project overview</h2>
-                            <p>
-                                This project builds a quantitative investment score for each
-                                census tract in Austin. The score blends demographics,
-                                rental demand, and accessibility into a single 0–100 metric
-                                to help investors and planners compare locations quickly.
-                            </p>
+    <article class="proj-card" data-category="analysis visualization">
+      <h3>Austin Score Analysis</h3>
+      <p>Exploratory and confirmatory analyses underlying the scoring model: distributions, correlations, and sensitivity checks.</p>
+      <div class="proj-actions">
+        <a class="primary" href="case-austin-score-analysis.html">Case study</a>
+        <a href="austin_score_analysis.png" target="_blank" rel="noopener">Open image</a>
+      </div>
+      <div class="proj-tag">Data Analysis</div>
+    </article>
 
-                            <h2>Key inputs</h2>
-                            <ul>
-                                <li>Median income and rent levels from Census / ACS data.</li>
-                                <li>Renter share as a proxy for multifamily demand.</li>
-                                <li>Distance to downtown Austin and major employment centers.</li>
-                                <li>Composite score normalized across tracts.</li>
-                            </ul>
+    <article class="proj-card" data-category="analysis visualization">
+      <h3>Austin Investment Scores</h3>
+      <p>Charts and tables summarizing neighborhood-level scores, ranking methodology, and comparative insights.</p>
+      <div class="proj-actions">
+        <a class="primary" href="case-austin-investment-scores.html">Case study</a>
+        <a href="austin_investment_scores.png" target="_blank" rel="noopener">Open image</a>
+      </div>
+      <div class="proj-tag">Visualization</div>
+    </article>
 
-                            <h2>What I built</h2>
-                            <ul>
-                                <li>GeoPandas workflow to join demographic data with tract geometries.</li>
-                                <li>Scoring functions to standardize variables and combine them into a single index.</li>
-                                <li>Interactive Folium web map with hover popups and tract-level details.</li>
-                                <li>Exploratory plots to show distributions and relationships between drivers and scores.</li>
-                            </ul>
+  </section>
 
-                            <div class="interactive-demo">
-                                <p>
-                                    Explore the interactive Austin map and inspect investment
-                                    scores for individual tracts.
-                                </p>
-                                <a href="austin_investment_interactive_map.html"
-                                   class="btn btn-primary">
-                                    Open interactive map
-                                </a>
-                            </div>
-                        </div>
+</main>
 
-                        <!-- Visuals -->
-                        <div>
-                            <div class="visual-grid">
-                                <div class="visual-item">
-                                    <img src="austin_investment_scores.png"
-                                         alt="Austin investment scores map">
-                                    <p>
-                                        Investment scores across Austin census tracts. Darker
-                                        green areas indicate stronger multifamily potential.
-                                    </p>
-                                </div>
+<footer>
+  © 2025 Benjamin Lab
+</footer>
 
-                                <div class="visual-item">
-                                    <img src="austin_score_analysis.png"
-                                         alt="Score analysis charts">
-                                    <p>
-                                        Distribution of scores and relationships with income,
-                                        renter share, and distance from downtown.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.proj-card');
 
-                    <h2>Takeaways</h2>
-                    <ul>
-                        <li>
-                            Tracts within roughly five miles of downtown show consistently
-                            higher scores, reflecting strong demand and accessibility.
-                        </li>
-                        <li>
-                            Renter share and proximity to job centers are strong drivers of
-                            multifamily potential, but high scores also depend on income
-                            levels that can support new supply.
-                        </li>
-                        <li>
-                            The scoring framework is portable—by swapping in local data,
-                            it can be adapted to other metros or asset classes.
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-    </main>
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    <footer>
-        <div class="wrapper">
-            © 2025 Benjamin Lab · Portfolio
-        </div>
-    </footer>
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category.includes(filter)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
