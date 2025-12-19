@@ -1,9 +1,8 @@
-<!-- case-austin-investment-map.html (FULL FILE with two images included) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Case Study — Austin Investment Opportunity Map</title>
+  <title>Austin Investment Opportunity Map — Case Study</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Fonts -->
@@ -11,7 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/style.css" />
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -28,49 +28,54 @@
 
 <main class="wrapper">
 
+  <!-- HEADER -->
   <section class="section">
     <h1 class="section-title">Austin Investment Opportunity Map</h1>
     <p class="hero-subtitle">
-      An applied GIS case study combining spatial indicators into a neighborhood-level
-      investment score, delivered through an interactive web map plus supporting visuals.
+      An applied GIS project that combines spatial indicators into a neighborhood-level
+      investment score, presented through an interactive map and supporting visuals.
     </p>
   </section>
 
+  <!-- OVERVIEW -->
   <section class="section section--alt">
     <div class="content-grid">
       <div>
-        <h2 class="section-title">Problem</h2>
+        <h2 class="section-title">Overview</h2>
         <p class="hero-subtitle">
-          Decision-makers needed a transparent, spatially explicit way to identify
-          neighborhoods with high investment potential while balancing socioeconomic,
-          infrastructural, and accessibility indicators.
+          This project was developed to help identify neighborhoods in Austin with
+          strong investment potential while balancing accessibility, land use, and
+          socioeconomic context. The goal was transparency, interpretability, and
+          spatial clarity.
         </p>
 
-        <h2 class="section-title" style="margin-top:1.2rem;">Approach</h2>
+        <h2 class="section-title" style="margin-top:1.25rem;">Methodology</h2>
         <ul class="project-bullets">
           <li>Compiled demographic, land-use, and accessibility indicators</li>
           <li>Standardized variables and constructed a composite score</li>
-          <li>Mapped results using an interactive web interface</li>
+          <li>Validated results through sensitivity analysis</li>
+          <li>Delivered results via interactive web mapping</li>
         </ul>
       </div>
 
       <div class="highlight-box">
         <strong>Tools & stack</strong><br>
-        ArcGIS Pro · Python (pandas, geopandas)<br>
-        Web mapping (Leaflet / Mapbox)<br>
+        GIS · Spatial Analysis · Python<br>
+        ArcGIS Pro · Web Mapping<br>
         Census & open spatial data
       </div>
     </div>
   </section>
 
+  <!-- INTERACTIVE MAP -->
   <section class="section">
     <h2 class="section-title">Interactive Map</h2>
     <p class="hero-subtitle">
-      Explore neighborhood scores, inspect indicator values, and compare spatial
-      patterns across Austin.
+      Use the map below to explore neighborhood scores, inspect indicator values,
+      and compare spatial patterns across Austin.
     </p>
 
-    <div class="figure" aria-hidden="false">
+    <div class="figure">
       <iframe
         src="austin_investment_interactive_map.html"
         title="Austin Investment Interactive Map"
@@ -91,31 +96,50 @@
     </div>
   </section>
 
+  <!-- SUPPORTING VISUALS -->
   <section class="section section--alt">
-    <h2 class="section-title">Supporting Visuals</h2>
-    <p class="hero-subtitle">Two key figures used alongside the map in presentations and briefings.</p>
+    <h2 class="section-title">Supporting Analysis</h2>
+    <p class="hero-subtitle">
+      The following figures were used alongside the interactive map in analysis and
+      presentations to communicate score behavior and distributions.
+    </p>
 
     <div class="figure">
-      <img src="austin_investment_scores.png" alt="Austin investment scores chart" loading="lazy">
+      <img
+        src="austin_investment_scores.png"
+        alt="Austin investment score summary"
+        loading="lazy">
     </div>
 
     <div class="figure">
-      <img src="austin_score_analysis.png" alt="Austin score analysis figure" loading="lazy">
+      <img
+        src="austin_score_analysis.png"
+        alt="Austin score analysis visualization"
+        loading="lazy">
     </div>
 
-    <div class="btn-row" style="margin-top:0.6rem;">
-      <a class="btn btn-secondary" href="austin_investment_scores.png" target="_blank" rel="noopener">Download Scores Chart</a>
-      <a class="btn btn-secondary" href="austin_score_analysis.png" target="_blank" rel="noopener">Download Analysis Figure</a>
+    <div class="btn-row">
+      <a class="btn btn-secondary"
+         href="austin_investment_scores.png"
+         target="_blank" rel="noopener">
+        Download Scores Chart
+      </a>
+      <a class="btn btn-secondary"
+         href="austin_score_analysis.png"
+         target="_blank" rel="noopener">
+        Download Analysis Figure
+      </a>
     </div>
   </section>
 
+  <!-- OUTCOME -->
   <section class="section">
-    <h2 class="section-title">Outcome</h2>
+    <h2 class="section-title">Outcome & Use</h2>
     <p class="hero-subtitle">
-      The map revealed clear spatial clusters of high investment potential near transit
-      corridors and mixed-use areas. Sensitivity testing showed score stability across
-      reasonable weighting schemes, supporting its use for exploratory analysis and
-      prioritization.
+      The project revealed clear spatial clustering of high investment potential near
+      transit corridors and mixed-use areas. Score rankings remained stable across
+      reasonable weighting variations, supporting use as an exploratory and
+      prioritization tool rather than a prescriptive ranking.
     </p>
   </section>
 
@@ -127,3 +151,4 @@
 
 </body>
 </html>
+
