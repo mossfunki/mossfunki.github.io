@@ -19,7 +19,7 @@
   --accent-2: #556b3a;
   --border: #e6e2db;
 
-  --nav-height: 72px; /* 🔑 SINGLE SOURCE OF TRUTH */
+  --nav-height: 100px; /* 🔑 SINGLE SOURCE OF TRUTH */
   --max-width: 1100px;
 }
 
