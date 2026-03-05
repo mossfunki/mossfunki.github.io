@@ -5,13 +5,15 @@
   <meta charset="UTF-8" />
   <title>Case Study — Austin Investment Scores</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Case Study: Austin Investment Scores — neighborhood-level investment score visualization by Benjamin Lab.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
@@ -21,6 +23,7 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
     </ul>
   </div>
@@ -100,8 +103,23 @@
 </main>
 
 <footer>
-  © 2025 Benjamin Lab
+  <div class="footer-inner">
+    <span>© 2025 Benjamin Lab</span>
+    <div class="footer-links">
+      <a href="mailto:your@email.com">Email</a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
 </footer>
 
+<script>
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
+</script>
 </body>
 </html>

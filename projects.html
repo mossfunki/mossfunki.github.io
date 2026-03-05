@@ -6,6 +6,7 @@
   <meta charset="UTF-8" />
   <title>Projects — Benjamin Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Projects by Benjamin Lab — applied GIS, spatial analysis, and data visualization including the Austin Investment Opportunity Map.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <style>
     /* Small page-specific adjustments */
@@ -21,7 +23,8 @@
     .filter-btn { border:1px solid var(--border); background:transparent; padding:.35rem .75rem; cursor:pointer; font-size:.85rem; color:var(--muted); }
     .filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
     .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
-    .proj-card { border:1px solid var(--border); background:var(--panel); padding:1rem; cursor:pointer; display:flex; flex-direction:column; gap:.6rem; min-height:120px; }
+    .proj-card { border:1px solid var(--border); background:var(--panel); padding:1rem; cursor:pointer; display:flex; flex-direction:column; gap:.6rem; min-height:120px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .proj-card:hover { border-color: var(--accent); box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
     .proj-card h3 { font-family:Merriweather, serif; color:var(--accent-2); font-size:1.05rem; margin-bottom:.25rem; }
     .proj-card p { color:var(--muted); font-size:.9rem; }
     .proj-tag { font-size:.75rem; margin-top:auto; color:var(--muted); }
@@ -38,6 +41,7 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
     </ul>
   </div>
@@ -63,8 +67,7 @@
       <h3>Austin Investment Opportunity Map</h3>
       <p>Interactive web map that scores neighborhoods by investment potential and visualizes spatial patterns across Austin.</p>
       <div class="proj-actions">
-        <a class="primary" href="case-austin-investment-map.html">Case study</a>
-        <a href="austin_investment_interactive_map.html" target="_blank" rel="noopener">Open map</a>
+        <a class="primary" href="austin_investment_interactive_map.html" target="_blank" rel="noopener">Open map</a>
       </div>
       <div class="proj-tag">GIS · Visualization</div>
     </article>
@@ -94,7 +97,14 @@
 </main>
 
 <footer>
-  © 2025 Benjamin Lab
+  <div class="footer-inner">
+    <span>© 2025 Benjamin Lab</span>
+    <div class="footer-links">
+      <a href="mailto:your@email.com">Email</a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -116,6 +126,13 @@
       });
     });
   });
+
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
 </script>
 
 </body>
