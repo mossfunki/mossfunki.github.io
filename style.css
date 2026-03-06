@@ -377,10 +377,143 @@ footer{
 }
 
 /* =========================
+   EXPERTISE GRID (HOMEPAGE)
+========================= */
+.expertise-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.expertise-card{
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.expertise-card h3{
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1rem;
+  color: var(--accent-2);
+  margin-bottom: 0.5rem;
+}
+
+.expertise-card p{
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* =========================
+   CASE STUDY
+========================= */
+.cs-breadcrumb{
+  padding: 1.25rem 0 0;
+  font-size: 0.875rem;
+}
+
+.cs-breadcrumb a{
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.cs-breadcrumb a:hover{
+  color: var(--ink);
+}
+
+.cs-tags{
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.cs-tag{
+  background: var(--accent-light);
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--border);
+  letter-spacing: 0.02em;
+}
+
+.cs-title{
+  font-family: "Merriweather", Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.cs-summary{
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 65ch;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.cs-kpis{
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
+.cs-kpi{
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cs-kpi-value{
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--accent-2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cs-kpi-label{
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cs-tools{
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.5rem;
+}
+
+.cs-tool{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.75rem;
+}
+
+/* =========================
    MOBILE SAFETY
 ========================= */
 @media (max-width: 700px){
   :root{
     --nav-height: 60px;
+  }
+}
+
+@media (max-width: 700px){
+  .expertise-grid{
+    grid-template-columns: 1fr;
   }
 }

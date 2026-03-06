@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>[PROJECT TITLE] — Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="[One sentence description of this project and its key result.]">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrapper">
+
+  <!-- BREADCRUMB -->
+  <div class="cs-breadcrumb">
+    <a href="projects.html">← Back to Projects</a>
+  </div>
+
+  <!-- HEADER -->
+  <section class="section">
+    <div class="cs-tags">
+      <span class="cs-tag">Supply Chain</span>
+      <span class="cs-tag">Python</span>
+      <span class="cs-tag">GIS</span>
+      <!-- Add/remove tags to match the project -->
+    </div>
+
+    <h1 class="cs-title">[Project Title]</h1>
+
+    <p class="cs-summary">
+      [One to two sentences. What did you do, and what was the result or key finding?
+      Example: "Modeled optimal distribution center placement across the Western U.S.
+      using facility location optimization, reducing estimated last-mile delivery costs
+      by 18% compared to the current network configuration."]
+    </p>
+
+    <!-- KEY METRICS — replace values and labels with real numbers -->
+    <div class="cs-kpis">
+      <div class="cs-kpi">
+        <span class="cs-kpi-value">3</span>
+        <span class="cs-kpi-label">Data sources</span>
+      </div>
+      <div class="cs-kpi">
+        <span class="cs-kpi-value">12</span>
+        <span class="cs-kpi-label">Variables modeled</span>
+      </div>
+      <div class="cs-kpi">
+        <span class="cs-kpi-value">18%</span>
+        <span class="cs-kpi-label">Cost reduction</span>
+      </div>
+      <div class="cs-kpi">
+        <span class="cs-kpi-value">847</span>
+        <span class="cs-kpi-label">Nodes analyzed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section section--alt">
+    <div class="content-grid">
+      <div>
+        <h2 class="section-title">Problem</h2>
+        <p class="hero-subtitle">
+          [Describe the problem being solved. Why does it matter? Who cares about this?
+          What decision or question is the analysis trying to answer?
+          Example: "Rapid e-commerce growth has made last-mile delivery the most
+          expensive segment of the supply chain, accounting for over 50% of total
+          logistics costs. Poorly sited distribution centers compound this cost by
+          increasing average delivery distance and reducing network flexibility."]
+        </p>
+      </div>
+      <div class="highlight-box">
+        <strong>Context</strong><br><br>
+        [Brief framing: industry, geography, scale, or policy context for the problem.]
+        <br><br>
+        <strong>Objective</strong><br><br>
+        [One sentence stating exactly what the analysis set out to determine.]
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA & METHODS -->
+  <section class="section">
+    <div class="content-grid">
+      <div>
+        <h2 class="section-title">Data & Methods</h2>
+        <p class="hero-subtitle">
+          [Describe your analytical approach. What methods did you use and why?
+          Mention any key modeling decisions or trade-offs.]
+        </p>
+        <ul class="project-bullets">
+          <li>[Method or step 1 — e.g., "Aggregated Census block-level population data to ZIP code demand zones"]</li>
+          <li>[Method or step 2 — e.g., "Modeled facility location as a p-median optimization problem using PuLP"]</li>
+          <li>[Method or step 3 — e.g., "Validated results with sensitivity analysis across ±20% demand scenarios"]</li>
+          <li>[Method or step 4]</li>
+        </ul>
+      </div>
+      <div class="highlight-box">
+        <strong>Data sources</strong><br><br>
+        [Source 1 — e.g., U.S. Census Bureau, 2022 ACS]<br>
+        [Source 2 — e.g., OpenStreetMap road network]<br>
+        [Source 3]<br><br>
+        <strong>Tools</strong><br><br>
+        [Tool 1] · [Tool 2] · [Tool 3]<br>
+        [Tool 4] · [Tool 5]
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN VISUALIZATION -->
+  <section class="section section--alt">
+    <h2 class="section-title">Analysis</h2>
+    <p class="hero-subtitle">
+      [One sentence describing what this visualization shows and what to look for in it.]
+    </p>
+
+    <div class="figure">
+      <!-- Replace src with your actual image or iframe -->
+      <img
+        src="[your-image-filename.png]"
+        alt="[Descriptive alt text for the visualization]"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Optional: second figure -->
+    <!--
+    <div class="figure" style="margin-top:1.5rem;">
+      <img src="[second-image.png]" alt="[Alt text]" loading="lazy" />
+    </div>
+    -->
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section">
+    <h2 class="section-title">Results</h2>
+    <p class="hero-subtitle">
+      [Lead with the most important finding. What did the analysis actually show?]
+    </p>
+    <ul class="project-bullets">
+      <li>[Key finding 1 — be specific, use numbers where possible]</li>
+      <li>[Key finding 2]</li>
+      <li>[Key finding 3]</li>
+    </ul>
+  </section>
+
+  <!-- IMPLICATIONS -->
+  <section class="section section--alt">
+    <div class="content-grid">
+      <div>
+        <h2 class="section-title">Implications</h2>
+        <p class="hero-subtitle">
+          [What do the results mean in practice? What decision or action do they support?
+          Who should care about this and why? Connect back to the original problem.]
+        </p>
+      </div>
+      <div>
+        <h2 class="section-title">Limitations & Next Steps</h2>
+        <ul class="project-bullets">
+          <li>[Limitation 1 — e.g., "Demand data aggregated at ZIP level may obscure local variation"]</li>
+          <li>[Limitation 2]</li>
+          <li>[Next step 1 — e.g., "Incorporate real-time traffic data for more accurate travel times"]</li>
+          <li>[Next step 2]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS & STACK -->
+  <section class="section">
+    <h2 class="section-title">Tools & Stack</h2>
+    <div class="cs-tools">
+      <span class="cs-tool">Python</span>
+      <span class="cs-tool">pandas</span>
+      <span class="cs-tool">GeoPandas</span>
+      <span class="cs-tool">PuLP</span>
+      <span class="cs-tool">Folium</span>
+      <span class="cs-tool">ArcGIS Pro</span>
+      <!-- Replace with the actual tools used -->
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://github.com/mossfunki" target="_blank" rel="noopener">View Code on GitHub</a>
+      <a class="btn btn-secondary" href="projects.html">← All Projects</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 Benjamin Lab</span>
+    <div class="footer-links">
+      <a href="mailto:your@email.com">Email</a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
+</script>
+</body>
+</html>
