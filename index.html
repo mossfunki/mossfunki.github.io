@@ -10,7 +10,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -34,6 +34,7 @@
   <!-- HERO -->
   <section class="section hero">
     <div>
+      <p class="hero-eyebrow">Benjamin Lab &mdash; Data Scientist &amp; Spatial Analyst</p>
       <h1 class="hero-title">
         Data science and spatial analytics for supply chain, logistics, and economic decisions.
       </h1>
@@ -48,22 +49,40 @@
         <a class="btn btn-secondary" href="about.html">About Me</a>
         <a class="btn btn-secondary" href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
+
+      <div class="hero-tools">
+        <span>Python</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>SQL</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>GIS</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>Supply Chain Optimization</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>Machine Learning</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>Econometrics</span>
+      </div>
     </div>
   </section>
 
 <!-- WHAT I DO -->
-<section class="section">
+<section class="section reveal">
+  <p class="section-label">01 &mdash; Expertise</p>
   <h2 class="section-title">What I do</h2>
   <div class="expertise-grid">
-    <div class="expertise-card">
+    <div class="expertise-card reveal reveal-delay-1">
+      <div class="expertise-number">01</div>
       <h3>Supply Chain & Logistics</h3>
       <p>Network optimization, facility siting, route analysis, and demand forecasting applied to real operational problems.</p>
     </div>
-    <div class="expertise-card">
+    <div class="expertise-card reveal reveal-delay-2">
+      <div class="expertise-number">02</div>
       <h3>Data Science & Modeling</h3>
       <p>Predictive modeling, time series forecasting, machine learning, and statistical inference from complex real-world datasets.</p>
     </div>
-    <div class="expertise-card">
+    <div class="expertise-card reveal reveal-delay-3">
+      <div class="expertise-number">03</div>
       <h3>GIS & Spatial Analysis</h3>
       <p>Spatial econometrics, interactive mapping, and geospatial data pipelines for location-based operational decisions.</p>
     </div>
@@ -71,9 +90,12 @@
 </section>
 
   <!-- FEATURED PROJECT -->
-  <section class="section section--alt">
+  <section class="section section--alt reveal">
     <div class="section-heading">
-      <h2 class="section-title">Featured Project</h2>
+      <div>
+        <p class="section-label">02 &mdash; Featured Work</p>
+        <h2 class="section-title">Featured Project</h2>
+      </div>
       <span class="section-subtitle">GIS · Spatial scoring · Python</span>
     </div>
 
@@ -130,6 +152,23 @@
     document.querySelectorAll('nav a').forEach(function(a){
       if(a.getAttribute('href') === p) a.classList.add('nav-active');
     });
+  })();
+
+  // Scroll reveal
+  (function(){
+    if(!('IntersectionObserver' in window)){
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
   })();
 </script>
 </body>
