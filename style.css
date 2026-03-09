@@ -629,6 +629,52 @@ footer{
 .reveal-delay-3{ transition-delay: 0.3s; }
 
 /* =========================
+   ABOUT PORTRAIT
+========================= */
+.about-portrait-wrap {
+  margin-bottom: 2rem;
+}
+
+.about-portrait {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+/* =========================
+   ABOUT PHOTO STRIP
+========================= */
+.about-photos {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
    MOBILE SAFETY
 ========================= */
 @media (max-width: 700px){
