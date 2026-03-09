@@ -629,7 +629,7 @@ footer{
 .reveal-delay-3{ transition-delay: 0.3s; }
 
 /* =========================
-   ABOUT PORTRAIT
+   ABOUT PORTRAIT (about page)
 ========================= */
 .about-portrait-wrap {
   margin-bottom: 2rem;
@@ -639,7 +639,19 @@ footer{
   width: 140px;
   height: 140px;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+/* =========================
+   HERO PORTRAIT (homepage)
+========================= */
+.hero-portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 15%;
   border: 1px solid var(--border);
   display: block;
 }
