@@ -648,7 +648,7 @@ footer{
    HERO PORTRAIT (homepage)
 ========================= */
 .hero-portrait {
-  width: 100%;
+  width: 80%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center 15%;
