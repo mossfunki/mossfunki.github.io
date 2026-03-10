@@ -3,176 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Humboldt County Map</title>
+  <title>Humboldt County Unincorporated Parcels</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Inter', system-ui, sans-serif; }
     #map { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+
+    /* Top bar */
+    #topbar {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid #d2ddd8;
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      backdrop-filter: blur(8px);
+    }
+    #topbar h1 {
+      font-size: 0.92rem; font-weight: 700; color: #14503f;
+      font-family: 'Merriweather', Georgia, serif; white-space: nowrap;
+    }
+    #topbar .divider { width: 1px; height: 20px; background: #d2ddd8; }
+    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 4px 12px; font-size: 0.78rem; font-weight: 600;
+      border: 1px solid #d2ddd8; background: white; cursor: pointer;
+      color: #52706a; letter-spacing: 0.03em; transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: #1a6b55; color: #1a6b55; }
+    .filter-btn.active { background: #1a6b55; color: white; border-color: #1a6b55; }
+    .filter-btn.active-sale { background: #1a6b55; color: white; border-color: #1a6b55; }
+    .filter-btn.active-lease { background: #2980b9; color: white; border-color: #2980b9; }
+    .filter-btn.active-both { background: #d35400; color: white; border-color: #d35400; }
+    #count-label {
+      font-size: 0.75rem; color: #52706a; white-space: nowrap;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Loading */
     #loading {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.92); padding: 1.5rem 2rem;
-      border: 1px solid #ccc; border-radius: 4px; z-index: 9999;
-      font-size: 1rem; color: #333; text-align: center;
+      background: rgba(255,255,255,0.95); padding: 1.25rem 2rem;
+      border: 1px solid #d2ddd8; z-index: 9999;
+      font-size: 0.95rem; color: #333; text-align: center;
     }
-    .info-panel {
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid #ccc;
+
+    /* Legend */
+    .legend {
+      background: rgba(255,255,255,0.95); padding: 10px 14px;
+      border: 1px solid #d2ddd8; font-size: 0.78rem; line-height: 1.8;
+    }
+    .legend-title { font-weight: 700; color: #14503f; margin-bottom: 4px; font-size: 0.8rem; }
+    .legend-row { display: flex; align-items: center; gap: 7px; }
+    .legend-dot {
+      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* Popup */
+    .parcel-popup { font-size: 0.82rem; line-height: 1.6; min-width: 220px; max-width: 280px; }
+    .parcel-popup h4 {
+      font-size: 0.88rem; font-weight: 700; color: #14503f;
+      margin-bottom: 6px; border-bottom: 1px solid #d2ddd8; padding-bottom: 4px;
+    }
+    .parcel-popup .badge {
+      display: inline-block; padding: 2px 8px; font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.04em; margin: 0 3px 6px 0;
       border-radius: 2px;
-      font-size: 0.82rem;
-      line-height: 1.5;
-      max-width: 240px;
     }
-    .info-panel h4 { margin: 0 0 4px; font-size: 0.9rem; color: #14503f; }
-    .legend { line-height: 1.6; }
-    .legend i {
-      width: 14px; height: 14px; display: inline-block;
-      margin-right: 6px; vertical-align: middle; opacity: 0.8;
+    .badge-sale { background: #eaf4ee; color: #1a6b55; border: 1px solid #1a6b55; }
+    .badge-lease { background: #ebf4fb; color: #2980b9; border: 1px solid #2980b9; }
+    .parcel-popup table { width: 100%; border-collapse: collapse; }
+    .parcel-popup td { padding: 1px 0; vertical-align: top; }
+    .parcel-popup td:first-child { color: #52706a; padding-right: 8px; white-space: nowrap; font-weight: 600; }
+    .parcel-popup .section-head {
+      font-weight: 700; color: #14503f; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding-top: 6px; padding-bottom: 2px;
     }
   </style>
 </head>
 <body>
 
-<div id="loading">Loading map data&hellip;</div>
+<div id="loading">Loading parcels&hellip;</div>
+
+<div id="topbar">
+  <h1>Humboldt County Unincorporated Parcels</h1>
+  <div class="divider"></div>
+  <div class="filter-group">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="sale">For Sale</button>
+    <button class="filter-btn" data-filter="lease">For Lease</button>
+    <button class="filter-btn" data-filter="both">Sale &amp; Lease</button>
+  </div>
+  <div class="divider"></div>
+  <span id="count-label">— parcels</span>
+</div>
+
 <div id="map"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
 <script>
-// Humboldt County center and bounds
 const HUMBOLDT_CENTER = [40.745, -123.87];
-const HUMBOLDT_ZOOM = 9;
 const HUMBOLDT_BOUNDS = [[40.001, -124.407], [41.465, -123.435]];
 
-// Init map with canvas renderer for performance
 const map = L.map('map', {
   center: HUMBOLDT_CENTER,
-  zoom: HUMBOLDT_ZOOM,
+  zoom: 10,
   preferCanvas: true,
   maxBounds: HUMBOLDT_BOUNDS,
-  maxBoundsViscosity: 0.7
+  maxBoundsViscosity: 0.6
 });
 
-// Basemap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  maxZoom: 18
+  maxZoom: 19
 }).addTo(map);
 
-// Layer style functions
-function broadbandStyle(feature) {
-  const tech = feature.properties.TechCode;
-  const colors = { 70: '#9b59b6', 50: '#3498db', 40: '#2ecc71', 10: '#e74c3c' };
-  const color = colors[tech] || '#95a5a6';
-  return { color: color, weight: 0.8, fillColor: color, fillOpacity: 0.25 };
+// Color by availability
+function parcelColor(props) {
+  const sale = isYes(props['FOR SALE?']);
+  const lease = isYes(props['FOR LEASE?']);
+  if (sale && lease) return { fill: '#d35400', border: '#a04000' }; // both — orange
+  if (sale)          return { fill: '#1a6b55', border: '#0f4232' }; // sale — green
+  if (lease)         return { fill: '#2980b9', border: '#1a5276' }; // lease — blue
+  return             { fill: '#7f8c8d', border: '#555' };            // neither — grey
 }
 
-function parcelStyle() {
-  return { color: '#1a6b55', weight: 1, fillColor: '#eaf2ef', fillOpacity: 0.5 };
+function isYes(val) {
+  return val && String(val).trim().toLowerCase() === 'yes';
 }
 
-function parcelHoverStyle() {
-  return { color: '#14503f', weight: 2, fillColor: '#b8ddd3', fillOpacity: 0.7 };
+function clean(val) {
+  const s = String(val).trim();
+  return (s === '' || s === 'nan' || s === 'None' || s === 'NaN') ? null : s;
 }
 
-function infraStyle() {
-  return { color: '#e67e22', weight: 1.5, fillColor: 'none', fillOpacity: 0 };
-}
+function buildPopup(props) {
+  const sale = isYes(props['FOR SALE?']);
+  const lease = isYes(props['FOR LEASE?']);
+  const badges = (sale ? '<span class="badge badge-sale">FOR SALE</span>' : '') +
+                 (lease ? '<span class="badge badge-lease">FOR LEASE</span>' : '');
 
-// Popup builders
-function broadbandPopup(props) {
-  const techNames = { 70: 'LTE / Mobile Broadband', 50: 'Cable', 40: 'DSL', 10: 'Fiber' };
-  return `<div class="info-panel">
-    <h4>Broadband Coverage</h4>
-    <b>Provider:</b> ${props.DBA || 'N/A'}<br>
-    <b>Technology:</b> ${techNames[props.TechCode] || 'Code ' + props.TechCode}<br>
-    <b>Households:</b> ${props.SUM_HH2020 ? props.SUM_HH2020.toLocaleString() : 'N/A'}<br>
-    <b>Purple zone:</b> ${props.PURPLEZONE ? 'Yes' : 'No'}
+  const row = (label, val) => val ? `<tr><td>${label}</td><td>${val}</td></tr>` : '';
+
+  const address = clean(props['ADDRESS']);
+  const apn = clean(props['APN_12']) || clean(props['APN']);
+  const acres = clean(props['LOT ACRES']) || clean(props['ACRES']);
+  const landUse = clean(props['LAND USE']) || clean(props['DESCRIPTIO']);
+  const propType = clean(props['PROPERTY TYPE']);
+  const zoning = clean(props['ZONING']);
+  const generalPlan = clean(props['CURRENT\nGENERAL PLAN']);
+  const recentUse = clean(props['CURRENT/MOST\nRECENT USE']);
+  const sqft = clean(props['MAIN HOUSE SQUARE FEET']);
+  const buildings = clean(props['NUMBER OF\nBUILDINGS ON PARCEL']);
+  const salePrice = clean(props['SALE PRICE ($)']);
+  const leasePrice = clean(props['LEASE PRICE\nPER MONTH ($)']);
+  const leaseType = clean(props['LEASE TYPE']);
+  const leaseTerms = clean(props['LEASE TERMS']);
+  const broker = clean(props['BROKER/OWNER CONTACT INFORMATION']);
+  const dateFound = clean(props['DATE FOUND']);
+
+  return `<div class="parcel-popup">
+    <h4>${address || 'APN ' + (apn || '—')}</h4>
+    ${badges}
+    <table>
+      <tr><td colspan="2" class="section-head">Parcel</td></tr>
+      ${row('APN', apn)}
+      ${row('Acres', acres)}
+      ${row('Land Use', landUse)}
+      ${row('Prop Type', propType)}
+      ${row('Zoning', zoning)}
+      ${row('General Plan', generalPlan)}
+      ${sqft || buildings ? `<tr><td colspan="2" class="section-head">Structure</td></tr>` : ''}
+      ${row('Sq Ft', sqft)}
+      ${row('Buildings', buildings)}
+      ${(sale || lease) ? `<tr><td colspan="2" class="section-head">Listing</td></tr>` : ''}
+      ${row('Sale Price', salePrice)}
+      ${row('Lease/mo', leasePrice)}
+      ${row('Lease Type', leaseType)}
+      ${row('Terms', leaseTerms)}
+      ${recentUse ? `<tr><td colspan="2" class="section-head">Current Use</td></tr>
+      <tr><td colspan="2" style="color:#52706a;padding-top:2px">${recentUse}</td></tr>` : ''}
+      ${broker ? `<tr><td colspan="2" class="section-head">Contact</td></tr>
+      <tr><td colspan="2"><a href="mailto:${broker}" style="color:#1a6b55">${broker}</a></td></tr>` : ''}
+      ${row('Date Found', dateFound)}
+    </table>
   </div>`;
 }
 
-function parcelPopup(props) {
-  const rows = [
-    ['APN', props.APN],
-    ['Address', props.ADDRESS],
-    ['Description', props.DESCRIPTIO],
-    ['Acres', props.ACRES ? Number(props.ACRES).toFixed(2) : null],
-    ['Land Use', props['LAND USE']],
-    ['Zoning', props.ZONING],
-    ['For Sale?', props['FOR SALE?']],
-    ['Sale Price', props['SALE PRICE ($)'] ? '$' + Number(props['SALE PRICE ($)']).toLocaleString() : null],
-    ['For Lease?', props['FOR LEASE?']],
-  ].filter(([_, v]) => v && v !== 'nan' && v !== 'None' && String(v).trim() !== '');
-  const html = rows.map(([k, v]) => `<b>${k}:</b> ${v}`).join('<br>');
-  return `<div class="info-panel"><h4>Parcel</h4>${html}</div>`;
+// Store all features for filtering
+let allFeatures = [];
+let activeFilter = 'all';
+let geoLayer = null;
+
+function featureMatchesFilter(props, filter) {
+  if (filter === 'all')   return true;
+  if (filter === 'sale')  return isYes(props['FOR SALE?']) && !isYes(props['FOR LEASE?']);
+  if (filter === 'lease') return !isYes(props['FOR SALE?']) && isYes(props['FOR LEASE?']);
+  if (filter === 'both')  return isYes(props['FOR SALE?']) && isYes(props['FOR LEASE?']);
+  return true;
 }
 
-function infraPopup(props) {
-  return `<div class="info-panel">
-    <h4>Infrastructure</h4>
-    <b>Type:</b> ${props.TYPE || 'N/A'}<br>
-    <b>Owner:</b> ${props.OWNER || 'N/A'}<br>
-    <b>Voltage:</b> ${props.VOLTAGE || 'N/A'} (${props.VOLT_CLASS || ''})<br>
-    <b>Status:</b> ${props.STATUS || 'N/A'}
-  </div>`;
-}
+function renderLayer(filter) {
+  if (geoLayer) map.removeLayer(geoLayer);
+  const filtered = allFeatures.filter(f => featureMatchesFilter(f.properties, filter));
+  document.getElementById('count-label').textContent = `${filtered.length} parcels`;
 
-// Layer groups
-const broadbandLayer = L.geoJSON(null, {
-  renderer: L.canvas(),
-  style: broadbandStyle,
-  onEachFeature: (f, layer) => layer.bindPopup(broadbandPopup(f.properties))
-});
+  geoLayer = L.geoJSON({ type: 'FeatureCollection', features: filtered }, {
+    renderer: L.canvas(),
+    style: f => {
+      const c = parcelColor(f.properties);
+      return { color: c.border, weight: 2, fillColor: c.fill, fillOpacity: 0.65 };
+    },
+    onEachFeature: (f, layer) => {
+      layer.bindPopup(buildPopup(f.properties), { maxWidth: 300 });
+      layer.on('mouseover', function() {
+        const c = parcelColor(f.properties);
+        this.setStyle({ fillOpacity: 0.9, weight: 3, color: c.border });
+      });
+      layer.on('mouseout', function() {
+        geoLayer.resetStyle(this);
+      });
+    }
+  }).addTo(map);
 
-const parcelLayer = L.geoJSON(null, {
-  renderer: L.canvas(),
-  style: parcelStyle,
-  onEachFeature: (f, layer) => {
-    layer.bindPopup(parcelPopup(f.properties));
-    layer.on('mouseover', function() { this.setStyle(parcelHoverStyle()); });
-    layer.on('mouseout', function() { parcelLayer.resetStyle(this); });
+  // Fit map to parcel extent
+  if (filtered.length > 0) {
+    try { map.fitBounds(geoLayer.getBounds(), { padding: [60, 60] }); } catch(e) {}
   }
+}
+
+// Filter button logic
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderLayer(activeFilter);
+  });
 });
 
-const infraLayer = L.geoJSON(null, {
-  renderer: L.canvas(),
-  style: infraStyle,
-  onEachFeature: (f, layer) => layer.bindPopup(infraPopup(f.properties))
-});
-
-// Load all layers async in parallel
-const loading = document.getElementById('loading');
-Promise.all([
-  fetch('layer_1.geojson').then(r => r.json()).then(d => { broadbandLayer.addData(d); broadbandLayer.addTo(map); }),
-  fetch('layer_2.geojson').then(r => r.json()).then(d => { parcelLayer.addData(d); parcelLayer.addTo(map); }),
-  fetch('layer_3.geojson').then(r => r.json()).then(d => { infraLayer.addData(d); infraLayer.addTo(map); }),
-]).then(() => {
-  loading.style.display = 'none';
-}).catch(err => {
-  loading.textContent = 'Error loading data. Try opening via a local server.';
-  console.error(err);
-});
-
-// Layer control
-const overlays = {
-  'Broadband Coverage': broadbandLayer,
-  'Parcels': parcelLayer,
-  'Infrastructure': infraLayer
-};
-L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+// Load data
+fetch('layer_2.geojson')
+  .then(r => r.json())
+  .then(data => {
+    allFeatures = data.features;
+    renderLayer('all');
+    document.getElementById('loading').style.display = 'none';
+  })
+  .catch(() => {
+    document.getElementById('loading').textContent = 'Error loading data.';
+  });
 
 // Legend
 const legend = L.control({ position: 'bottomright' });
 legend.onAdd = function() {
-  const div = L.DomUtil.create('div', 'info-panel legend');
-  div.innerHTML = `<h4>Broadband Tech</h4>
-    <i style="background:#9b59b6"></i> LTE / Mobile<br>
-    <i style="background:#3498db"></i> Cable<br>
-    <i style="background:#2ecc71"></i> DSL<br>
-    <i style="background:#e74c3c"></i> Fiber<br>
-    <i style="background:#95a5a6"></i> Other<br>
-    <hr style="margin:6px 0">
-    <i style="background:#1a6b55"></i> Parcel<br>
-    <i style="background:#e67e22"></i> Infrastructure`;
+  const div = L.DomUtil.create('div', 'legend');
+  div.innerHTML = `
+    <div class="legend-title">Availability</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#1a6b55"></div> For Sale</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#2980b9"></div> For Lease</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#d35400"></div> Sale &amp; Lease</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#7f8c8d"></div> Other</div>`;
   return div;
 };
 legend.addTo(map);
