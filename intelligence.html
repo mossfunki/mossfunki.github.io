@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intelligence Work — Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Commercial intelligence work by Benjamin Lab — competitive landscape analysis, market signal monitoring, and decision-support analytics.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <style>
+    .intel-wrapper { max-width: 860px; margin: 0 auto; padding: 6rem 1.25rem 4rem; }
+    .case-study { border: 1px solid var(--border); background: var(--panel); padding: 2rem; margin-top: 2.5rem; }
+    .case-study h3 { font-family: Merriweather, serif; color: var(--accent-2); font-size: 1.2rem; margin-bottom: 1rem; }
+    .case-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .case-meta-item { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.05em; color: var(--muted); }
+    .case-meta-item strong { color: var(--text); display: block; margin-bottom: 0.2rem; }
+    .case-section { margin-top: 1.5rem; }
+    .case-section h4 { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .case-section p, .case-section li { color: var(--muted); font-size: 0.93rem; line-height: 1.75; }
+    .case-section ul { padding-left: 1.2rem; }
+    .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
+    .signal-chip { border: 1px solid var(--border); padding: 0.5rem 0.75rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+    .signal-chip strong { color: var(--text); display: block; margin-bottom: 0.15rem; font-size: 0.78rem; }
+    .in-progress-box { border: 1px dashed var(--border); padding: 1.75rem 2rem; margin-top: 3rem; }
+    .in-progress-box p { color: var(--muted); font-size: 0.93rem; line-height: 1.75; margin-top: 0.5rem; }
+    .outcome-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    .outcome-stat { text-align: left; }
+    .outcome-stat .stat-number { font-family: Merriweather, serif; font-size: 1.6rem; color: var(--accent-2); }
+    .outcome-stat .stat-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; color: var(--muted); margin-top: 0.15rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="intelligence.html">Intelligence</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="intel-wrapper">
+
+  <p class="section-label">Commercial Intelligence</p>
+  <h1 class="page-title">Intelligence Work</h1>
+  <p class="page-subtitle" style="max-width: 62ch;">
+    Competitive intelligence means tracking what competitors are building, where the market
+    is moving, and what signals — from hiring patterns to developer sentiment to funding flows
+    — tell you before the press release does. The output is decision-ready, not academic.
+  </p>
+
+  <!-- CASE STUDY -->
+  <div class="case-study reveal">
+    <p class="section-label" style="margin-bottom: 0.75rem;">Case Study &mdash; 2025&ndash;2026</p>
+    <h3>AI Agent Memory Market &mdash; Competitive Landscape</h3>
+
+    <div class="case-meta">
+      <div class="case-meta-item">
+        <strong>Context</strong>
+        Early-stage AI infrastructure startup
+      </div>
+      <div class="case-meta-item">
+        <strong>Role</strong>
+        Market Intelligence &amp; Strategy Analyst
+      </div>
+      <div class="case-meta-item">
+        <strong>Duration</strong>
+        Dec 2025 &mdash; Present
+      </div>
+      <div class="case-meta-item">
+        <strong>Deliverable</strong>
+        Recurring weekly strategy briefs
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h4>Problem</h4>
+      <p>
+        Ix needed ongoing competitive awareness in the stateful AI infrastructure space — a
+        fast-moving market with no dominant player, significant VC activity, and developer
+        adoption as the key battleground metric. There was no dedicated CI function. The
+        challenge was building a system that could track signal at scale and surface it in
+        a form leadership could act on, week over week.
+      </p>
+    </div>
+
+    <div class="case-section">
+      <h4>System Built</h4>
+      <p>
+        A recurring monitoring pipeline across 20+ sources, structured to separate signal types
+        and synthesize them into weekly executive briefs. Sources were typed by what they reveal:
+      </p>
+      <div class="signal-grid">
+        <div class="signal-chip">
+          <strong>Developer sentiment</strong>
+          Reddit, Hacker News, GitHub issues
+        </div>
+        <div class="signal-chip">
+          <strong>Product velocity</strong>
+          Changelog monitoring, release notes, API changes
+        </div>
+        <div class="signal-chip">
+          <strong>Investor thesis</strong>
+          Funding announcements, round sizing, lead investors
+        </div>
+        <div class="signal-chip">
+          <strong>Talent signals</strong>
+          Job listings — role type, seniority, stack
+        </div>
+        <div class="signal-chip">
+          <strong>Research frontier</strong>
+          arXiv preprints in agent memory and stateful AI
+        </div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h4>Landscape Mapped</h4>
+      <p>
+        10+ direct competitors tracked across the stateful AI infrastructure space — including
+        LangGraph, OpenAI (memory APIs), Neo4j, Mem0, and others — categorized by product
+        positioning, developer traction, and funding stage. Landscape updated continuously as
+        new entrants emerged and incumbents shipped.
+      </p>
+    </div>
+
+    <div class="case-section">
+      <h4>Outputs &amp; Impact</h4>
+      <div class="outcome-row">
+        <div class="outcome-stat">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Competitors tracked</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Signal sources monitored</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-number">60%</div>
+          <div class="stat-label">User retention lift</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-number">Weekly</div>
+          <div class="stat-label">Executive briefs delivered</div>
+        </div>
+      </div>
+      <p style="margin-top: 1rem;">
+        Beyond the competitive landscape: behavioral cohort analysis of platform users
+        diagnosed engagement drop-off and surfaced targeted recommendations that drove a 60%
+        increase in user retention — adopted directly by the product team. The CI system also
+        identified enterprise customer pipeline signals and mapped investor thesis alignment
+        across the AI agent memory market.
+      </p>
+    </div>
+  </div>
+
+  <!-- IN PROGRESS -->
+  <div class="in-progress-box reveal">
+    <p class="section-label" style="margin-bottom: 0.5rem;">In Development</p>
+    <h2 style="font-family: Merriweather, serif; font-size: 1.1rem; color: var(--accent-2);">
+      Next: Health Tech Commercial Intelligence
+    </h2>
+    <p>
+      Applying the same CI methodology to the digital health space — market structure analysis,
+      hiring signal breakdowns, pricing intelligence, and category mapping across health tech
+      segments. Work in progress. <a href="mailto:benjaminmonroelab@gmail.com" style="color: var(--accent-2);">Reach out</a> if you're working in this space.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2025 Benjamin Lab</span>
+    <div class="footer-links">
+      <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
+
+  (function(){
+    if(!('IntersectionObserver' in window)){
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
