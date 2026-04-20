@@ -186,6 +186,7 @@ nav ul li:last-child a:hover { background: #374151; color: #fff; }
 .layer-toggle.active { opacity: 1; }
 .layer-toggle.inactive { opacity: 0.35; }
 .layer-toggle--risk { color: var(--danger); border-color: #fecaca; }
+.layer-toggle--routes { color: var(--warning); border-color: #fde68a; }
 .layer-toggle--clusters { color: var(--accent); border-color: #bfdbfe; }
 #map { height: 480px; width: 100%; border-radius: 4px; border: 1px solid var(--border); }
 
