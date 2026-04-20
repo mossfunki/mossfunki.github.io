@@ -14,6 +14,8 @@
 
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 <body>
 
@@ -72,6 +74,50 @@
 
   </section>
 
+<section class="map-section reveal" id="map-section">
+  <div class="map-section-inner">
+    <div class="map-section-header">
+      <div>
+        <p class="section-label">02 &mdash; Live Spatial Analysis</p>
+        <h2 class="section-title">Economic Risk &amp; County Clusters</h2>
+        <p class="section-subtitle" style="margin-top:0.3rem;">US County &middot; FEMA NRI + Census TIGER &middot; K-Means Spatial ML &middot; updated daily</p>
+      </div>
+      <div class="layer-toggles">
+        <button class="layer-toggle layer-toggle--risk active" data-layer="risk">Risk Zones</button>
+        <button class="layer-toggle layer-toggle--clusters active" data-layer="clusters">ML Clusters</button>
+      </div>
+    </div>
+    <div id="map"></div>
+    <div class="pipeline-panel">
+      <p class="pipeline-label">Pipeline</p>
+      <div class="pipeline-stages">
+        <div class="pipeline-stage">
+          <div class="pipeline-stage-name">Ingest</div>
+          <div class="pipeline-stage-status">&#10003; FEMA NRI</div>
+          <div class="pipeline-stage-meta">3,143 counties</div>
+        </div>
+        <div class="pipeline-stage">
+          <div class="pipeline-stage-name">Transform</div>
+          <div class="pipeline-stage-status">&#10003; Spatial Join</div>
+          <div class="pipeline-stage-meta">Census TIGER 20m</div>
+        </div>
+        <div class="pipeline-stage">
+          <div class="pipeline-stage-name">Model</div>
+          <div class="pipeline-stage-status">&#10003; K-Means</div>
+          <div class="pipeline-stage-meta">5 clusters</div>
+        </div>
+      </div>
+      <p class="pipeline-footer">
+        Last run: <span id="pipeline-last-run">—</span>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/mossfunki/mossfunki.github.io/actions" target="_blank" rel="noopener">View GitHub Actions &rarr;</a>
+        &nbsp;&middot;&nbsp;
+        <a href="spatial.html">How it&rsquo;s built &rarr;</a>
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- WHAT I DO -->
 <section class="section reveal">
   <p class="section-label">01 &mdash; Expertise</p>
@@ -79,8 +125,8 @@
   <div class="expertise-grid">
     <div class="expertise-card reveal reveal-delay-1">
       <div class="expertise-number">01</div>
-      <h3>Market Intelligence & Competitive Analysis</h3>
-      <p>Recurring competitor monitoring, signal synthesis from developer forums, funding data, and job listings — structured into decision-ready briefs for executive teams.</p>
+      <h3>Healthcare & Biotech CI</h3>
+      <p>Drug pipeline tracking, competitive landscape mapping, FDA approval monitoring, and biopharma market intelligence — translating clinical and commercial signals into strategic decisions.</p>
     </div>
     <div class="expertise-card reveal reveal-delay-2">
       <div class="expertise-number">02</div>
@@ -225,6 +271,117 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var map = L.map('map', {
+    center: [39.5, -98.35],
+    zoom: 4,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, AEX, GeoEye',
+      maxZoom: 18
+    }
+  ).addTo(map);
+
+  var CLUSTER_COLORS = ['#22c55e', '#86efac', '#f59e0b', '#ef4444', '#3b82f6'];
+
+  function riskColor(score) {
+    if (!score) return '#d1d5db88';
+    if (score < 15)  return '#22c55e88';
+    if (score < 30)  return '#86efac88';
+    if (score < 50)  return '#fde68a88';
+    if (score < 70)  return '#f9730088';
+    return '#ef444488';
+  }
+
+  var riskLayer = null;
+  var clustersLayer = null;
+  var toggleState = { risk: true, clusters: true };
+
+  fetch('data/counties.geojson')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      riskLayer = L.geoJSON(data, {
+        style: function (f) {
+          return {
+            fillColor: riskColor(f.properties.risk_score),
+            weight: 0.3,
+            opacity: 0.7,
+            color: '#ffffff',
+            fillOpacity: 0.7
+          };
+        },
+        onEachFeature: function (f, layer) {
+          var p = f.properties;
+          layer.bindTooltip(
+            '<strong>' + (p.name || 'County') + ', ' + (p.state || '') + '</strong>' +
+            '<br>Risk Score: ' + p.risk_score +
+            '<br>Cluster: ' + (p.cluster_label || '&mdash;'),
+            { sticky: true, className: 'map-tooltip' }
+          );
+        }
+      });
+
+      clustersLayer = L.geoJSON(data, {
+        style: function (f) {
+          var c = CLUSTER_COLORS[f.properties.cluster_id % CLUSTER_COLORS.length];
+          return {
+            fillColor: c,
+            weight: 0.3,
+            opacity: 0.5,
+            color: '#ffffff',
+            fillOpacity: 0.5
+          };
+        },
+        onEachFeature: function (f, layer) {
+          var p = f.properties;
+          layer.bindTooltip(
+            '<strong>' + (p.name || 'County') + ', ' + (p.state || '') + '</strong>' +
+            '<br>Cluster: ' + (p.cluster_label || '&mdash;') +
+            '<br>Risk Score: ' + p.risk_score,
+            { sticky: true, className: 'map-tooltip' }
+          );
+        }
+      });
+
+      riskLayer.addTo(map);
+
+      fetch('data/pipeline-status.json')
+        .then(function (r) { return r.json(); })
+        .then(function (s) {
+          var el = document.getElementById('pipeline-last-run');
+          if (el) el.textContent = s.last_run;
+        })
+        .catch(function () {});
+    })
+    .catch(function () {
+      document.getElementById('map').innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:center;height:100%;' +
+        'color:#9ca3af;font-size:0.875rem;background:#f9fafb;">Map data not found &mdash; run scripts/update_map_data.py first</div>';
+    });
+
+  document.querySelectorAll('.layer-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var layer = btn.dataset.layer;
+      if (layer === 'risk' && riskLayer) {
+        toggleState.risk = !toggleState.risk;
+        toggleState.risk ? map.addLayer(riskLayer) : map.removeLayer(riskLayer);
+        btn.classList.toggle('active', toggleState.risk);
+        btn.classList.toggle('inactive', !toggleState.risk);
+      } else if (layer === 'clusters' && clustersLayer) {
+        toggleState.clusters = !toggleState.clusters;
+        toggleState.clusters ? map.addLayer(clustersLayer) : map.removeLayer(clustersLayer);
+        btn.classList.toggle('active', toggleState.clusters);
+        btn.classList.toggle('inactive', !toggleState.clusters);
+      }
+    });
+  });
+}());
+</script>
 <script>
   (function(){
     var p = location.pathname.split('/').pop() || 'index.html';
