@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spatial Analytics — Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Spatial ML pipeline, GIS methods, and automated data infrastructure by Benjamin Lab — FEMA NRI, Census TIGER, K-Means clustering, GitHub Actions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600;700&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="intelligence.html">Intelligence</a></li>
+      <li><a href="spatial.html">Spatial</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="Ben-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <p class="section-label">Spatial Analytics &amp; GIS</p>
+  <h1 class="page-title">Spatial ML Pipeline</h1>
+  <p class="page-subtitle">
+    A live data pipeline &mdash; FEMA National Risk Index + Census TIGER county geometries,
+    processed with Python, clustered with K-Means, served as GeoJSON to a Leaflet.js
+    satellite map. Runs daily on GitHub Actions.
+  </p>
+</div>
+
+<main>
+
+  <!-- PIPELINE ARCHITECTURE -->
+  <section class="section">
+    <p class="section-label">01 &mdash; Pipeline Architecture</p>
+    <h2 class="section-title">How It&rsquo;s Built</h2>
+
+    <div class="pipeline-flow" style="margin-top:2rem;">
+      <div class="flow-step">
+        <div class="flow-step-label">Source A</div>
+        <div class="flow-step-content">FEMA NRI CSV</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-step-label">Source B</div>
+        <div class="flow-step-content">Census TIGER SHP</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-step-label">Process</div>
+        <div class="flow-step-content">Python &middot; pandas &middot; geopandas</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-step-label">Model</div>
+        <div class="flow-step-content">K-Means (scikit-learn)</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-step-label">Output</div>
+        <div class="flow-step-content">counties.geojson</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-step-label">Serve</div>
+        <div class="flow-step-content">Leaflet.js &middot; GitHub Pages</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+      <div class="method-card">
+        <h4>Data Ingestion</h4>
+        <p>
+          The pipeline downloads the FEMA National Risk Index county-level CSV and
+          the Census TIGER 20m county boundary shapefile directly via HTTP &mdash; no API keys required.
+          Raw files are cached locally and excluded from the repo via <code>.gitignore</code>.
+        </p>
+      </div>
+      <div class="method-card">
+        <h4>Spatial Join</h4>
+        <p>
+          County records are joined on 5-digit FIPS code. TIGER geometries are reprojected to
+          WGS84 (EPSG:4326) for Leaflet compatibility. GeoPandas handles the merge &mdash; the output
+          is a GeoDataFrame with both geometry and risk attributes per county.
+        </p>
+      </div>
+      <div class="method-card">
+        <h4>Automation</h4>
+        <p>
+          A GitHub Actions workflow triggers daily at 06:00 UTC. It runs the Python script,
+          commits the updated <code>counties.geojson</code> and <code>pipeline-status.json</code>
+          back to the repo, and GitHub Pages rebuilds automatically. The homepage map reflects
+          the latest data on the next page load.
+        </p>
+      </div>
+      <div class="method-card">
+        <h4>Stack</h4>
+        <p>
+          Python 3.11 &middot; pandas &middot; geopandas &middot; scikit-learn &middot; requests &middot; Leaflet.js 1.9 &middot;
+          Esri World Imagery satellite tiles &middot; GitHub Actions &middot; GitHub Pages
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <a class="btn btn-secondary" href="https://github.com/mossfunki/mossfunki.github.io/blob/main/scripts/update_map_data.py" target="_blank" rel="noopener">View pipeline script &rarr;</a>
+      &nbsp;
+      <a class="btn btn-secondary" href="https://github.com/mossfunki/mossfunki.github.io/actions" target="_blank" rel="noopener">View GitHub Actions &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SPATIAL ML METHODS -->
+  <section class="section--alt">
+    <div style="max-width:1100px;margin:0 auto;padding:5rem 0;">
+      <p class="section-label">02 &mdash; Spatial ML</p>
+      <h2 class="section-title">Methods</h2>
+
+      <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+        <div class="method-card">
+          <h4>Feature Engineering</h4>
+          <p>
+            Seven features from the FEMA NRI are used: composite risk score, expected annual
+            loss score, social vulnerability index (SoVI), community resilience score, and
+            annualized frequency rates for hurricanes, tornadoes, and riverine flooding.
+            All features are standardized (zero mean, unit variance) before clustering.
+          </p>
+        </div>
+        <div class="method-card">
+          <h4>K-Means Clustering (k=5)</h4>
+          <p>
+            K-Means is run with k=5 and random_state=42 for reproducibility. Clusters are
+            relabeled post-hoc by ascending mean risk score so that cluster 0 always
+            represents the lowest-risk group &mdash; making the output deterministic across pipeline
+            runs regardless of initialization order.
+          </p>
+        </div>
+        <div class="method-card">
+          <h4>Cluster Profiles</h4>
+          <p>
+            The five clusters capture distinct county risk profiles: low-risk/high-resilience
+            (predominantly Mountain West and Upper Midwest), rural/low-exposure,
+            moderate-risk/mixed, coastal/weather-exposed (Gulf Coast, Atlantic seaboard),
+            and high-risk/low-resilience (predominantly Deep South and lower Mississippi).
+          </p>
+        </div>
+        <div class="method-card">
+          <h4>Spatial Autocorrelation</h4>
+          <p>
+            Risk scores exhibit strong positive spatial autocorrelation &mdash; neighboring counties
+            tend to share similar risk profiles. This is expected given shared climate exposure
+            and regional economic patterns. A spatial lag term could be added to regression
+            models to account for this clustering effect (Moran&rsquo;s I &asymp; 0.6 for RISK_SCORE).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATASETS -->
+  <section class="section">
+    <p class="section-label">03 &mdash; Data Sources</p>
+    <h2 class="section-title">Datasets</h2>
+
+    <div style="margin-top:2rem;overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);">
+            <th style="text-align:left;padding:0.6rem 1rem 0.6rem 0;color:var(--text);font-weight:700;">Dataset</th>
+            <th style="text-align:left;padding:0.6rem 1rem;color:var(--text);font-weight:700;">Source</th>
+            <th style="text-align:left;padding:0.6rem 1rem;color:var(--text);font-weight:700;">Update freq.</th>
+            <th style="text-align:left;padding:0.6rem 1rem;color:var(--text);font-weight:700;">Variables used</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--text);font-weight:600;">FEMA National Risk Index</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);">FEMA (hazards.fema.gov)</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);">Annual</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);font-family:var(--font-mono);font-size:0.75rem;">RISK_SCORE, EAL_SCORE, SOVI_SCORE, RESL_SCORE, HWAV_AFREQ, TRND_AFREQ, RFLD_AFREQ</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--text);font-weight:600;">Census TIGER County Boundaries</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);">US Census Bureau</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);">Annual</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);font-family:var(--font-mono);font-size:0.75rem;">County polygons (20m simplified, EPSG:4326)</td>
+          </tr>
+          <tr>
+            <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--text);font-weight:600;">Esri World Imagery</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);">Esri / ArcGIS Online</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);">Continuous</td>
+            <td style="padding:0.75rem 1rem;color:var(--text-secondary);font-family:var(--font-mono);font-size:0.75rem;">Satellite tile basemap (XYZ tiles, free)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Benjamin Lab</span>
+    <div class="footer-links">
+      <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
+  (function(){
+    if(!('IntersectionObserver' in window)){
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
