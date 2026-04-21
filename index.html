@@ -276,8 +276,10 @@
   var map = L.map('map', {
     center: [39.5, -98.35],
     zoom: 4,
-    scrollWheelZoom: false
+    scrollWheelZoom: false,
+    preferCanvas: true
   });
+  setTimeout(function () { map.invalidateSize(); }, 250);
 
   L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -349,7 +351,6 @@
       });
 
       riskLayer.addTo(map);
-      map.invalidateSize();
 
       fetch('data/pipeline-status.json')
         .then(function (r) { return r.json(); })
