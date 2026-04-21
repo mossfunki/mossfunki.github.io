@@ -74,7 +74,7 @@
 
   </section>
 
-<section class="map-section reveal" id="map-section">
+<section class="map-section" id="map-section">
   <div class="map-section-inner">
     <div class="map-section-header">
       <div>
@@ -349,6 +349,7 @@
       });
 
       riskLayer.addTo(map);
+      map.invalidateSize();
 
       fetch('data/pipeline-status.json')
         .then(function (r) { return r.json(); })
