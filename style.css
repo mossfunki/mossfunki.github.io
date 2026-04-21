@@ -653,6 +653,43 @@ nav ul li:last-child a:hover { background: var(--accent-hover); color: var(--bg)
 }
 .skill-tag:hover { border-color: var(--border-accent); color: var(--accent); }
 
+/* ── APPROACH LIST ───────────────────────────────────────── */
+.approach-list {
+  padding-left: 1.4rem;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1;
+  counter-reset: approach-counter;
+  list-style: none;
+  padding-left: 0;
+}
+.approach-list li {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+  line-height: 1.75;
+  counter-increment: approach-counter;
+}
+.approach-list li::before {
+  content: counter(approach-counter);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-accent);
+  border-radius: 2px;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.22rem;
+}
+.approach-list li strong { color: var(--text); }
+
 /* ── ABOUT PHOTOS ────────────────────────────────────────── */
 .about-photos { margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
 .about-blurb {

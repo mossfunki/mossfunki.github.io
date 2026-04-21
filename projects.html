@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Work — Benjamin Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Benjamin Lab's project work — operations forecasting, competitive intelligence, logistics modeling, and spatial analytics for real-world business problems.">
+  <meta name="description" content="Benjamin Lab's project work — demand forecasting, inventory optimization, competitive intelligence, and logistics gap analysis for operations and supply chain roles in Seattle.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,41 +31,31 @@
   <div class="page-header">
     <p class="section-label">Portfolio</p>
     <h1 class="page-title">Work &amp; Projects</h1>
-    <p class="page-subtitle">Operations analysis, demand forecasting, competitive intelligence, and logistics modeling — built on Python, SQL, and GIS. All projects include full methodology and reproducible code.</p>
+    <p class="page-subtitle">Three projects. Each one shows a real operational problem, a real method, a real output, and a decision it enables. No filler.</p>
   </div>
 
   <div style="max-width:1100px; margin:0 auto; padding:0 1.5rem 5rem;">
-
-    <!-- FILTER BAR -->
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="operations">Operations</button>
-      <button class="filter-btn" data-filter="forecasting">Forecasting</button>
-      <button class="filter-btn" data-filter="intelligence">Intelligence</button>
-      <button class="filter-btn" data-filter="logistics">Logistics</button>
-      <button class="filter-btn" data-filter="gis">GIS / Spatial</button>
-    </div>
-
-    <!-- PROJECT CARDS -->
     <div class="proj-grid">
 
       <!-- 1. FLAGSHIP -->
-      <div class="proj-card proj-card--featured reveal" data-category="operations forecasting logistics gis">
+      <div class="proj-card proj-card--featured reveal" data-category="operations forecasting logistics">
         <div class="proj-card-top">
           <span class="proj-status proj-status--new">Flagship</span>
-          <span class="proj-domain">Operations &middot; Forecasting</span>
+          <span class="proj-domain">Supply Chain &middot; Forecasting &middot; Inventory</span>
         </div>
-        <h3>Seattle Event-Driven Demand Forecasting</h3>
-        <p>Predicts traffic volume surges and transit ridership spikes around Climate Pledge Arena, T-Mobile Park, and Lumen Field using WSDOT sensor data, King County Metro GTFS feeds, and XGBoost time-series modeling. 85% directional accuracy on held-out test set.</p>
-        <div class="proj-outcome-chips">
-          <span class="outcome-chip">85% accuracy</span>
-          <span class="outcome-chip">500+ sensor stations</span>
-          <span class="outcome-chip">2–4 hr advance windows</span>
+        <h3>Demand Forecasting &amp; Inventory Optimization</h3>
+        <p><strong>Problem:</strong> Static reorder models miss event-driven demand spikes — generating stockouts during Seahawks games or PAX and excess inventory in quiet weeks.</p>
+        <p style="margin-top:0.5rem;"><strong>Method:</strong> Prophet time-series forecasting trained on 2 years of simulated weekly demand. Safety stock recalculated weekly using service level targets (95%) and lead time variance. Dynamic reorder point replaces fixed tables.</p>
+        <p style="margin-top:0.5rem;"><strong>Output:</strong> Streamlit dashboard with 14-day rolling forecast per SKU and a weekly reorder action table — built for an ops manager to act on without opening a notebook.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem;">
+          <span class="outcome-chip">31% fewer stockouts vs. static model</span>
+          <span class="outcome-chip">8.4% MAPE (held-out test)</span>
+          <span class="outcome-chip">Dynamic ROP per SKU</span>
         </div>
-        <p class="proj-tag">Python &middot; XGBoost &middot; GTFS &middot; WSDOT API &middot; OSMnx &middot; Folium</p>
+        <p class="proj-tag" style="margin-top:0.75rem;">Python &middot; Prophet &middot; XGBoost &middot; pandas &middot; Streamlit &middot; Safety Stock Modeling</p>
         <div class="proj-actions">
-          <a href="seattle-demand-forecast.html" class="primary">Case Study</a>
-          <a href="https://github.com/mossfunki/seattle-event-demand" target="_blank" rel="noopener">GitHub</a>
+          <a href="demand-inventory-forecast.html" class="primary">Full Case Study</a>
+          <a href="https://github.com/mossfunki/demand-inventory-forecast" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
@@ -74,14 +64,16 @@
         <div class="proj-card-top">
           <span class="proj-domain">Market Intelligence &middot; Analytics</span>
         </div>
-        <h3>AI Market Competitive Intelligence System — Ix</h3>
-        <p>Built a recurring CI pipeline at an early-stage AI startup — 20+ monitored sources, 10+ tracked competitors, weekly executive briefs. Behavioral cohort analysis on top drove a 60% user retention lift adopted by the product team.</p>
-        <div class="proj-outcome-chips">
-          <span class="outcome-chip">60% retention lift</span>
-          <span class="outcome-chip">10+ competitors</span>
-          <span class="outcome-chip">Weekly cadence</span>
+        <h3>Competitive Intelligence System &mdash; 60% Retention Lift</h3>
+        <p><strong>Problem:</strong> No dedicated CI function at an early-stage AI startup. Leadership flying blind on competitor moves and user churn.</p>
+        <p style="margin-top:0.5rem;"><strong>Method:</strong> Built a monitoring pipeline across 20+ sources (developer forums, funding announcements, arXiv, job listings). Behavioral cohort analysis in Amplitude diagnosed engagement drop-off by user segment.</p>
+        <p style="margin-top:0.5rem;"><strong>Output:</strong> Weekly strategy briefs to executive leadership. Retention recommendations adopted by product team.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem;">
+          <span class="outcome-chip">60% user retention increase</span>
+          <span class="outcome-chip">10+ competitors tracked</span>
+          <span class="outcome-chip">Deployed at Ix &mdash; Dec 2025</span>
         </div>
-        <p class="proj-tag">Python &middot; Amplitude &middot; Cohort Analysis &middot; Competitive Intelligence</p>
+        <p class="proj-tag" style="margin-top:0.75rem;">Python &middot; Amplitude &middot; Behavioral Cohort Analysis &middot; Competitive Intelligence</p>
         <div class="proj-actions">
           <a href="intelligence.html" class="primary">Case Study</a>
         </div>
@@ -90,73 +82,20 @@
       <!-- 3. Seattle Last Mile -->
       <div class="proj-card reveal" data-category="logistics gis operations">
         <div class="proj-card-top">
-          <span class="proj-domain">Logistics &middot; GIS</span>
+          <span class="proj-domain">Logistics &middot; Operations &middot; GIS</span>
         </div>
-        <h3>Seattle Last-Mile Logistics Coverage Analysis</h3>
-        <p>Network analysis and isochrone modeling for last-mile delivery in Seattle — 10/20/30-minute drive-time coverage from five real distribution hubs. Surfaces coverage gaps and under-served zones for logistics operations planning.</p>
-        <div class="proj-outcome-chips">
-          <span class="outcome-chip">5 real hubs</span>
+        <h3>Seattle Last-Mile Delivery Gap Analysis</h3>
+        <p><strong>Problem:</strong> Where are the King County zones that existing Seattle distribution hubs can't reach within a viable delivery window — and how bad is the gap?</p>
+        <p style="margin-top:0.5rem;"><strong>Method:</strong> OSMnx network analysis generates 10/20/30-minute drive-time isochrones from five real distribution hub locations. Census tract overlay produces a composite under-service score by zone.</p>
+        <p style="margin-top:0.5rem;"><strong>Output:</strong> Interactive Leaflet map with gap-scored zones. Identifies candidate hub locations for a new facility to maximize under-served coverage.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem;">
+          <span class="outcome-chip">5 real distribution hubs</span>
           <span class="outcome-chip">King County road network</span>
-          <span class="outcome-chip">Gap scoring by zone</span>
+          <span class="outcome-chip">Coverage gap by census tract</span>
         </div>
-        <p class="proj-tag">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Python</p>
+        <p class="proj-tag" style="margin-top:0.75rem;">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Python &middot; Network Analysis</p>
         <div class="proj-actions">
           <a href="https://github.com/mossfunki/seattle-last-mile-logistics" target="_blank" rel="noopener" class="primary">GitHub</a>
-        </div>
-      </div>
-
-      <!-- 4. Biotech Pipeline -->
-      <div class="proj-card reveal" data-category="intelligence operations">
-        <div class="proj-card-top">
-          <span class="proj-domain">Healthcare CI &middot; Automation</span>
-        </div>
-        <h3>Biotech Pipeline Intelligence — FDA &amp; Clinical Trials</h3>
-        <p>Automated pipeline pulling ClinicalTrials.gov and FDA CDER data to map Phase II/III drug development activity by indication and sponsor. Surfaces competitive density and near-approval signals across oncology, CNS, and rare disease.</p>
-        <div class="proj-outcome-chips">
-          <span class="outcome-chip">1,200+ trials indexed</span>
-          <span class="outcome-chip">7 indications tracked</span>
-          <span class="outcome-chip">Zero API keys required</span>
-        </div>
-        <p class="proj-tag">Python &middot; pandas &middot; ClinicalTrials.gov API &middot; FDA CDER &middot; GitHub Actions</p>
-        <div class="proj-actions">
-          <a href="intelligence.html#biotech" class="primary">Case Study</a>
-          <a href="https://github.com/mossfunki/mossfunki.github.io" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </div>
-
-      <!-- 5. PNW Supply Chain -->
-      <div class="proj-card reveal" data-category="logistics operations forecasting">
-        <div class="proj-card-top">
-          <span class="proj-domain">Supply Chain &middot; Dashboard</span>
-        </div>
-        <h3>PNW Freight Flow Dashboard</h3>
-        <p>Interactive Streamlit dashboard analyzing PNW freight flow using BTS FAF5 origin-destination data (2018–2022). Mode and year filters, commodity breakdowns, and year-over-year growth trend analysis for regional supply chain planning.</p>
-        <div class="proj-outcome-chips">
-          <span class="outcome-chip">5-year trend analysis</span>
-          <span class="outcome-chip">Multi-modal freight</span>
-          <span class="outcome-chip">O-D pair mapping</span>
-        </div>
-        <p class="proj-tag">Python &middot; Streamlit &middot; BTS FAF5 &middot; pandas &middot; Plotly</p>
-        <div class="proj-actions">
-          <a href="https://github.com/mossfunki/pnw-supply-chain-dashboard" target="_blank" rel="noopener" class="primary">GitHub</a>
-        </div>
-      </div>
-
-      <!-- 6. Seattle Transit Equity -->
-      <div class="proj-card reveal" data-category="gis operations">
-        <div class="proj-card-top">
-          <span class="proj-domain">GIS &middot; Public Sector Analytics</span>
-        </div>
-        <h3>Seattle Transit Equity &amp; Gap Analysis</h3>
-        <p>Spatial analysis identifying King County census tracts with high economic need and low transit frequency, combining GTFS feeds, Census ACS data, and a composite gap score. Directly applicable to transit operations planning and equity reporting.</p>
-        <div class="proj-outcome-chips">
-          <span class="outcome-chip">King County tracts</span>
-          <span class="outcome-chip">GTFS + Census ACS</span>
-          <span class="outcome-chip">Composite gap score</span>
-        </div>
-        <p class="proj-tag">Python &middot; GeoPandas &middot; GTFS &middot; Census ACS &middot; Spatial Analysis</p>
-        <div class="proj-actions">
-          <a href="https://github.com/mossfunki/seattle-transit-equity" target="_blank" rel="noopener" class="primary">GitHub</a>
         </div>
       </div>
 
@@ -176,18 +115,6 @@
 </footer>
 
 <script>
-  var buttons = document.querySelectorAll('.filter-btn');
-  var cards   = document.querySelectorAll('.proj-card');
-  buttons.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      buttons.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var filter = btn.dataset.filter;
-      cards.forEach(function(card){
-        card.style.display = (filter === 'all' || card.dataset.category.includes(filter)) ? '' : 'none';
-      });
-    });
-  });
   (function(){
     var p = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('nav a').forEach(function(a){

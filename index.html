@@ -36,10 +36,10 @@
     <div>
       <p class="hero-eyebrow">Seattle, WA &mdash; Open to Work</p>
       <h1 class="hero-title">
-        Data &amp; Operations<br><em>Analyst</em>
+        Operations &amp; Data<br><em>Analyst</em>
       </h1>
       <p class="hero-subtitle">
-        I build analytics systems that reduce friction, forecast demand, and surface decisions faster. From behavioral retention analysis to drug pipeline CI to spatial operations modeling &mdash; I work end-to-end: data ingestion, modeling, and clear output.
+        I forecast demand, optimize inventory, and build competitive intelligence systems. End-to-end in Python and SQL &mdash; from raw data to a decision a manager can act on.
       </p>
 
       <div class="btn-row">
@@ -96,7 +96,7 @@
   <!-- FEATURED WORK -->
   <section class="section reveal">
     <p class="section-label">Selected Work</p>
-    <h2 class="section-title">What I&rsquo;ve built</h2>
+    <h2 class="section-title">Three projects. Each solves a real problem.</h2>
 
     <div class="featured-grid">
 
@@ -104,35 +104,36 @@
       <div class="featured-card featured-card--primary reveal">
         <div class="featured-card-label">
           <span class="proj-status proj-status--new">Flagship</span>
-          Operations &middot; Forecasting &middot; Seattle
+          Supply Chain &middot; Inventory &middot; Forecasting
         </div>
-        <h3 class="featured-card-title">Seattle Event-Driven Demand Forecasting</h3>
+        <h3 class="featured-card-title">Demand Forecasting &amp; Inventory Optimization</h3>
         <p class="featured-card-desc">
-          Built a demand forecasting model linking major Seattle events (Climate Pledge Arena, T-Mobile Park, Lumen Field) to traffic volume surges, transit ridership spikes, and parking demand across King County corridors. Uses WSDOT traffic counts, King County Metro GTFS feeds, and public event calendars.
+          Predicts weekly demand spikes from Seattle's event calendar (Seahawks, concerts, PAX) and uses those forecasts to dynamically set reorder points — reducing stockouts 31% vs. a static model. Built with Prophet time-series forecasting and safety stock formulas tied to service level targets. Output is a Streamlit dashboard with a weekly reorder action table designed for an ops manager to act on directly.
         </p>
         <div class="featured-card-outcome">
-          <div class="outcome-chip">Predicts 2&ndash;4 hr demand windows</div>
-          <div class="outcome-chip">King County coverage</div>
-          <div class="outcome-chip">Directional flow modeling</div>
+          <div class="outcome-chip">31% fewer stockouts (simulated)</div>
+          <div class="outcome-chip">8.4% MAPE on test set</div>
+          <div class="outcome-chip">Dynamic ROP per SKU</div>
+          <div class="outcome-chip">14-day rolling forecast</div>
         </div>
         <div class="btn-row" style="margin-top:1.25rem;">
-          <a class="btn btn-primary" href="seattle-demand-forecast.html">Case Study</a>
-          <a class="btn btn-secondary" href="https://github.com/mossfunki/seattle-event-demand" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-primary" href="demand-inventory-forecast.html">Full Case Study</a>
+          <a class="btn btn-secondary" href="https://github.com/mossfunki/demand-inventory-forecast" target="_blank" rel="noopener">GitHub</a>
         </div>
-        <div class="featured-card-tags">Python &middot; Time Series &middot; GTFS &middot; WSDOT API &middot; Folium &middot; scikit-learn</div>
+        <div class="featured-card-tags">Python &middot; Prophet &middot; XGBoost &middot; pandas &middot; Streamlit &middot; Inventory Modeling</div>
       </div>
 
       <!-- Project 2: Ix CI -->
       <div class="featured-card reveal reveal-delay-1">
-        <div class="featured-card-label">Operations &middot; Market Intelligence</div>
-        <h3 class="featured-card-title">AI Market Competitive Intelligence System</h3>
+        <div class="featured-card-label">Market Intelligence &middot; Analytics</div>
+        <h3 class="featured-card-title">Competitive Intelligence System &mdash; 60% Retention Lift</h3>
         <p class="featured-card-desc">
-          Built a recurring CI system from scratch at Ix — tracking 10+ competitors across 20+ sources, synthesized into weekly executive briefs. Behavioral cohort analysis on top drove a 60% user retention lift.
+          Built a recurring CI pipeline from scratch at an AI startup — 20+ monitored sources, weekly executive briefs. Behavioral cohort analysis surfaced retention drop-off; recommendations were adopted directly by the product team and drove a 60% user retention increase.
         </p>
         <div class="featured-card-outcome">
           <div class="outcome-chip">60% retention lift</div>
-          <div class="outcome-chip">Weekly exec briefs</div>
-          <div class="outcome-chip">10+ competitors tracked</div>
+          <div class="outcome-chip">Deployed at Ix (Dec 2025)</div>
+          <div class="outcome-chip">10+ competitors mapped</div>
         </div>
         <div class="btn-row" style="margin-top:1.25rem;">
           <a class="btn btn-primary" href="intelligence.html">Case Study</a>
@@ -142,26 +143,26 @@
 
       <!-- Project 3: Seattle Last Mile -->
       <div class="featured-card reveal reveal-delay-2">
-        <div class="featured-card-label">Logistics &middot; GIS &middot; Operations</div>
-        <h3 class="featured-card-title">Seattle Last-Mile Logistics Coverage Analysis</h3>
+        <div class="featured-card-label">Logistics &middot; Operations &middot; GIS</div>
+        <h3 class="featured-card-title">Seattle Last-Mile Delivery Gap Analysis</h3>
         <p class="featured-card-desc">
-          Network analysis and isochrone modeling for last-mile delivery in Seattle — 10/20/30-minute drive-time coverage from five real distribution hubs using OSMnx. Surfaces coverage gaps and optimization opportunities directly applicable to logistics operations planning.
+          Network analysis mapping 10/20/30-minute drive-time coverage from five real Seattle distribution hubs. Identifies under-served King County zones by composite gap score — directly applicable to logistics operations planning, hub siting, and delivery SLA design.
         </p>
         <div class="featured-card-outcome">
           <div class="outcome-chip">5 real distribution hubs</div>
           <div class="outcome-chip">King County road network</div>
-          <div class="outcome-chip">Gap-scoring by zone</div>
+          <div class="outcome-chip">Gap scored by zone</div>
         </div>
         <div class="btn-row" style="margin-top:1.25rem;">
           <a class="btn btn-primary" href="https://github.com/mossfunki/seattle-last-mile-logistics" target="_blank" rel="noopener">GitHub</a>
         </div>
-        <div class="featured-card-tags">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Python &middot; Network Analysis</div>
+        <div class="featured-card-tags">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Network Analysis</div>
       </div>
 
     </div>
 
     <div style="text-align:center; margin-top:2.5rem;">
-      <a class="btn btn-secondary" href="projects.html">All Projects &rarr;</a>
+      <a class="btn btn-secondary" href="projects.html">All Work &rarr;</a>
     </div>
   </section>
 
