@@ -1,13 +1,11 @@
-<!-- index.html (FULL FILE) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Benjamin Lab — Market Intelligence & Strategy Analyst</title>
+  <title>Benjamin Lab — Data & Operations Analyst</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Benjamin Lab — market intelligence and strategy analyst specializing in healthcare, biotech, and AI infrastructure competitive analysis, market mapping, and growth insights.">
+  <meta name="description" content="Benjamin Lab — Data & Operations Analyst in Seattle. I build forecasting systems, competitive intelligence tools, and analytics pipelines for operations, logistics, healthcare, and tech.">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,9 +22,7 @@
     <div class="nav-brand">Benjamin Lab</div>
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="intelligence.html">Intelligence</a></li>
-      <li><a href="spatial.html">Spatial</a></li>
+      <li><a href="projects.html">Work</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="resume.html">Resume</a></li>
     </ul>
@@ -38,19 +34,18 @@
   <!-- HERO -->
   <section class="section hero">
     <div>
-      <p class="hero-eyebrow">Benjamin Lab &mdash; Market Intelligence &amp; Strategy Analyst</p>
+      <p class="hero-eyebrow">Seattle, WA &mdash; Open to Work</p>
       <h1 class="hero-title">
-        Healthcare &amp; AI<br><em>Market Intelligence</em>
+        Data &amp; Operations<br><em>Analyst</em>
       </h1>
       <p class="hero-subtitle">
-        Competitive analysis, market mapping, and growth insights for healthcare, biotech, and AI infrastructure companies &mdash; built on Python pipelines, behavioral analytics, and spatial data.
+        I build analytics systems that reduce friction, forecast demand, and surface decisions faster. From behavioral retention analysis to drug pipeline CI to spatial operations modeling &mdash; I work end-to-end: data ingestion, modeling, and clear output.
       </p>
 
       <div class="btn-row">
-        <a class="btn btn-primary" href="intelligence.html">Intelligence Work</a>
-        <a class="btn btn-secondary" href="#map-section">Explore Spatial Analytics</a>
-        <a class="btn btn-secondary" href="projects.html">Projects</a>
+        <a class="btn btn-primary" href="projects.html">View My Work</a>
         <a class="btn btn-secondary" href="resume.html">Resume</a>
+        <a class="btn btn-secondary" href="mailto:benjaminmonroelab@gmail.com">Get in Touch</a>
       </div>
 
       <div class="hero-tools">
@@ -58,202 +53,188 @@
         <span class="hero-tools-sep">&middot;</span>
         <span>SQL</span>
         <span class="hero-tools-sep">&middot;</span>
+        <span>Tableau</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>Forecasting</span>
+        <span class="hero-tools-sep">&middot;</span>
+        <span>GIS</span>
+        <span class="hero-tools-sep">&middot;</span>
         <span>Competitive Intelligence</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>Market Mapping</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>Spatial Analytics</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>Machine Learning</span>
       </div>
     </div>
 
     <div class="hero-portrait-wrap">
       <img src="IMG_8482.png" alt="Benjamin Lab" class="hero-portrait">
     </div>
-
   </section>
 
-<section class="map-section" id="map-section">
-  <div class="map-section-inner">
-    <div class="map-section-header">
-      <div>
-        <p class="section-label">02 &mdash; Live Spatial Analysis</p>
-        <h2 class="section-title">Economic Risk &amp; County Clusters</h2>
-        <p class="section-subtitle" style="margin-top:0.3rem;">US County &middot; FEMA NRI + Census TIGER &middot; K-Means Spatial ML &middot; updated daily</p>
+  <!-- PROOF STRIP -->
+  <section class="proof-strip">
+    <div class="proof-strip-inner">
+      <div class="proof-item">
+        <span class="proof-number">60%</span>
+        <span class="proof-label">User retention lift — behavioral cohort analysis at Ix</span>
       </div>
-      <div class="layer-toggles">
-        <button class="layer-toggle layer-toggle--risk active" data-layer="risk">Risk Zones</button>
-        <button class="layer-toggle layer-toggle--clusters active" data-layer="clusters">ML Clusters</button>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <span class="proof-number">200+</span>
+        <span class="proof-label">Competitor signals monitored weekly across 20+ sources</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <span class="proof-number">3,222</span>
+        <span class="proof-label">US counties in live K-Means spatial ML pipeline</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <span class="proof-number">140K+</span>
+        <span class="proof-label">Institutional records analyzed for Cal Poly Humboldt IRAR</span>
       </div>
     </div>
-    <div id="map"></div>
-    <div class="pipeline-panel">
-      <p class="pipeline-label">Pipeline</p>
-      <div class="pipeline-stages">
-        <div class="pipeline-stage">
-          <div class="pipeline-stage-name">Ingest</div>
-          <div class="pipeline-stage-status">&#10003; FEMA NRI</div>
-          <div class="pipeline-stage-meta">3,143 counties</div>
-        </div>
-        <div class="pipeline-stage">
-          <div class="pipeline-stage-name">Transform</div>
-          <div class="pipeline-stage-status">&#10003; Spatial Join</div>
-          <div class="pipeline-stage-meta">Census TIGER 20m</div>
-        </div>
-        <div class="pipeline-stage">
-          <div class="pipeline-stage-name">Model</div>
-          <div class="pipeline-stage-status">&#10003; K-Means</div>
-          <div class="pipeline-stage-meta">5 clusters</div>
-        </div>
-      </div>
-      <p class="pipeline-footer">
-        Last run: <span id="pipeline-last-run">—</span>
-        &nbsp;&middot;&nbsp;
-        <a href="https://github.com/mossfunki/mossfunki.github.io/actions" target="_blank" rel="noopener">View GitHub Actions &rarr;</a>
-        &nbsp;&middot;&nbsp;
-        <a href="spatial.html">How it&rsquo;s built &rarr;</a>
-      </p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- WHAT I DO -->
-<section class="section reveal">
-  <p class="section-label">01 &mdash; Expertise</p>
-  <h2 class="section-title">What I do</h2>
-  <div class="expertise-grid">
-    <div class="expertise-card reveal reveal-delay-1">
-      <div class="expertise-number">01</div>
-      <h3>Healthcare & Biotech CI</h3>
-      <p>Drug pipeline tracking, competitive landscape mapping, FDA approval monitoring, and biopharma market intelligence — translating clinical and commercial signals into strategic decisions.</p>
-    </div>
-    <div class="expertise-card reveal reveal-delay-2">
-      <div class="expertise-number">02</div>
-      <h3>Data Science & Modeling</h3>
-      <p>Predictive modeling, time series forecasting, machine learning, and statistical inference from complex real-world datasets.</p>
-    </div>
-    <div class="expertise-card reveal reveal-delay-3">
-      <div class="expertise-number">03</div>
-      <h3>GIS & Spatial Analysis</h3>
-      <p>Spatial econometrics, interactive mapping, and geospatial data pipelines for location-based operational decisions.</p>
-    </div>
-  </div>
-</section>
-
-  <!-- EXPERIENCE -->
+  <!-- FEATURED WORK -->
   <section class="section reveal">
-    <p class="section-label">02 &mdash; Experience</p>
-    <h2 class="section-title">Where I've worked</h2>
+    <p class="section-label">Selected Work</p>
+    <h2 class="section-title">What I&rsquo;ve built</h2>
 
-    <div class="exp-list">
+    <div class="featured-grid">
 
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-company">Ix</div>
-          <div class="exp-date">Dec 2025 &mdash; Present</div>
+      <!-- Project 1: Flagship -->
+      <div class="featured-card featured-card--primary reveal">
+        <div class="featured-card-label">
+          <span class="proj-status proj-status--new">Flagship</span>
+          Operations &middot; Forecasting &middot; Seattle
         </div>
-        <div>
-          <h3 class="exp-role">Market Intelligence &amp; Strategy Analyst</h3>
-          <p style="color:var(--muted);font-size:0.88rem;margin-bottom:0.6rem;font-style:italic;">Early-Stage AI Infrastructure Startup — persistent world state &amp; memory layer for multi-agent AI systems</p>
-          <ul class="exp-bullets">
-            <li>Built a recurring competitive intelligence system tracking 10+ direct competitors — including LangGraph, OpenAI, Neo4j, and Mem0 — synthesizing product launches, funding rounds, and developer forum signals into weekly strategy briefs for executive leadership</li>
-            <li>Drove a 60% increase in platform user retention by diagnosing engagement drop-off through behavioral cohort analysis and delivering targeted recommendations adopted by the product team</li>
-            <li>Monitored 20+ sources — including developer forums (Reddit, HN, GitHub), academic research (arXiv), job listings, and funding announcements — to identify enterprise customer pipeline signals and map investor thesis alignment across the AI agent memory market</li>
-            <li>Built and maintained telemetry-linked data pipelines supporting real-time product analytics, user behavior tracking, and executive reporting infrastructure</li>
-            <li>Bridged product, engineering, and leadership by translating behavioral data and competitive findings into prioritized recommendations — serving as a core decision-support function in a resource-constrained, high-velocity environment</li>
-          </ul>
+        <h3 class="featured-card-title">Seattle Event-Driven Demand Forecasting</h3>
+        <p class="featured-card-desc">
+          Built a demand forecasting model linking major Seattle events (Climate Pledge Arena, T-Mobile Park, Lumen Field) to traffic volume surges, transit ridership spikes, and parking demand across King County corridors. Uses WSDOT traffic counts, King County Metro GTFS feeds, and public event calendars.
+        </p>
+        <div class="featured-card-outcome">
+          <div class="outcome-chip">Predicts 2&ndash;4 hr demand windows</div>
+          <div class="outcome-chip">King County coverage</div>
+          <div class="outcome-chip">Directional flow modeling</div>
         </div>
+        <div class="btn-row" style="margin-top:1.25rem;">
+          <a class="btn btn-primary" href="seattle-demand-forecast.html">Case Study</a>
+          <a class="btn btn-secondary" href="https://github.com/mossfunki/seattle-event-demand" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="featured-card-tags">Python &middot; Time Series &middot; GTFS &middot; WSDOT API &middot; Folium &middot; scikit-learn</div>
       </div>
 
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-company">Humboldt County</div>
-          <div class="exp-date">Jan 2025 &mdash; May 2025</div>
+      <!-- Project 2: Ix CI -->
+      <div class="featured-card reveal reveal-delay-1">
+        <div class="featured-card-label">Operations &middot; Market Intelligence</div>
+        <h3 class="featured-card-title">AI Market Competitive Intelligence System</h3>
+        <p class="featured-card-desc">
+          Built a recurring CI system from scratch at Ix — tracking 10+ competitors across 20+ sources, synthesized into weekly executive briefs. Behavioral cohort analysis on top drove a 60% user retention lift.
+        </p>
+        <div class="featured-card-outcome">
+          <div class="outcome-chip">60% retention lift</div>
+          <div class="outcome-chip">Weekly exec briefs</div>
+          <div class="outcome-chip">10+ competitors tracked</div>
         </div>
-        <div>
-          <h3 class="exp-role">GIS &amp; Economic Development Analyst</h3>
-          <p style="color:var(--muted);font-size:0.88rem;margin-bottom:0.6rem;font-style:italic;">Department of Economic Development | Eureka, CA</p>
-          <ul class="exp-bullets">
-            <li>Built geospatial intelligence products using Python and ArcGIS to map regional assets and identify infrastructure gaps — deliverables incorporated into county economic development planning and resource allocation cycles</li>
-            <li>Integrated spatial and tabular datasets to produce decision-support dashboards used in executive briefings and multi-stakeholder resource allocation planning</li>
-            <li>Analyzed regional economic patterns to surface actionable insights on growth opportunities, directly informing policy recommendations submitted to county leadership</li>
-          </ul>
+        <div class="btn-row" style="margin-top:1.25rem;">
+          <a class="btn btn-primary" href="intelligence.html">Case Study</a>
         </div>
+        <div class="featured-card-tags">Python &middot; Amplitude &middot; Cohort Analysis &middot; Competitive Intelligence</div>
       </div>
 
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-company">Cal Poly Humboldt</div>
-          <div class="exp-date">Jan 2024 &mdash; May 2024</div>
+      <!-- Project 3: Seattle Last Mile -->
+      <div class="featured-card reveal reveal-delay-2">
+        <div class="featured-card-label">Logistics &middot; GIS &middot; Operations</div>
+        <h3 class="featured-card-title">Seattle Last-Mile Logistics Coverage Analysis</h3>
+        <p class="featured-card-desc">
+          Network analysis and isochrone modeling for last-mile delivery in Seattle — 10/20/30-minute drive-time coverage from five real distribution hubs using OSMnx. Surfaces coverage gaps and optimization opportunities directly applicable to logistics operations planning.
+        </p>
+        <div class="featured-card-outcome">
+          <div class="outcome-chip">5 real distribution hubs</div>
+          <div class="outcome-chip">King County road network</div>
+          <div class="outcome-chip">Gap-scoring by zone</div>
         </div>
-        <div>
-          <h3 class="exp-role">Research Analyst &mdash; IRAR</h3>
-          <p style="color:var(--muted);font-size:0.88rem;margin-bottom:0.6rem;font-style:italic;">Institutional Research, Analytics &amp; Reporting | Arcata, CA</p>
-          <ul class="exp-bullets">
-            <li>Analyzed 140,000+ institutional records to evaluate program performance, enrollment trends, and resource allocation effectiveness across departments</li>
-            <li>Designed automated data pipelines in Python to clean, standardize, and integrate multi-source datasets — improving reporting throughput and eliminating manual processing bottlenecks</li>
-            <li>Produced executive-level analytical reports and Tableau dashboards used in leadership planning, accreditation reporting, and compliance audits</li>
-          </ul>
+        <div class="btn-row" style="margin-top:1.25rem;">
+          <a class="btn btn-primary" href="https://github.com/mossfunki/seattle-last-mile-logistics" target="_blank" rel="noopener">GitHub</a>
         </div>
+        <div class="featured-card-tags">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Python &middot; Network Analysis</div>
       </div>
 
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <div class="exp-company">Cal Poly Humboldt</div>
-          <div class="exp-date">Aug 2025 &mdash; Dec 2025</div>
-        </div>
-        <div>
-          <h3 class="exp-role">President &amp; Analytics Lead — Data Science Club</h3>
-          <ul class="exp-bullets">
-            <li>Led analytics teams delivering data projects for public agencies and research clients — managing scope, timelines, and stakeholder communication across concurrent workstreams</li>
-            <li>Designed and taught technical curricula in Python, SQL, Tableau, and version control, building analytical capability across the organization</li>
-          </ul>
-        </div>
-      </div>
+    </div>
 
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a class="btn btn-secondary" href="projects.html">All Projects &rarr;</a>
     </div>
   </section>
 
-  <!-- FEATURED PROJECT -->
+  <!-- SKILLS -->
   <section class="section section--alt reveal">
-    <div class="section-heading">
-      <div>
-        <p class="section-label">03 &mdash; Featured Work</p>
-        <h2 class="section-title">Featured Work</h2>
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">What I can do for your team</h2>
+    <div class="skills-strip">
+      <div class="skill-block">
+        <div class="skill-block-icon">&#9650;</div>
+        <h3>Analysis &amp; Modeling</h3>
+        <p>Forecasting, regression, clustering, cohort analysis, A/B testing. Python (pandas, scikit-learn, statsmodels) and SQL end-to-end.</p>
       </div>
-      <span class="section-subtitle">Competitive Intelligence · Market Analysis · AI Infrastructure</span>
+      <div class="skill-block">
+        <div class="skill-block-icon">&#9632;</div>
+        <h3>Operations Intelligence</h3>
+        <p>KPI dashboards, logistics modeling, route optimization, supply chain analysis. Turns operational data into actionable decisions.</p>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-icon">&#9679;</div>
+        <h3>Competitive &amp; Market CI</h3>
+        <p>Signal monitoring pipelines, competitor landscape mapping, FDA/clinical pipeline tracking. Built recurring systems, not one-off reports.</p>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-icon">&#9670;</div>
+        <h3>Spatial &amp; GIS</h3>
+        <p>GeoPandas, ArcGIS, Leaflet.js, OSMnx. Network analysis, isochrone modeling, and spatial joins for location-based decisions.</p>
+      </div>
     </div>
+    <div class="tools-row">
+      <span>Python</span><span>SQL</span><span>pandas</span><span>scikit-learn</span><span>Tableau</span><span>Amplitude</span><span>GeoPandas</span><span>Streamlit</span><span>GitHub Actions</span><span>Leaflet.js</span><span>OSMnx</span><span>statsmodels</span>
+    </div>
+  </section>
 
-    <div class="content-grid">
-      <div>
-        <h3 class="proj-title">AI Agent Memory Market — Competitive Landscape</h3>
-        <p class="hero-subtitle">
-          A recurring competitive intelligence system built from scratch at Ix — tracking 10+
-          competitors across developer forums, funding announcements, and product launches,
-          synthesized into weekly strategy briefs for executive leadership.
-        </p>
-
-        <ul class="project-bullets">
-          <li>200+ competitor signals monitored across 20+ sources</li>
-          <li>Behavioral cohort analysis driving 60% retention lift</li>
-          <li>Landscape mapping: LangGraph, OpenAI, Neo4j, Mem0 and others</li>
-        </ul>
-
-        <div class="btn-row">
-          <a class="btn btn-primary" href="intelligence.html">
-            View Case Study
-          </a>
-          <a class="btn btn-secondary" href="projects.html">
-            All Projects
-          </a>
+  <!-- SPATIAL MAP -->
+  <section class="map-section" id="map-section">
+    <div class="map-section-inner">
+      <div class="map-section-header">
+        <div>
+          <p class="section-label">Live Pipeline &mdash; Spatial ML</p>
+          <h2 class="section-title">US County Risk &amp; Cluster Model</h2>
+          <p class="section-subtitle" style="margin-top:0.3rem;">FEMA NRI + Census TIGER &middot; K-Means (k=5) &middot; 3,222 counties &middot; updated daily via GitHub Actions</p>
+        </div>
+        <div class="layer-toggles">
+          <button class="layer-toggle layer-toggle--risk active" data-layer="risk">Risk Zones</button>
+          <button class="layer-toggle layer-toggle--clusters active" data-layer="clusters">ML Clusters</button>
         </div>
       </div>
-
-      <div class="highlight-box">
-        <strong>Methods &amp; tools</strong><br>
-        Competitive Intelligence · Cohort Analysis · Signal Monitoring<br>
-        Python · SQL · Tableau · Behavioral Analytics
+      <div id="map"></div>
+      <div class="pipeline-panel">
+        <p class="pipeline-label">Automated Pipeline</p>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="pipeline-stage-name">Ingest</div>
+            <div class="pipeline-stage-status">&#10003; FEMA NRI</div>
+            <div class="pipeline-stage-meta">3,143 counties</div>
+          </div>
+          <div class="pipeline-stage">
+            <div class="pipeline-stage-name">Transform</div>
+            <div class="pipeline-stage-status">&#10003; Spatial Join</div>
+            <div class="pipeline-stage-meta">Census TIGER 20m</div>
+          </div>
+          <div class="pipeline-stage">
+            <div class="pipeline-stage-name">Model</div>
+            <div class="pipeline-stage-status">&#10003; K-Means</div>
+            <div class="pipeline-stage-meta">5 clusters</div>
+          </div>
+        </div>
+        <p class="pipeline-footer">
+          Last run: <span id="pipeline-last-run">—</span>
+          &nbsp;&middot;&nbsp;
+          <a href="https://github.com/mossfunki/mossfunki.github.io/actions" target="_blank" rel="noopener">View GitHub Actions &rarr;</a>
+        </p>
       </div>
     </div>
   </section>
@@ -262,7 +243,7 @@
 
 <footer>
   <div class="footer-inner">
-    <span>© 2025 Benjamin Lab</span>
+    <span>&copy; 2026 Benjamin Lab &mdash; Seattle, WA</span>
     <div class="footer-links">
       <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
@@ -283,16 +264,13 @@
 
   L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {
-      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, AEX, GeoEye',
-      maxZoom: 18
-    }
+    { attribution: 'Tiles &copy; Esri', maxZoom: 18 }
   ).addTo(map);
 
   var CLUSTER_COLORS = ['#22c55e', '#86efac', '#f59e0b', '#ef4444', '#3b82f6'];
 
   function riskColor(score) {
-    if (!score) return '#d1d5db88';
+    if (score === null || score === undefined) return '#d1d5db44';
     if (score < 15)  return '#22c55e88';
     if (score < 30)  return '#86efac88';
     if (score < 50)  return '#fde68a88';
@@ -309,19 +287,13 @@
     .then(function (data) {
       riskLayer = L.geoJSON(data, {
         style: function (f) {
-          return {
-            fillColor: riskColor(f.properties.risk_score),
-            weight: 0.3,
-            opacity: 0.7,
-            color: '#ffffff',
-            fillOpacity: 0.7
-          };
+          return { fillColor: riskColor(f.properties.risk_score), weight: 0.3, opacity: 0.7, color: '#ffffff', fillOpacity: 0.7 };
         },
         onEachFeature: function (f, layer) {
           var p = f.properties;
           layer.bindTooltip(
             '<strong>' + (p.name || 'County') + ', ' + (p.state || '') + '</strong>' +
-            '<br>Risk Score: ' + p.risk_score +
+            '<br>Risk Score: ' + (p.risk_score !== null ? p.risk_score : 'N/A') +
             '<br>Cluster: ' + (p.cluster_label || '&mdash;'),
             { sticky: true, className: 'map-tooltip' }
           );
@@ -331,20 +303,14 @@
       clustersLayer = L.geoJSON(data, {
         style: function (f) {
           var c = CLUSTER_COLORS[f.properties.cluster_id % CLUSTER_COLORS.length];
-          return {
-            fillColor: c,
-            weight: 0.3,
-            opacity: 0.5,
-            color: '#ffffff',
-            fillOpacity: 0.5
-          };
+          return { fillColor: c, weight: 0.3, opacity: 0.5, color: '#ffffff', fillOpacity: 0.5 };
         },
         onEachFeature: function (f, layer) {
           var p = f.properties;
           layer.bindTooltip(
             '<strong>' + (p.name || 'County') + ', ' + (p.state || '') + '</strong>' +
             '<br>Cluster: ' + (p.cluster_label || '&mdash;') +
-            '<br>Risk Score: ' + p.risk_score,
+            '<br>Risk Score: ' + (p.risk_score !== null ? p.risk_score : 'N/A'),
             { sticky: true, className: 'map-tooltip' }
           );
         }
@@ -362,8 +328,7 @@
     })
     .catch(function () {
       document.getElementById('map').innerHTML =
-        '<div style="display:flex;align-items:center;justify-content:center;height:100%;' +
-        'color:#9ca3af;font-size:0.875rem;background:#f9fafb;">Map data not found &mdash; run scripts/update_map_data.py first</div>';
+        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:0.875rem;">Map data loading&hellip;</div>';
     });
 
   document.querySelectorAll('.layer-toggle').forEach(function (btn) {
@@ -391,8 +356,6 @@
       if(a.getAttribute('href') === p) a.classList.add('nav-active');
     });
   })();
-
-  // Scroll reveal
   (function(){
     if(!('IntersectionObserver' in window)){
       document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
@@ -400,10 +363,7 @@
     }
     var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });

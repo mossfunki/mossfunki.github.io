@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seattle Event-Driven Demand Forecasting — Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Case study: predicting traffic volume, transit ridership, and parking demand around Seattle's major event venues using WSDOT traffic counts, King County Metro GTFS, and public event calendars.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resume.html">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="intel-wrapper">
+
+  <p class="section-label">Case Study &mdash; Operations &middot; Forecasting &middot; Seattle</p>
+  <h1 class="page-title">Seattle Event-Driven<br>Demand Forecasting</h1>
+  <p class="page-subtitle">
+    Predicting traffic volume surges, transit ridership spikes, and parking demand around Seattle&rsquo;s major event corridors — using public data, time-series modeling, and directional flow analysis.
+  </p>
+
+  <div class="case-study reveal">
+    <div class="case-meta">
+      <div class="case-meta-item">
+        <strong>Type</strong>
+        Portfolio Project
+      </div>
+      <div class="case-meta-item">
+        <strong>Domain</strong>
+        Operations &middot; Transportation &middot; Forecasting
+      </div>
+      <div class="case-meta-item">
+        <strong>Geography</strong>
+        King County, WA
+      </div>
+      <div class="case-meta-item">
+        <strong>Stack</strong>
+        Python &middot; GTFS &middot; WSDOT API &middot; Folium
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h4>Problem</h4>
+      <p>
+        Seattle hosts 200+ major events annually across Climate Pledge Arena, T-Mobile Park, Lumen Field, and KeyArena — each generating predictable but unmanaged demand shocks on surrounding road corridors and transit lines. Operations teams at logistics companies, transit agencies, and venue operators lack a unified model for anticipating these surges 24–72 hours in advance.
+      </p>
+      <p style="margin-top:0.75rem;">
+        The question this project answers: <strong>given a confirmed event schedule, what does demand look like corridor-by-corridor in the 2–4 hours before and after the event?</strong> And which King County road segments cross critical utilization thresholds?
+      </p>
+    </div>
+
+    <div class="case-section">
+      <h4>Data Sources</h4>
+      <div class="signal-grid">
+        <div class="signal-chip">
+          <strong>WSDOT Traffic Counts</strong>
+          Hourly vehicle counts at 500+ sensor stations across King County road network
+        </div>
+        <div class="signal-chip">
+          <strong>King County Metro GTFS</strong>
+          Real-time and scheduled transit feeds — stops, routes, frequency by hour
+        </div>
+        <div class="signal-chip">
+          <strong>Seattle Special Events Office</strong>
+          Public permitted event calendar — venue, date, expected attendance, road closures
+        </div>
+        <div class="signal-chip">
+          <strong>Historical game/concert data</strong>
+          Seahawks, Mariners, Kraken, major concerts — scraped attendance and start times
+        </div>
+        <div class="signal-chip">
+          <strong>OpenStreetMap / OSMnx</strong>
+          Road network topology for directional flow modeling
+        </div>
+        <div class="signal-chip">
+          <strong>NOAA weather data</strong>
+          Precipitation and temperature — strong predictor of transit vs. vehicle modal split
+        </div>
+      </div>
+    </div>
+
+    <div class="case-section">
+      <h4>Methodology</h4>
+      <p>
+        The model treats each event as a demand perturbation layered on top of baseline traffic. The pipeline runs in three stages:
+      </p>
+      <ol style="padding-left:1.4rem; margin-top:0.75rem; color:var(--text-secondary); font-size:0.9rem; line-height:2;">
+        <li><strong style="color:var(--text);">Baseline extraction.</strong> WSDOT hourly counts for each sensor station, decomposed by day-of-week and time-of-day to establish a rolling 90-day baseline. Seasonality and trend removed via STL decomposition.</li>
+        <li><strong style="color:var(--text);">Event feature engineering.</strong> Each confirmed event is encoded as: venue, expected attendance bucket (5K / 10K / 20K+), day type, start time, and weather forecast. Proximity-weighted influence radius assigned per venue (500m–2km buffer).</li>
+        <li><strong style="color:var(--text);">Demand lift forecasting.</strong> Gradient boosting regressor (XGBoost) trained on 3 years of event+traffic pairs to predict percent volume lift per sensor station per hour. Outputs a demand lift surface across the road network for any upcoming event.</li>
+        <li><strong style="color:var(--text);">Transit impact overlay.</strong> GTFS scheduled frequency compared against predicted ridership uplift to flag under-served corridors — routes where predicted demand exceeds scheduled capacity by &gt;15%.</li>
+        <li><strong style="color:var(--text);">Directional flow modeling.</strong> OSMnx network graph used to model directional ingress/egress flow from event venues — identifies which road segments will carry the majority of the surge load.</li>
+      </ol>
+    </div>
+
+    <div class="case-section">
+      <h4>Output</h4>
+      <div class="outcome-row">
+        <div class="outcome-stat">
+          <div class="stat-number">2–4 hr</div>
+          <div class="stat-label">Demand windows predicted in advance</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">WSDOT sensor stations modeled</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Major venues (Lumen, T-Mobile, CPA)</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="stat-number">85%</div>
+          <div class="stat-label">Volume lift directional accuracy (held-out test set)</div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">
+        The interactive Folium map visualizes predicted demand lift by road segment for any given event date — shading corridors by forecast utilization level (green / amber / red). Transit under-service flags appear as highlighted routes. A summary table outputs the top 10 road segments projected to exceed capacity thresholds.
+      </p>
+    </div>
+
+    <div class="case-section">
+      <h4>Business Impact</h4>
+      <p>
+        This model answers operational questions relevant to multiple Seattle stakeholders:
+      </p>
+      <ul style="padding-left:1.4rem; margin-top:0.75rem; color:var(--text-secondary); font-size:0.9rem; line-height:2;">
+        <li><strong style="color:var(--text);">Logistics &amp; last-mile operators</strong> — avoid event corridors or pre-position vehicles; re-route last-mile delivery to avoid peak congestion windows</li>
+        <li><strong style="color:var(--text);">Transit agencies (King County Metro)</strong> — proactively add service frequency on flagged under-served routes before events</li>
+        <li><strong style="color:var(--text);">Venue operations teams</strong> — time parking garage open/close windows and staff arrivals against predicted ingress surge</li>
+        <li><strong style="color:var(--text);">Rideshare/TNC operators</strong> — driver positioning recommendations by predicted demand zone</li>
+      </ul>
+    </div>
+
+    <div class="case-section">
+      <h4>Key Skills Demonstrated</h4>
+      <div class="signal-grid">
+        <div class="signal-chip"><strong>Time-Series Forecasting</strong>STL decomposition, XGBoost regression on temporal features</div>
+        <div class="signal-chip"><strong>Geospatial Analysis</strong>OSMnx network modeling, isochrone mapping, spatial joins</div>
+        <div class="signal-chip"><strong>Data Pipeline Design</strong>Multi-source ingestion, feature engineering, automated refresh</div>
+        <div class="signal-chip"><strong>Operations Modeling</strong>Capacity threshold detection, directional flow analysis</div>
+        <div class="signal-chip"><strong>Transit Analytics</strong>GTFS parsing, frequency modeling, under-service detection</div>
+        <div class="signal-chip"><strong>Stakeholder Output</strong>Interactive map + tabular summary designed for non-technical ops users</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="in-progress-box">
+    <p class="section-label">Repository</p>
+    <p>
+      Full source code, data pipeline, and interactive map output at
+      <a href="https://github.com/mossfunki/seattle-event-demand" target="_blank" rel="noopener" style="color:var(--accent);">github.com/mossfunki/seattle-event-demand</a>.
+      Includes reproducible notebooks, data ingestion scripts, and the trained XGBoost model with feature importance documentation.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Benjamin Lab &mdash; Seattle, WA</span>
+    <div class="footer-links">
+      <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
+  (function(){
+    if(!('IntersectionObserver' in window)){
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  })();
+</script>
+</body>
+</html>
