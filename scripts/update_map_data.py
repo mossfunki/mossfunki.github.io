@@ -162,14 +162,18 @@ def build_geojson(gdf: gpd.GeoDataFrame) -> dict:
     for _, row in gdf.iterrows():
         if row.geometry is None or row.geometry.is_empty:
             continue
+        def safe_float(col):
+            v = row.get(col)
+            return round(float(v), 2) if pd.notna(v) else None
+
         props = {
             "name":          str(row.get("COUNTY", "")),
             "state":         str(row.get("STATEABBRV", "")),
             "fips":          str(row["FIPS"]),
-            "risk_score":    round(float(row.get("RISK_SCORE") or 0), 2),
-            "eal_score":     round(float(row.get("EAL_SCORE") or 0), 2),
-            "sovi_score":    round(float(row.get("SOVI_SCORE") or 0), 2),
-            "resl_score":    round(float(row.get("RESL_SCORE") or 0), 2),
+            "risk_score":    safe_float("RISK_SCORE"),
+            "eal_score":     safe_float("EAL_SCORE"),
+            "sovi_score":    safe_float("SOVI_SCORE"),
+            "resl_score":    safe_float("RESL_SCORE"),
             "cluster_id":    int(row["cluster_id"]) if pd.notna(row.get("cluster_id")) else 0,
             "cluster_label": str(row.get("cluster_label", "") or ""),
         }
