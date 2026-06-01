@@ -249,7 +249,7 @@ nav ul li:last-child a:hover { background: var(--accent-hover); color: var(--bg)
   flex-direction: column;
   align-items: center;
   gap: 0.65rem;
-  margin-top: 2.75rem;
+  margin-top: 1.5rem;
 }
 .hero-portrait {
   width: 190px;
