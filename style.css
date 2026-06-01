@@ -252,8 +252,8 @@ nav ul li:last-child a:hover { background: var(--accent-hover); color: var(--bg)
   margin-top: 1.5rem;
 }
 .hero-portrait {
-  width: 220px;
-  height: 220px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid var(--border-strong);
