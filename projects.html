@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Work — Benjamin Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Benjamin Lab's project work — demand forecasting, inventory optimization, competitive intelligence, and logistics gap analysis for operations and supply chain roles in Seattle.">
+  <meta name="description" content="Benjamin Lab's project work — GIS pipelines, spatial econometrics, and machine learning applied to King County and Seattle open data. Plus demand forecasting and analytics.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,67 +35,88 @@
   </div>
 
   <div style="max-width:1100px; margin:0 auto; padding:0 1.5rem 5rem;">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="gis">GIS &amp; Spatial</button>
+      <button class="filter-btn" data-filter="econometrics">Econometrics</button>
+      <button class="filter-btn" data-filter="analytics">Analytics</button>
+    </div>
     <div class="proj-grid">
 
-      <!-- 1. FLAGSHIP -->
-      <div class="proj-card proj-card--featured reveal" data-category="operations forecasting logistics">
+      <!-- 1. Seattle GIS Portfolio — featured/primary -->
+      <div class="proj-card proj-card--featured reveal" data-category="gis econometrics">
         <div class="proj-card-top">
-          <span class="proj-status proj-status--new">Flagship</span>
-          <span class="proj-domain">Supply Chain &middot; Forecasting &middot; Inventory</span>
+          <span class="proj-status proj-status--new">New</span>
+          <span class="proj-domain">GIS &middot; Spatial Econometrics &middot; Machine Learning</span>
         </div>
-        <h3>Demand Forecasting &amp; Inventory Optimization</h3>
-        <p><strong>Problem:</strong> Static reorder models miss event-driven demand spikes — generating stockouts during Seahawks games or PAX and excess inventory in quiet weeks.</p>
-        <p style="margin-top:0.5rem;"><strong>Method:</strong> Prophet time-series forecasting trained on 2 years of simulated weekly demand. Safety stock recalculated weekly using service level targets (95%) and lead time variance. Dynamic reorder point replaces fixed tables.</p>
-        <p style="margin-top:0.5rem;"><strong>Output:</strong> Streamlit dashboard with 14-day rolling forecast per SKU and a weekly reorder action table — built for an ops manager to act on without opening a notebook.</p>
-        <div class="proj-outcome-chips" style="margin-top:0.75rem;">
-          <span class="outcome-chip">31% fewer stockouts vs. static model</span>
-          <span class="outcome-chip">8.4% MAPE (held-out test)</span>
-          <span class="outcome-chip">Dynamic ROP per SKU</span>
+        <h3>Seattle Spatial Analysis Portfolio</h3>
+        <p><strong>Problem:</strong> Three real public policy questions that King County and Seattle open data can answer &mdash; if you build the right pipelines.</p>
+        <p style="margin-top:0.5rem"><strong>Method:</strong> OLS hedonic regression on 531k parcels (TOD pricing), DBSCAN clustering on 7,400 ped/bike collisions (infrastructure risk), Random Forest + SHAP on 1,545 census tracts (urban heat). Each pipeline is automated, end-to-end, and explained in plain English.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem">
+          <span class="outcome-chip">R&sup2;=0.502 OLS</span>
+          <span class="outcome-chip">303 DBSCAN clusters</span>
+          <span class="outcome-chip">CV F1: 0.47 Random Forest</span>
         </div>
-        <p class="proj-tag" style="margin-top:0.75rem;">Python &middot; Prophet &middot; XGBoost &middot; pandas &middot; Streamlit &middot; Safety Stock Modeling</p>
+        <p class="proj-tag" style="margin-top:0.75rem">GeoPandas &middot; Statsmodels &middot; scikit-learn &middot; SHAP &middot; MapLibre GL &middot; King County Open Data</p>
         <div class="proj-actions">
-          <a href="demand-inventory-forecast.html" class="primary">Full Case Study</a>
-          <a href="https://github.com/mossfunki/demand-inventory-forecast" target="_blank" rel="noopener">GitHub</a>
+          <a href="seattle-gis.html" class="primary">Interactive Case Study &rarr;</a>
+          <a href="https://github.com/mossfunki/seattle-gis-portfolio" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <!-- 2. Ix CI -->
-      <div class="proj-card reveal" data-category="analytics operations">
+      <!-- 2. Seattle Last-Mile Logistics -->
+      <div class="proj-card reveal" data-category="gis">
         <div class="proj-card-top">
-          <span class="proj-domain">Business Analysis &middot; Product Analytics</span>
-        </div>
-        <h3>User Retention Analysis &mdash; 60% Lift</h3>
-        <p><strong>Problem:</strong> An early-stage AI startup was losing users with no visibility into where or why. No analytics function, no benchmarks, no competitive context.</p>
-        <p style="margin-top:0.5rem;"><strong>Method:</strong> Behavioral cohort analysis in Amplitude to identify drop-off by segment and action. Weekly market intelligence feed from 20+ sources to frame competitive positioning. SQL + Python to pull and structure the underlying data.</p>
-        <p style="margin-top:0.5rem;"><strong>Output:</strong> Weekly exec briefs with clear recommendations. Product team adopted the findings — retention increased 60% within 8 weeks of implementation.</p>
-        <div class="proj-outcome-chips" style="margin-top:0.75rem;">
-          <span class="outcome-chip">60% user retention increase</span>
-          <span class="outcome-chip">Deployed at Ix — Dec 2025</span>
-          <span class="outcome-chip">Directly actionable to stakeholders</span>
-        </div>
-        <p class="proj-tag" style="margin-top:0.75rem;">Python &middot; SQL &middot; Amplitude &middot; Cohort Analysis &middot; Stakeholder Reporting</p>
-        <div class="proj-actions">
-          <a href="intelligence.html" class="primary">Case Study</a>
-        </div>
-      </div>
-
-      <!-- 3. Seattle Last Mile -->
-      <div class="proj-card reveal" data-category="logistics gis operations">
-        <div class="proj-card-top">
-          <span class="proj-domain">Logistics &middot; Operations &middot; GIS</span>
+          <span class="proj-domain">Logistics &middot; GIS &middot; Operations</span>
         </div>
         <h3>Seattle Last-Mile Delivery Gap Analysis</h3>
-        <p><strong>Problem:</strong> Where are the King County zones that existing Seattle distribution hubs can't reach within a viable delivery window — and how bad is the gap?</p>
-        <p style="margin-top:0.5rem;"><strong>Method:</strong> OSMnx network analysis generates 10/20/30-minute drive-time isochrones from five real distribution hub locations. Census tract overlay produces a composite under-service score by zone.</p>
-        <p style="margin-top:0.5rem;"><strong>Output:</strong> Interactive Leaflet map with gap-scored zones. Identifies candidate hub locations for a new facility to maximize under-served coverage.</p>
-        <div class="proj-outcome-chips" style="margin-top:0.75rem;">
+        <p><strong>Problem:</strong> Where are the King County zones that existing Seattle distribution hubs can&rsquo;t reach within a viable delivery window &mdash; and how bad is the gap?</p>
+        <p style="margin-top:0.5rem"><strong>Method:</strong> OSMnx network analysis generates 10/20/30-minute drive-time isochrones from five real distribution hub locations. Census tract overlay produces a composite under-service score by zone.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem">
           <span class="outcome-chip">5 real distribution hubs</span>
           <span class="outcome-chip">King County road network</span>
           <span class="outcome-chip">Coverage gap by census tract</span>
         </div>
-        <p class="proj-tag" style="margin-top:0.75rem;">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Python &middot; Network Analysis</p>
+        <p class="proj-tag" style="margin-top:0.75rem">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Python &middot; Network Analysis</p>
         <div class="proj-actions">
           <a href="https://github.com/mossfunki/seattle-last-mile-logistics" target="_blank" rel="noopener" class="primary">GitHub</a>
+        </div>
+      </div>
+
+      <!-- 3. Demand Forecasting -->
+      <div class="proj-card reveal" data-category="analytics">
+        <div class="proj-card-top">
+          <span class="proj-domain">Analytics &middot; Operations &middot; Forecasting</span>
+        </div>
+        <h3>Demand Forecasting &amp; Inventory Optimization</h3>
+        <p><strong>Problem:</strong> Static reorder models miss event-driven demand spikes &mdash; generating stockouts during Seahawks games or PAX and excess inventory in quiet weeks.</p>
+        <p style="margin-top:0.5rem"><strong>Method:</strong> Prophet time-series forecasting trained on 2 years of simulated weekly demand. Safety stock recalculated weekly using service level targets (95%) and lead time variance.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem">
+          <span class="outcome-chip">31% fewer stockouts vs. static model</span>
+          <span class="outcome-chip">8.4% MAPE (held-out test)</span>
+        </div>
+        <p class="proj-tag" style="margin-top:0.75rem">Python &middot; Prophet &middot; XGBoost &middot; pandas &middot; Streamlit</p>
+        <div class="proj-actions">
+          <a href="demand-inventory-forecast.html" class="primary">Case Study</a>
+          <a href="https://github.com/mossfunki/demand-inventory-forecast" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <!-- 4. User Retention -->
+      <div class="proj-card reveal" data-category="analytics">
+        <div class="proj-card-top">
+          <span class="proj-domain">Analytics &middot; Product &middot; Ix</span>
+        </div>
+        <h3>User Retention Analysis &mdash; 60% Lift</h3>
+        <p><strong>Problem:</strong> An early-stage AI startup was losing users with no visibility into where or why.</p>
+        <p style="margin-top:0.5rem"><strong>Method:</strong> Behavioral cohort analysis in Amplitude to identify drop-off by segment and action. SQL + Python to pull and structure the underlying data. Weekly exec briefs with clear recommendations.</p>
+        <div class="proj-outcome-chips" style="margin-top:0.75rem">
+          <span class="outcome-chip">60% user retention increase</span>
+          <span class="outcome-chip">Deployed at Ix &mdash; Dec 2025</span>
+        </div>
+        <p class="proj-tag" style="margin-top:0.75rem">Python &middot; SQL &middot; Amplitude &middot; Cohort Analysis</p>
+        <div class="proj-actions">
+          <a href="intelligence.html" class="primary">Case Study</a>
         </div>
       </div>
 
