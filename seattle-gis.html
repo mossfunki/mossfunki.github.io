@@ -483,6 +483,12 @@ function updateMapLayer(projectIdx) {
   LAYERS.forEach((layer, i) => {
     map.setLayoutProperty(layer, 'visibility', i === projectIdx ? 'visible' : 'none');
   });
+  // Station overlay: only visible on TOD tab
+  ['stations-layer', 'stations-labels'].forEach(id => {
+    if (map.getLayer(id)) {
+      map.setLayoutProperty(id, 'visibility', projectIdx === 0 ? 'visible' : 'none');
+    }
+  });
   document.getElementById('layer-label').textContent = LAYER_LABELS[projectIdx];
 }
 
@@ -559,7 +565,60 @@ map.on('load', () => {
     layout: { visibility: 'none' }
   });
 
+  // ── Light Rail Stations ──────────────────────────────────────────────────
+  map.addSource('stations', {
+    type: 'geojson',
+    data: 'data/seattle-gis/light_rail_stations.geojson'
+  });
+  map.addLayer({
+    id: 'stations-layer',
+    type: 'circle',
+    source: 'stations',
+    paint: {
+      'circle-radius': ['match', ['get', 'STATUS'], 'In Construction', 9, 'In Service', 7, 5],
+      'circle-color': ['match', ['get', 'STATUS'], 'In Construction', '#c8a152', 'In Service', '#ffffff', '#4f596e'],
+      'circle-opacity': ['match', ['get', 'STATUS'], 'In Planning', 0.4, 1.0],
+      'circle-stroke-width': 2,
+      'circle-stroke-color': ['match', ['get', 'STATUS'], 'In Construction', 'rgba(200,161,82,0.4)', '#1a1f2e']
+    }
+    // visible by default (TOD is the first tab)
+  });
+  map.addLayer({
+    id: 'stations-labels',
+    type: 'symbol',
+    source: 'stations',
+    minzoom: 11,
+    layout: {
+      'text-field': ['get', 'STATION'],
+      'text-font': ['Open Sans Regular'],
+      'text-size': 10,
+      'text-offset': [0, 1.4],
+      'text-anchor': 'top',
+      'text-optional': true
+    },
+    paint: {
+      'text-color': ['match', ['get', 'STATUS'], 'In Construction', '#c8a152', '#cccccc'],
+      'text-halo-color': '#0b0e15',
+      'text-halo-width': 1.5
+    }
+  });
+
   // ── Popups ───────────────────────────────────────────────────────────────
+
+  // Station popup
+  map.on('click', 'stations-layer', (e) => {
+    const p = e.features[0].properties;
+    const statusColor = p.STATUS === 'In Construction' ? '#c8a152' : p.STATUS === 'In Service' ? '#4aaa7a' : '#4f596e';
+    new maplibregl.Popup({ closeButton: false, maxWidth: '220px' })
+      .setLngLat(e.lngLat)
+      .setHTML(`
+        <div class="tt-row"><span class="tt-label">Station</span><span class="tt-val">${p.STATION}</span></div>
+        <div class="tt-row"><span class="tt-label">Status</span><span class="tt-val" style="color:${statusColor}">${p.STATUS}</span></div>
+      `)
+      .addTo(map);
+  });
+  map.on('mouseenter', 'stations-layer', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'stations-layer', () => { map.getCanvas().style.cursor = ''; });
 
   // TOD parcel popup
   map.on('click', 'parcels-layer', (e) => {
