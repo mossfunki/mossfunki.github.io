@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seattle GIS Portfolio — Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Three end-to-end geospatial pipelines on King County and Seattle open data — TOD affordability, collision risk, and urban heat island prediction.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- MapLibre GL -->
+  <link href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
+  <!-- Scrollama -->
+  <script src="https://unpkg.com/scrollama@3/build/scrollama.js"></script>
+
+  <style>
+    /* ── Scrollytelling layout ── */
+    .scrolly-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* Sticky map panel */
+    .map-col {
+      position: sticky;
+      top: 62px;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid var(--border-strong);
+    }
+    @media (max-width: 600px) {
+      #map { height: 280px; }
+    }
+
+    /* Scroll steps */
+    .step {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.35;
+      transition: opacity 0.3s;
+    }
+    .step:last-child { border-bottom: none; }
+    .step.active { opacity: 1; }
+
+    .step-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.85rem;
+    }
+    .step-label::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .step-body {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    /* Plain-English finding box */
+    .finding-box {
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      border-radius: 4px;
+      padding: 1.1rem 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-top: 0.75rem;
+    }
+
+    /* Stat row */
+    .stat-row { display: flex; gap: 2rem; margin: 1.25rem 0; flex-wrap: wrap; }
+    .stat-n {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-l {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Project narratives — only active one visible */
+    .project-narrative[hidden] { display: none; }
+
+    /* Map toolbar */
+    .map-toolbar {
+      padding: 0.6rem 0.75rem;
+      background: var(--surface-raised);
+      border: 1px solid var(--border-strong);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .map-credit {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      color: var(--text-muted);
+    }
+
+    /* MapLibre popup override */
+    .maplibregl-popup-content {
+      background: var(--surface-raised) !important;
+      border: 1px solid var(--border-strong) !important;
+      color: var(--text) !important;
+      font-family: var(--font-mono) !important;
+      font-size: 0.72rem !important;
+      border-radius: 3px !important;
+      padding: 0.6rem 0.8rem !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+    }
+    .maplibregl-popup-tip { border-top-color: var(--border-strong) !important; }
+    .tt-row { display: flex; justify-content: space-between; gap: 1.5rem; margin-bottom: 0.2rem; }
+    .tt-label { color: var(--text-muted); }
+    .tt-val { color: var(--accent); font-weight: 500; }
+
+    /* Pipeline flow */
+    .pipeline-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    @media (max-width: 900px) {
+      .scrolly-section { grid-template-columns: 1fr; }
+      .map-col { position: relative; top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">Benjamin Lab</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="nav-active">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resume.html">Resume</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrapper">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="section-label">Seattle GIS Portfolio &middot; 2024</p>
+    <h1 class="page-title">Spatial Analysis<br>for <em style="font-style:italic;color:var(--accent)">Public Good</em></h1>
+    <p class="page-subtitle">
+      Three end-to-end geospatial pipelines built on King County and Seattle open data.
+      Each project answers a real policy question &mdash; scroll through to explore the findings.
+    </p>
+  </div>
+
+  <!-- PROJECT TABS -->
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem 0;">
+    <div class="filter-bar" id="proj-tabs">
+      <button class="filter-btn active" data-project="0">01 &mdash; TOD Affordability</button>
+      <button class="filter-btn" data-project="1">02 &mdash; Collision Risk</button>
+      <button class="filter-btn" data-project="2">03 &mdash; Canopy ML</button>
+    </div>
+  </div>
+
+  <!-- SCROLLYTELLING -->
+  <div class="scrolly-section">
+
+    <!-- LEFT: narrative column -->
+    <div class="narrative-col" id="narrative">
+<!-- PROJECT 0: TOD AFFORDABILITY -->
+<div class="project-narrative" data-project="0">
+
+  <div class="step active" data-step="0">
+    <p class="step-label">01 &mdash; Context</p>
+    <h2 class="step-title">Does transit proximity raise property values in King County?</h2>
+    <p class="step-body">Sound Transit&rsquo;s Link expansion is the largest public infrastructure investment in the Pacific Northwest. This analysis quantifies the price premium that light rail proximity confers on residential parcels &mdash; controlling for square footage, age, and Mandatory Housing Affordability zoning tier.</p>
+    <div class="stat-row">
+      <div><div class="stat-n">531k</div><div class="stat-l">Residential Parcels</div></div>
+      <div><div class="stat-n">51</div><div class="stat-l">Link Stations</div></div>
+      <div><div class="stat-n">0.502</div><div class="stat-l">R² Score</div></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="1">
+    <p class="step-label">02 &mdash; Finding</p>
+    <h2 class="step-title">7% premium for parcels 400&ndash;800ft from a station</h2>
+    <p class="step-body">The hedonic OLS regression identifies a statistically significant price premium (p=0.015) for parcels in the 400&ndash;800ft ring around a station. Parcels within 400ft show no premium &mdash; likely reflecting noise, density, and commercial adjacency effects.</p>
+    <div class="highlight-box" style="margin-top:1rem">
+      <strong>band_400_800ft:</strong> +0.0697 coef (p=0.015)<br>
+      <strong>band_800_1600ft:</strong> +0.0434 coef (p=0.108)<br>
+      <strong>SqFtTotLiving:</strong> +0.0004 per sq ft (p&lt;0.001)
+    </div>
+  </div>
+
+  <div class="step" data-step="2">
+    <p class="step-label">03 &mdash; What This Means</p>
+    <h2 class="step-title">The investment concentrates value in a specific walkable band</h2>
+    <div class="finding-box">
+      Sound Transit&rsquo;s light rail expansion is creating a measurable price wedge in King County neighborhoods. Homes in the walkable ring around stations are worth roughly 7% more than equivalent homes further out &mdash; but the premium disappears within 400 feet of the station itself, where commercial noise and density suppress residential values. For housing affordability planners, this means the transit investment is concentrating value in a specific band, not uniformly across the corridor.
+    </div>
+  </div>
+
+  <div class="step" data-step="3">
+    <p class="step-label">04 &mdash; Method</p>
+    <h2 class="step-title">531k parcels, vectorized distance joins, one regression</h2>
+    <p class="step-body">King County parcel centroids are joined to light rail station points using <code style="font-family:var(--font-mono);color:var(--accent)">gpd.sjoin_nearest()</code>, replacing a row-by-row apply loop. Distance bins are one-hot encoded as regression dummies. The model controls for square footage, year built, and MHA zoning tier.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem">
+      <span class="outcome-chip">geopandas</span>
+      <span class="outcome-chip">statsmodels OLS</span>
+      <span class="outcome-chip" style="color:var(--cool);border-color:rgba(91,143,217,0.3);background:rgba(91,143,217,0.08)">EPSG:2285</span>
+      <span class="outcome-chip" style="color:var(--success);border-color:rgba(74,170,122,0.3);background:rgba(74,170,122,0.07)">King County Open Data</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- PROJECT 1: COLLISION RISK -->
+<div class="project-narrative" data-project="1" hidden>
+
+  <div class="step active" data-step="0">
+    <p class="step-label">01 &mdash; Context</p>
+    <h2 class="step-title">Where are Seattle&rsquo;s highest-risk pedestrian and bike corridors?</h2>
+    <p class="step-body">SDOT&rsquo;s Vision Zero initiative targets locations where pedestrian and bike collisions are most concentrated. This pipeline ingests all recorded ped/bike collisions, clusters them by spatial density, and ranks locations by a composite risk score that accounts for both collision frequency and infrastructure gap.</p>
+    <div class="stat-row">
+      <div><div class="stat-n">7,412</div><div class="stat-l">Ped/Bike Collisions</div></div>
+      <div><div class="stat-n">303</div><div class="stat-l">Clusters Identified</div></div>
+      <div><div class="stat-n">3,896</div><div class="stat-l">Infrastructure Points Scored</div></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="1">
+    <p class="step-label">02 &mdash; Finding</p>
+    <h2 class="step-title">Top cluster: 69 collisions, ranked #1 for density &amp; infrastructure gap</h2>
+    <p class="step-body">The highest-ranked cluster contains 69 pedestrian and bike collisions and sits in a corridor with minimal nearby safety infrastructure. The composite risk score &mdash; combining normalized collision count with normalized infrastructure gap &mdash; surfaces locations where both dimensions are severe simultaneously.</p>
+    <div class="highlight-box" style="margin-top:1rem">
+      <strong>Cluster #1:</strong> 69 collisions &mdash; risk score 0.182<br>
+      <strong>Cluster #2:</strong> 45 collisions &mdash; risk score 0.085<br>
+      <strong>Cluster #3:</strong> 13 collisions, large gap &mdash; risk score 0.058
+    </div>
+  </div>
+
+  <div class="step" data-step="2">
+    <p class="step-label">03 &mdash; What This Means</p>
+    <h2 class="step-title">A prioritized list for where investment saves the most lives per dollar</h2>
+    <div class="finding-box">
+      Seattle&rsquo;s most dangerous corridor for pedestrians and cyclists &mdash; a cluster of 69 collisions near downtown &mdash; is also one of the most underserved by existing safety infrastructure. The pipeline scores every cluster on two dimensions: how many collisions it contains, and how little infrastructure surrounds it. That combined score gives SDOT a prioritized list of where targeted investment &mdash; protected lanes, signal retiming, traffic calming &mdash; would prevent the most harm per dollar spent.
+    </div>
+  </div>
+
+  <div class="step" data-step="3">
+    <p class="step-label">04 &mdash; Method</p>
+    <h2 class="step-title">DBSCAN clustering with ball-tree indexing, normalized risk scoring</h2>
+    <p class="step-body">Raw collision points are filtered to pedestrian/bike involvement, then clustered with DBSCAN (<code style="font-family:var(--font-mono);color:var(--accent)">eps=200ft, min_samples=5, algorithm=ball_tree</code>) to avoid O(n²) memory. Both dimensions of the risk score are MinMax-normalized independently before multiplication &mdash; preventing cluster size from dominating distance.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem">
+      <span class="outcome-chip">scikit-learn DBSCAN</span>
+      <span class="outcome-chip">MinMaxScaler</span>
+      <span class="outcome-chip" style="color:var(--cool);border-color:rgba(91,143,217,0.3);background:rgba(91,143,217,0.08)">argparse CLI</span>
+      <span class="outcome-chip" style="color:var(--success);border-color:rgba(74,170,122,0.3);background:rgba(74,170,122,0.07)">SDOT Open Data</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- PROJECT 2: CANOPY ML -->
+<div class="project-narrative" data-project="2" hidden>
+
+  <div class="step active" data-step="0">
+    <p class="step-label">01 &mdash; Context</p>
+    <h2 class="step-title">Which Seattle census tracts face the highest urban heat island risk?</h2>
+    <p class="step-body">Urban heat islands disproportionately affect dense, under-canopied neighborhoods &mdash; raising health risks for vulnerable populations. This model predicts which King County census tracts are at highest risk using land-use and tree canopy features, then explains the predictions with SHAP values.</p>
+    <div class="stat-row">
+      <div><div class="stat-n">1,545</div><div class="stat-l">Census Tracts</div></div>
+      <div><div class="stat-n">267k</div><div class="stat-l">Trees Aggregated</div></div>
+      <div><div class="stat-n">0.557</div><div class="stat-l">CV Accuracy</div></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="1">
+    <p class="step-label">02 &mdash; Finding</p>
+    <h2 class="step-title">Urban village coverage is the strongest predictor &mdash; stronger than tree density</h2>
+    <p class="step-body">SHAP values show that <code style="font-family:var(--font-mono);color:var(--accent)">pct_urban_village</code> has the highest mean absolute impact on model output &mdash; nearly twice the contribution of tree density. Permit intensity and median tree diameter follow. New construction rate is nearly zero.</p>
+    <div class="highlight-box" style="margin-top:1rem">
+      <strong>Top feature:</strong> pct_urban_village (mean |SHAP| ≈ 0.127)<br>
+      <strong>2nd:</strong> tree_density (≈ 0.060)<br>
+      <strong>3rd:</strong> median_diameter (≈ 0.049)
+    </div>
+  </div>
+
+  <div class="step" data-step="2">
+    <p class="step-label">03 &mdash; What This Means</p>
+    <h2 class="step-title">Seattle&rsquo;s heat vulnerability is a land-use problem, not just a canopy problem</h2>
+    <div class="finding-box">
+      The model&rsquo;s most surprising finding: urban village designation &mdash; not tree density &mdash; is the strongest predictor of heat exposure. Tracts with high urban village coverage are hotter because they&rsquo;re denser, more impervious, and more built-up. Planting trees helps, but the data suggests Seattle&rsquo;s heat vulnerability is fundamentally a land-use problem, not just a canopy problem. Climate adaptation planning should target the intersection of urban density and social vulnerability, not just the neighborhoods with the fewest trees.
+    </div>
+  </div>
+
+  <div class="step" data-step="3">
+    <p class="step-label">04 &mdash; Method</p>
+    <h2 class="step-title">Tract-level spatial aggregation, Random Forest with stratified CV</h2>
+    <p class="step-body">Tree, permit, and urban village data are spatially joined to census tracts and aggregated to per-tract density features. The target (top-20% surface temperature anomaly) is derived from an independent UHI layer &mdash; no feature variable appears in the target definition, avoiding leakage. SHAP TreeExplainer translates the model into policy-readable importances.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem">
+      <span class="outcome-chip">RandomForestClassifier</span>
+      <span class="outcome-chip">StratifiedKFold</span>
+      <span class="outcome-chip" style="color:var(--cool);border-color:rgba(91,143,217,0.3);background:rgba(91,143,217,0.08)">SHAP TreeExplainer</span>
+      <span class="outcome-chip" style="color:var(--success);border-color:rgba(74,170,122,0.3);background:rgba(74,170,122,0.07)">267k SDOT Trees</span>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    <!-- RIGHT: sticky map column -->
+    <div class="map-col">
+      <div id="map"></div>
+      <div class="map-toolbar">
+        <span id="layer-label" class="layer-toggle layer-toggle--risk active" style="cursor:default">
+          ● TOD Parcel Residuals
+        </span>
+        <span class="map-credit">CartoDB Dark Matter</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PIPELINE FLOW -->
+  <div class="pipeline-section" id="pipeline-section">
+<div class="section--alt" style="padding:3rem 0;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem">
+    <span class="section-label">Pipeline Architecture</span>
+    <h2 class="section-title" style="margin-bottom:2rem">How Each Project Is Built</h2>
+
+    <!-- P1 flow -->
+    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">01 &mdash; TOD Affordability</p>
+    <div class="pipeline-flow" style="margin-bottom:2rem;flex-wrap:wrap">
+      <div class="flow-step"><div class="flow-step-label">Source</div><div class="flow-step-content">KC Parcel CSV</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Join</div><div class="flow-step-content">RESBLDG.csv</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Feature Eng.</div><div class="flow-step-content">Distance bands · MHA dummies</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Model</div><div class="flow-step-content">OLS Regression</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="border-color:var(--border-accent)"><div class="flow-step-label">Output</div><div class="flow-step-content" style="color:var(--accent)">R²=0.502</div></div>
+    </div>
+
+    <!-- P2 flow -->
+    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">02 &mdash; Collision Risk</p>
+    <div class="pipeline-flow" style="margin-bottom:2rem;flex-wrap:wrap">
+      <div class="flow-step"><div class="flow-step-label">Source</div><div class="flow-step-content">SDOT Collisions</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Filter</div><div class="flow-step-content">Ped/bike only</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Cluster</div><div class="flow-step-content">DBSCAN · ball_tree</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Score</div><div class="flow-step-content">Normalized risk index</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="border-color:var(--border-accent)"><div class="flow-step-label">Output</div><div class="flow-step-content" style="color:var(--accent)">303 clusters ranked</div></div>
+    </div>
+
+    <!-- P3 flow -->
+    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">03 &mdash; Canopy ML</p>
+    <div class="pipeline-flow" style="flex-wrap:wrap">
+      <div class="flow-step"><div class="flow-step-label">Sources</div><div class="flow-step-content">267k Trees · Permits · UV</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Aggregate</div><div class="flow-step-content">Census tract features</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Model</div><div class="flow-step-content">Random Forest · CV</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><div class="flow-step-label">Explain</div><div class="flow-step-content">SHAP values</div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="border-color:var(--border-accent)"><div class="flow-step-label">Output</div><div class="flow-step-content" style="color:var(--accent)">1,545 tracts scored</div></div>
+    </div>
+
+    <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+      <a class="btn btn-secondary" href="https://github.com/mossfunki/seattle-gis-portfolio" target="_blank" rel="noopener">View Full Code on GitHub &rarr;</a>
+    </div>
+  </div>
+</div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Benjamin Lab &mdash; Seattle, WA</span>
+    <div class="footer-links">
+      <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav active state
+  (function(){
+    var p = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(function(a){
+      if (a.getAttribute('href') === p) a.classList.add('nav-active');
+    });
+  })();
+</script>
+
+<script>
+// ── Map initialization ────────────────────────────────────────────────────
+const map = new maplibregl.Map({
+  container: 'map',
+  style: {
+    version: 8,
+    sources: {
+      'carto-dark': {
+        type: 'raster',
+        tiles: [
+          'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+          'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+          'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+        ],
+        tileSize: 256,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
+      }
+    },
+    layers: [{ id: 'carto-dark-layer', type: 'raster', source: 'carto-dark' }]
+  },
+  center: [-122.33, 47.55],
+  zoom: 10,
+});
+
+map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+// ── Layer config ─────────────────────────────────────────────────────────
+const LAYERS = ['parcels-layer', 'clusters-layer', 'tracts-layer'];
+const LAYER_LABELS = [
+  '● TOD Parcel Residuals',
+  '● Collision Cluster Risk',
+  '● Urban Heat Island Risk Score'
+];
+
+function updateMapLayer(projectIdx) {
+  if (!map.getLayer(LAYERS[0])) return;
+  LAYERS.forEach((layer, i) => {
+    map.setLayoutProperty(layer, 'visibility', i === projectIdx ? 'visible' : 'none');
+  });
+  document.getElementById('layer-label').textContent = LAYER_LABELS[projectIdx];
+}
+
+map.on('load', () => {
+
+  // ── TOD Parcels ──────────────────────────────────────────────────────────
+  map.addSource('parcels', {
+    type: 'geojson',
+    data: 'data/seattle-gis/parcels_sample.geojson'
+  });
+  map.addLayer({
+    id: 'parcels-layer',
+    type: 'circle',
+    source: 'parcels',
+    paint: {
+      'circle-radius': 2.5,
+      'circle-color': [
+        'interpolate', ['linear'], ['get', 'residual'],
+        -3, '#e05757',
+        0,  '#4f596e',
+        3,  '#4aaa7a'
+      ],
+      'circle-opacity': 0.65
+    }
+  });
+
+  // ── Collision Clusters ───────────────────────────────────────────────────
+  map.addSource('clusters', {
+    type: 'geojson',
+    data: 'data/seattle-gis/high_injury_clusters.geojson'
+  });
+  map.addLayer({
+    id: 'clusters-layer',
+    type: 'circle',
+    source: 'clusters',
+    paint: {
+      'circle-radius': [
+        'interpolate', ['linear'], ['get', 'cluster_size'],
+        5,  6,
+        70, 26
+      ],
+      'circle-color': [
+        'interpolate', ['linear'], ['get', 'risk_score'],
+        0,    '#d4956a',
+        0.1,  '#e05757',
+        0.18, '#c8a152'
+      ],
+      'circle-opacity': 0.85,
+      'circle-stroke-width': 1,
+      'circle-stroke-color': 'rgba(255,255,255,0.15)'
+    },
+    layout: { visibility: 'none' }
+  });
+
+  // ── Tract Risk ───────────────────────────────────────────────────────────
+  map.addSource('tracts', {
+    type: 'geojson',
+    data: 'data/seattle-gis/tract_risk.geojson'
+  });
+  map.addLayer({
+    id: 'tracts-layer',
+    type: 'fill',
+    source: 'tracts',
+    paint: {
+      'fill-color': [
+        'interpolate', ['linear'], ['get', 'risk_score'],
+        0,   '#10141e',
+        0.2, '#c8a152',
+        0.5, '#e05757'
+      ],
+      'fill-opacity': 0.72,
+      'fill-outline-color': 'rgba(255,255,255,0.08)'
+    },
+    layout: { visibility: 'none' }
+  });
+
+  // ── Popups ───────────────────────────────────────────────────────────────
+
+  // TOD parcel popup
+  map.on('click', 'parcels-layer', (e) => {
+    const p = e.features[0].properties;
+    const residual = parseFloat(p.residual || 0).toFixed(3);
+    const dist = p.dist_ft ? `${Math.round(p.dist_ft).toLocaleString()} ft` : 'N/A';
+    const resColor = parseFloat(residual) >= 0 ? '#4aaa7a' : '#e05757';
+    new maplibregl.Popup({ closeButton: false, maxWidth: '220px' })
+      .setLngLat(e.lngLat)
+      .setHTML(`
+        <div class="tt-row"><span class="tt-label">Dist. to station</span><span class="tt-val">${dist}</span></div>
+        <div class="tt-row"><span class="tt-label">OLS residual</span><span class="tt-val" style="color:${resColor}">${residual}</span></div>
+      `)
+      .addTo(map);
+  });
+  map.on('mouseenter', 'parcels-layer', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'parcels-layer', () => { map.getCanvas().style.cursor = ''; });
+
+  // Collision cluster popup
+  map.on('click', 'clusters-layer', (e) => {
+    const p = e.features[0].properties;
+    new maplibregl.Popup({ closeButton: false, maxWidth: '220px' })
+      .setLngLat(e.lngLat)
+      .setHTML(`
+        <div class="tt-row"><span class="tt-label">Priority rank</span><span class="tt-val">#${p.priority_rank}</span></div>
+        <div class="tt-row"><span class="tt-label">Collisions</span><span class="tt-val">${p.cluster_size}</span></div>
+        <div class="tt-row"><span class="tt-label">Risk score</span><span class="tt-val">${parseFloat(p.risk_score).toFixed(3)}</span></div>
+      `)
+      .addTo(map);
+  });
+  map.on('mouseenter', 'clusters-layer', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'clusters-layer', () => { map.getCanvas().style.cursor = ''; });
+
+  // Census tract popup
+  map.on('click', 'tracts-layer', (e) => {
+    const p = e.features[0].properties;
+    const riskLabel = p.heat_risk == 1 ? '<span style="color:#e05757">High Risk</span>' : '<span style="color:#4aaa7a">Low Risk</span>';
+    new maplibregl.Popup({ closeButton: false, maxWidth: '220px' })
+      .setLngLat(e.lngLat)
+      .setHTML(`
+        <div class="tt-row"><span class="tt-label">Tract</span><span class="tt-val">${p.GEOID}</span></div>
+        <div class="tt-row"><span class="tt-label">Risk score</span><span class="tt-val">${parseFloat(p.risk_score).toFixed(3)}</span></div>
+        <div class="tt-row"><span class="tt-label">Classification</span><span class="tt-val">${riskLabel}</span></div>
+      `)
+      .addTo(map);
+  });
+  map.on('mouseenter', 'tracts-layer', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'tracts-layer', () => { map.getCanvas().style.cursor = ''; });
+
+  // initScrollama is defined in the next task's script block
+  if (typeof initScrollama === 'function') initScrollama();
+});
+</script>
+
+<script>
+// ── Project configuration ────────────────────────────────────────────────
+let currentProject = 0;
+let scroller;
+
+const PROJECT_VIEWS = [
+  [
+    { center: [-122.10, 47.50], zoom: 9  },
+    { center: [-122.32, 47.61], zoom: 13 },
+    { center: [-122.32, 47.61], zoom: 13 },
+    { center: [-122.30, 47.59], zoom: 11 },
+  ],
+  [
+    { center: [-122.33, 47.60], zoom: 11 },
+    { center: [-122.335, 47.615], zoom: 15 },
+    { center: [-122.335, 47.615], zoom: 14 },
+    { center: [-122.33, 47.60], zoom: 11 },
+  ],
+  [
+    { center: [-122.10, 47.50], zoom: 9  },
+    { center: [-122.30, 47.54], zoom: 11 },
+    { center: [-122.30, 47.54], zoom: 11 },
+    { center: [-122.10, 47.50], zoom: 9  },
+  ],
+];
+
+function initScrollama() {
+  if (scroller) scroller.destroy();
+  scroller = scrollama();
+  scroller.setup({
+    step: '.project-narrative:not([hidden]) .step',
+    offset: 0.5,
+  }).onStepEnter(({ element, index }) => {
+    document.querySelectorAll('.project-narrative:not([hidden]) .step')
+      .forEach(s => s.classList.remove('active'));
+    element.classList.add('active');
+    const view = PROJECT_VIEWS[currentProject][index];
+    if (view) map.flyTo({ center: view.center, zoom: view.zoom, duration: 1000 });
+  });
+}
+
+function switchProject(idx) {
+  currentProject = idx;
+  document.querySelectorAll('#proj-tabs .filter-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.project-narrative').forEach((n, i) => {
+    n.hidden = i !== idx;
+  });
+  document.getElementById('narrative').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  updateMapLayer(idx);
+  const view = PROJECT_VIEWS[idx][0];
+  map.flyTo({ center: view.center, zoom: view.zoom, duration: 800 });
+  setTimeout(initScrollama, 50);
+}
+
+document.querySelectorAll('#proj-tabs .filter-btn').forEach((btn, i) => {
+  btn.addEventListener('click', () => switchProject(i));
+});
+</script>
+
+</body>
+</html>
