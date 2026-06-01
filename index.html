@@ -23,8 +23,6 @@
 
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 <body>
 
@@ -44,130 +42,137 @@
 
   <!-- HERO -->
   <section class="section hero">
-    <div>
-      <p class="hero-eyebrow">Seattle, WA &mdash; Open to Work</p>
-      <h1 class="hero-title">
-        Operations &amp; Data<br><em>Analyst</em>
-      </h1>
-      <p class="hero-subtitle">
-        I turn operational data into decisions. Demand forecasting, inventory planning, logistics analysis &mdash; built end-to-end in Python and SQL, designed for the people who act on the output.
-      </p>
+  <div>
+    <p class="hero-eyebrow">Seattle, WA &mdash; Open to Work</p>
+    <h1 class="hero-title">
+      Spatial Data Scientist<br>with an <em>Economist&rsquo;s Lens</em>
+    </h1>
+    <p class="hero-subtitle">
+      I build end-to-end geospatial pipelines &mdash; automated ingestion,
+      spatial feature engineering, econometric modeling, and interactive maps
+      &mdash; grounded in economic theory and aimed at public sector decisions.
+    </p>
 
-      <div class="btn-row">
-        <a class="btn btn-primary" href="projects.html">View My Work</a>
-        <a class="btn btn-secondary" href="resume.html">Resume</a>
-        <a class="btn btn-secondary" href="mailto:benjaminmonroelab@gmail.com">Get in Touch</a>
-      </div>
-
-      <div class="hero-tools">
-        <span>Python</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>SQL</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>Tableau</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>Forecasting</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>Inventory &amp; Supply Chain</span>
-        <span class="hero-tools-sep">&middot;</span>
-        <span>GIS &amp; Logistics</span>
-      </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="projects.html">Explore My Work</a>
+      <a class="btn btn-secondary" href="seattle-gis.html">Seattle GIS Portfolio</a>
+      <a class="btn btn-secondary" href="mailto:benjaminmonroelab@gmail.com">Get in Touch</a>
     </div>
 
-    <div class="hero-portrait-wrap">
-      <img src="IMG_8482.png" alt="Benjamin Lab" class="hero-portrait">
+    <div class="hero-tools">
+      <span>GeoPandas</span>
+      <span class="hero-tools-sep">&middot;</span>
+      <span>Statsmodels OLS</span>
+      <span class="hero-tools-sep">&middot;</span>
+      <span>SHAP</span>
+      <span class="hero-tools-sep">&middot;</span>
+      <span>MapLibre GL</span>
+      <span class="hero-tools-sep">&middot;</span>
+      <span>Python</span>
+      <span class="hero-tools-sep">&middot;</span>
+      <span>King County Open Data</span>
     </div>
-  </section>
+  </div>
+
+  <div class="hero-portrait-wrap">
+    <img src="IMG_8482.png" alt="Benjamin Lab" class="hero-portrait">
+  </div>
+</section>
 
   <!-- PROOF STRIP -->
   <section class="proof-strip">
     <div class="proof-strip-inner">
       <div class="proof-item">
-        <span class="proof-number">60%</span>
-        <span class="proof-label">User retention lift — behavioral cohort analysis at Ix</span>
+        <span class="proof-number">531k</span>
+        <span class="proof-label">King County Parcels Analyzed</span>
       </div>
       <div class="proof-divider"></div>
       <div class="proof-item">
-        <span class="proof-number">33%</span>
-        <span class="proof-label">Stockout reduction — dynamic vs. static reorder model</span>
+        <span class="proof-number">303</span>
+        <span class="proof-label">High-Injury Collision Clusters Mapped</span>
       </div>
       <div class="proof-divider"></div>
       <div class="proof-item">
-        <span class="proof-number">3,222</span>
-        <span class="proof-label">US counties in live K-Means spatial ML pipeline</span>
+        <span class="proof-number">1,545</span>
+        <span class="proof-label">Census Tracts Scored for Heat Risk</span>
       </div>
       <div class="proof-divider"></div>
       <div class="proof-item">
-        <span class="proof-number">140K+</span>
-        <span class="proof-label">Institutional records analyzed for Cal Poly Humboldt IRAR</span>
+        <span class="proof-number">R²=0.50</span>
+        <span class="proof-label">TOD Hedonic Regression</span>
       </div>
     </div>
   </section>
 
   <!-- FEATURED WORK -->
   <section class="section reveal">
-    <p class="section-label">Selected Work</p>
-    <h2 class="section-title">Projects built around real business problems</h2>
+    <div class="section-heading reveal">
+      <div>
+        <span class="section-label">Featured Work</span>
+        <h2 class="section-title">Seattle Spatial Analysis</h2>
+        <p class="section-subtitle">Three pipelines. Real open data. Real policy questions.</p>
+      </div>
+    </div>
 
-    <div class="featured-grid">
+    <div class="featured-grid reveal">
 
-      <!-- Project 1: Flagship -->
-      <div class="featured-card featured-card--primary reveal">
+      <div class="featured-card featured-card--primary">
         <div class="featured-card-label">
-          <span class="proj-status proj-status--new">Flagship</span>
-          Supply Chain &middot; Inventory &middot; Forecasting
+          GIS Portfolio &middot; King County Open Data
+          <span class="proj-status proj-status--new" style="margin-left:0.5rem">New</span>
         </div>
+        <h3 class="featured-card-title">Seattle Spatial Analysis Trilogy</h3>
+        <p class="featured-card-desc">
+          Three end-to-end geospatial pipelines answering real public policy questions &mdash;
+          transit-oriented development pricing, pedestrian collision risk allocation, and urban
+          heat island prediction by census tract. Built on King County and Seattle open data,
+          automated with Python, explained in plain English.
+        </p>
+        <div class="featured-card-outcome">
+          <span class="outcome-chip">531k parcels &middot; OLS R&sup2;=0.50</span>
+          <span class="outcome-chip">303 collision clusters &middot; DBSCAN</span>
+          <span class="outcome-chip">Random Forest + SHAP</span>
+        </div>
+        <div class="btn-row" style="margin-top:1.25rem">
+          <a class="btn btn-primary" href="seattle-gis.html">Explore Interactive Case Study &rarr;</a>
+          <a class="btn btn-secondary" href="https://github.com/mossfunki/seattle-gis-portfolio" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <p class="featured-card-tags">GeoPandas &middot; Statsmodels &middot; scikit-learn &middot; SHAP &middot; MapLibre GL &middot; Scrollama</p>
+      </div>
+
+      <div class="featured-card">
+        <div class="featured-card-label">Analytics &middot; Operations</div>
         <h3 class="featured-card-title">Demand Forecasting &amp; Inventory Optimization</h3>
         <p class="featured-card-desc">
-          Predicts weekly demand spikes from Seattle's event calendar (Seahawks, concerts, PAX) and uses those forecasts to dynamically set reorder points — reducing stockouts 31% vs. a static model. Built with Prophet time-series forecasting and safety stock formulas tied to service level targets. Output is a Streamlit dashboard with a weekly reorder action table designed for an ops manager to act on directly.
+          Prophet time-series forecasting on event-driven demand, with dynamic safety stock
+          recalculation. 31% fewer stockouts vs. static reorder model on held-out test data.
         </p>
         <div class="featured-card-outcome">
-          <div class="outcome-chip">31% fewer stockouts (simulated)</div>
-          <div class="outcome-chip">8.4% MAPE on test set</div>
-          <div class="outcome-chip">Dynamic ROP per SKU</div>
-          <div class="outcome-chip">14-day rolling forecast</div>
+          <span class="outcome-chip">8.4% MAPE</span>
+          <span class="outcome-chip">31% fewer stockouts</span>
         </div>
-        <div class="btn-row" style="margin-top:1.25rem;">
-          <a class="btn btn-primary" href="demand-inventory-forecast.html">Full Case Study</a>
-          <a class="btn btn-secondary" href="https://github.com/mossfunki/demand-inventory-forecast" target="_blank" rel="noopener">GitHub</a>
+        <div class="btn-row" style="margin-top:1rem">
+          <a class="btn btn-secondary" href="demand-inventory-forecast.html">Case Study</a>
         </div>
-        <div class="featured-card-tags">Python &middot; Prophet &middot; XGBoost &middot; pandas &middot; Streamlit &middot; Inventory Modeling</div>
+        <p class="featured-card-tags">Python &middot; Prophet &middot; XGBoost &middot; Streamlit</p>
       </div>
 
-      <!-- Project 2: Ix CI -->
-      <div class="featured-card reveal reveal-delay-1">
-        <div class="featured-card-label">Business Analysis &middot; Product Analytics</div>
+      <div class="featured-card">
+        <div class="featured-card-label">Analytics &middot; Ix</div>
         <h3 class="featured-card-title">User Retention Analysis &mdash; 60% Lift</h3>
         <p class="featured-card-desc">
-          Behavioral cohort analysis at an AI startup — identified where and why users churned, built a weekly market intelligence feed from 20+ sources, and delivered findings directly to the product team. Recommendations were adopted and drove a 60% retention increase within 8 weeks.
+          Behavioral cohort analysis in Amplitude to identify drop-off drivers at an
+          AI infrastructure startup. Findings adopted by the product team; retention
+          increased 60% within 8 weeks.
         </p>
         <div class="featured-card-outcome">
-          <div class="outcome-chip">60% retention lift</div>
-          <div class="outcome-chip">Deployed at Ix (Dec 2025)</div>
-          <div class="outcome-chip">Actionable to product team</div>
+          <span class="outcome-chip">60% retention increase</span>
+          <span class="outcome-chip">Deployed Dec 2025</span>
         </div>
-        <div class="btn-row" style="margin-top:1.25rem;">
-          <a class="btn btn-primary" href="intelligence.html">Case Study</a>
+        <div class="btn-row" style="margin-top:1rem">
+          <a class="btn btn-secondary" href="intelligence.html">Case Study</a>
         </div>
-        <div class="featured-card-tags">Python &middot; SQL &middot; Amplitude &middot; Cohort Analysis &middot; Stakeholder Reporting</div>
-      </div>
-
-      <!-- Project 3: Seattle Last Mile -->
-      <div class="featured-card reveal reveal-delay-2">
-        <div class="featured-card-label">Logistics &middot; Operations &middot; GIS</div>
-        <h3 class="featured-card-title">Seattle Last-Mile Delivery Gap Analysis</h3>
-        <p class="featured-card-desc">
-          Network analysis mapping 10/20/30-minute drive-time coverage from five real Seattle distribution hubs. Identifies under-served King County zones by composite gap score — directly applicable to logistics operations planning, hub siting, and delivery SLA design.
-        </p>
-        <div class="featured-card-outcome">
-          <div class="outcome-chip">5 real distribution hubs</div>
-          <div class="outcome-chip">King County road network</div>
-          <div class="outcome-chip">Gap scored by zone</div>
-        </div>
-        <div class="btn-row" style="margin-top:1.25rem;">
-          <a class="btn btn-primary" href="https://github.com/mossfunki/seattle-last-mile-logistics" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <div class="featured-card-tags">OSMnx &middot; GeoPandas &middot; Leaflet.js &middot; Network Analysis</div>
+        <p class="featured-card-tags">Python &middot; SQL &middot; Amplitude &middot; Cohort Analysis</p>
       </div>
 
     </div>
@@ -208,48 +213,6 @@
     </div>
   </section>
 
-  <!-- SPATIAL MAP -->
-  <section class="map-section" id="map-section">
-    <div class="map-section-inner">
-      <div class="map-section-header">
-        <div>
-          <p class="section-label">Live Pipeline &mdash; Spatial ML</p>
-          <h2 class="section-title">US County Risk &amp; Cluster Model</h2>
-          <p class="section-subtitle" style="margin-top:0.3rem;">FEMA NRI + Census TIGER &middot; K-Means (k=5) &middot; 3,222 counties &middot; updated daily via GitHub Actions</p>
-        </div>
-        <div class="layer-toggles">
-          <button class="layer-toggle layer-toggle--risk active" data-layer="risk">Risk Zones</button>
-          <button class="layer-toggle layer-toggle--clusters active" data-layer="clusters">ML Clusters</button>
-        </div>
-      </div>
-      <div id="map"></div>
-      <div class="pipeline-panel">
-        <p class="pipeline-label">Automated Pipeline</p>
-        <div class="pipeline-stages">
-          <div class="pipeline-stage">
-            <div class="pipeline-stage-name">Ingest</div>
-            <div class="pipeline-stage-status">&#10003; FEMA NRI</div>
-            <div class="pipeline-stage-meta">3,143 counties</div>
-          </div>
-          <div class="pipeline-stage">
-            <div class="pipeline-stage-name">Transform</div>
-            <div class="pipeline-stage-status">&#10003; Spatial Join</div>
-            <div class="pipeline-stage-meta">Census TIGER 20m</div>
-          </div>
-          <div class="pipeline-stage">
-            <div class="pipeline-stage-name">Model</div>
-            <div class="pipeline-stage-status">&#10003; K-Means</div>
-            <div class="pipeline-stage-meta">5 clusters</div>
-          </div>
-        </div>
-        <p class="pipeline-footer">
-          Last run: <span id="pipeline-last-run">—</span>
-          &nbsp;&middot;&nbsp;
-          <a href="https://github.com/mossfunki/mossfunki.github.io/actions" target="_blank" rel="noopener">View GitHub Actions &rarr;</a>
-        </p>
-      </div>
-    </div>
-  </section>
 
 </main>
 
@@ -264,103 +227,6 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  var map = L.map('map', {
-    center: [39.5, -98.35],
-    zoom: 4,
-    scrollWheelZoom: false,
-    preferCanvas: true
-  });
-  setTimeout(function () { map.invalidateSize(); }, 250);
-
-  L.tileLayer(
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    { attribution: 'Tiles &copy; Esri', maxZoom: 18 }
-  ).addTo(map);
-
-  var CLUSTER_COLORS = ['#22c55e', '#86efac', '#f59e0b', '#ef4444', '#3b82f6'];
-
-  function riskColor(score) {
-    if (score === null || score === undefined) return '#d1d5db44';
-    if (score < 15)  return '#22c55e88';
-    if (score < 30)  return '#86efac88';
-    if (score < 50)  return '#fde68a88';
-    if (score < 70)  return '#f9730088';
-    return '#ef444488';
-  }
-
-  var riskLayer = null;
-  var clustersLayer = null;
-  var toggleState = { risk: true, clusters: true };
-
-  fetch('data/counties.geojson')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      riskLayer = L.geoJSON(data, {
-        style: function (f) {
-          return { fillColor: riskColor(f.properties.risk_score), weight: 0.3, opacity: 0.7, color: '#ffffff', fillOpacity: 0.7 };
-        },
-        onEachFeature: function (f, layer) {
-          var p = f.properties;
-          layer.bindTooltip(
-            '<strong>' + (p.name || 'County') + ', ' + (p.state || '') + '</strong>' +
-            '<br>Risk Score: ' + (p.risk_score !== null ? p.risk_score : 'N/A') +
-            '<br>Cluster: ' + (p.cluster_label || '&mdash;'),
-            { sticky: true, className: 'map-tooltip' }
-          );
-        }
-      });
-
-      clustersLayer = L.geoJSON(data, {
-        style: function (f) {
-          var c = CLUSTER_COLORS[f.properties.cluster_id % CLUSTER_COLORS.length];
-          return { fillColor: c, weight: 0.3, opacity: 0.5, color: '#ffffff', fillOpacity: 0.5 };
-        },
-        onEachFeature: function (f, layer) {
-          var p = f.properties;
-          layer.bindTooltip(
-            '<strong>' + (p.name || 'County') + ', ' + (p.state || '') + '</strong>' +
-            '<br>Cluster: ' + (p.cluster_label || '&mdash;') +
-            '<br>Risk Score: ' + (p.risk_score !== null ? p.risk_score : 'N/A'),
-            { sticky: true, className: 'map-tooltip' }
-          );
-        }
-      });
-
-      riskLayer.addTo(map);
-
-      fetch('data/pipeline-status.json')
-        .then(function (r) { return r.json(); })
-        .then(function (s) {
-          var el = document.getElementById('pipeline-last-run');
-          if (el) el.textContent = s.last_run;
-        })
-        .catch(function () {});
-    })
-    .catch(function () {
-      document.getElementById('map').innerHTML =
-        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:0.875rem;">Map data loading&hellip;</div>';
-    });
-
-  document.querySelectorAll('.layer-toggle').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var layer = btn.dataset.layer;
-      if (layer === 'risk' && riskLayer) {
-        toggleState.risk = !toggleState.risk;
-        toggleState.risk ? map.addLayer(riskLayer) : map.removeLayer(riskLayer);
-        btn.classList.toggle('active', toggleState.risk);
-        btn.classList.toggle('inactive', !toggleState.risk);
-      } else if (layer === 'clusters' && clustersLayer) {
-        toggleState.clusters = !toggleState.clusters;
-        toggleState.clusters ? map.addLayer(clustersLayer) : map.removeLayer(clustersLayer);
-        btn.classList.toggle('active', toggleState.clusters);
-        btn.classList.toggle('inactive', !toggleState.clusters);
-      }
-    });
-  });
-}());
-</script>
 <script>
   (function(){
     var p = location.pathname.split('/').pop() || 'index.html';
