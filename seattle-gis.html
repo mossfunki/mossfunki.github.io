@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seattle GIS Portfolio — Benjamin Lab</title>
+  <title>Seattle GIS Portfolio | Benjamin Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Three end-to-end geospatial pipelines on King County and Seattle open data — TOD affordability, collision risk, and urban heat island prediction.">
+  <meta name="description" content="Three end-to-end geospatial pipelines on King County and Seattle open data, TOD affordability, collision risk, and urban heat island prediction.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,7 +119,7 @@
       margin-top: 0.2rem;
     }
 
-    /* Project narratives — only active one visible */
+    /* Project narratives, only active one visible */
     .project-narrative[hidden] { display: none; }
 
     /* Map toolbar */
@@ -192,16 +192,16 @@
     <h1 class="page-title">Spatial Analysis<br>for <em style="font-style:italic;color:var(--accent)">Public Good</em></h1>
     <p class="page-subtitle">
       Three end-to-end geospatial pipelines built on King County and Seattle open data.
-      Each project answers a real policy question &mdash; scroll through to explore the findings.
+      Each project answers a real policy question. Scroll through to explore the findings.
     </p>
   </div>
 
   <!-- PROJECT TABS -->
   <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem 0;">
     <div class="filter-bar" id="proj-tabs">
-      <button class="filter-btn active" data-project="0">01 &mdash; TOD Affordability</button>
-      <button class="filter-btn" data-project="1">02 &mdash; Collision Risk</button>
-      <button class="filter-btn" data-project="2">03 &mdash; Canopy ML</button>
+      <button class="filter-btn active" data-project="0">01. TOD Affordability</button>
+      <button class="filter-btn" data-project="1">02. Collision Risk</button>
+      <button class="filter-btn" data-project="2">03. Canopy ML</button>
     </div>
   </div>
 
@@ -214,9 +214,9 @@
 <div class="project-narrative" data-project="0">
 
   <div class="step active" data-step="0">
-    <p class="step-label">01 &mdash; Context</p>
+    <p class="step-label">01. Context</p>
     <h2 class="step-title">Does transit proximity raise property values in King County?</h2>
-    <p class="step-body">Sound Transit&rsquo;s Link expansion is the largest public infrastructure investment in the Pacific Northwest. This analysis quantifies the price premium that light rail proximity confers on residential parcels &mdash; controlling for square footage, age, and Mandatory Housing Affordability zoning tier.</p>
+    <p class="step-body">Sound Transit&rsquo;s Link expansion is the largest public infrastructure investment in the Pacific Northwest. This analysis quantifies the price premium that light rail proximity confers on residential parcels, controlling for square footage, age, and Mandatory Housing Affordability zoning tier.</p>
     <div class="stat-row">
       <div><div class="stat-n">531k</div><div class="stat-l">Residential Parcels</div></div>
       <div><div class="stat-n">51</div><div class="stat-l">Link Stations</div></div>
@@ -225,9 +225,9 @@
   </div>
 
   <div class="step" data-step="1">
-    <p class="step-label">02 &mdash; Finding</p>
+    <p class="step-label">02. Finding</p>
     <h2 class="step-title">7% premium for parcels 400&ndash;800ft from a station</h2>
-    <p class="step-body">The hedonic OLS regression identifies a statistically significant price premium (p=0.015) for parcels in the 400&ndash;800ft ring around a station. Parcels within 400ft show no premium &mdash; likely reflecting noise, density, and commercial adjacency effects.</p>
+    <p class="step-body">The hedonic OLS regression identifies a statistically significant price premium (p=0.015) for parcels in the 400&ndash;800ft ring around a station. Parcels within 400ft show no premium, likely reflecting noise, density, and commercial adjacency effects.</p>
     <div class="highlight-box" style="margin-top:1rem">
       <strong>band_400_800ft:</strong> +0.0697 coef (p=0.015)<br>
       <strong>band_800_1600ft:</strong> +0.0434 coef (p=0.108)<br>
@@ -236,15 +236,15 @@
   </div>
 
   <div class="step" data-step="2">
-    <p class="step-label">03 &mdash; What This Means</p>
+    <p class="step-label">03. What This Means</p>
     <h2 class="step-title">The investment concentrates value in a specific walkable band</h2>
     <div class="finding-box">
-      Sound Transit&rsquo;s light rail expansion is creating a measurable price wedge in King County neighborhoods. Homes in the walkable ring around stations are worth roughly 7% more than equivalent homes further out &mdash; but the premium disappears within 400 feet of the station itself, where commercial noise and density suppress residential values. For housing affordability planners, this means the transit investment is concentrating value in a specific band, not uniformly across the corridor.
+      Sound Transit&rsquo;s light rail expansion is creating a measurable price wedge in King County neighborhoods. Homes in the walkable ring around stations are worth roughly 7% more than equivalent homes further out, but the premium disappears within 400 feet of the station itself, where commercial noise and density suppress residential values. For housing affordability planners, this means the transit investment is concentrating value in a specific band, not uniformly across the corridor.
     </div>
   </div>
 
   <div class="step" data-step="3">
-    <p class="step-label">04 &mdash; Method</p>
+    <p class="step-label">04. Method</p>
     <h2 class="step-title">531k parcels, vectorized distance joins, one regression</h2>
     <p class="step-body">King County parcel centroids are joined to light rail station points using <code style="font-family:var(--font-mono);color:var(--accent)">gpd.sjoin_nearest()</code>, replacing a row-by-row apply loop. Distance bins are one-hot encoded as regression dummies. The model controls for square footage, year built, and MHA zoning tier.</p>
     <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem">
@@ -261,7 +261,7 @@
 <div class="project-narrative" data-project="1" hidden>
 
   <div class="step active" data-step="0">
-    <p class="step-label">01 &mdash; Context</p>
+    <p class="step-label">01. Context</p>
     <h2 class="step-title">Where are Seattle&rsquo;s highest-risk pedestrian and bike corridors?</h2>
     <p class="step-body">SDOT&rsquo;s Vision Zero initiative targets locations where pedestrian and bike collisions are most concentrated. This pipeline ingests all recorded ped/bike collisions, clusters them by spatial density, and ranks locations by a composite risk score that accounts for both collision frequency and infrastructure gap.</p>
     <div class="stat-row">
@@ -272,28 +272,28 @@
   </div>
 
   <div class="step" data-step="1">
-    <p class="step-label">02 &mdash; Finding</p>
+    <p class="step-label">02. Finding</p>
     <h2 class="step-title">Top cluster: 69 collisions, ranked #1 for density &amp; infrastructure gap</h2>
-    <p class="step-body">The highest-ranked cluster contains 69 pedestrian and bike collisions and sits in a corridor with minimal nearby safety infrastructure. The composite risk score &mdash; combining normalized collision count with normalized infrastructure gap &mdash; surfaces locations where both dimensions are severe simultaneously.</p>
+    <p class="step-body">The highest-ranked cluster contains 69 pedestrian and bike collisions and sits in a corridor with minimal nearby safety infrastructure. The composite risk score, combining normalized collision count with normalized infrastructure gap, and surfaces locations where both dimensions are severe simultaneously.</p>
     <div class="highlight-box" style="margin-top:1rem">
-      <strong>Cluster #1:</strong> 69 collisions &mdash; risk score 0.182<br>
-      <strong>Cluster #2:</strong> 45 collisions &mdash; risk score 0.085<br>
-      <strong>Cluster #3:</strong> 13 collisions, large gap &mdash; risk score 0.058
+      <strong>Cluster #1:</strong> 69 collisions, risk score 0.182<br>
+      <strong>Cluster #2:</strong> 45 collisions, risk score 0.085<br>
+      <strong>Cluster #3:</strong> 13 collisions, large gap, risk score 0.058
     </div>
   </div>
 
   <div class="step" data-step="2">
-    <p class="step-label">03 &mdash; What This Means</p>
+    <p class="step-label">03. What This Means</p>
     <h2 class="step-title">A prioritized list for where investment saves the most lives per dollar</h2>
     <div class="finding-box">
-      Seattle&rsquo;s most dangerous corridor for pedestrians and cyclists &mdash; a cluster of 69 collisions near downtown &mdash; is also one of the most underserved by existing safety infrastructure. The pipeline scores every cluster on two dimensions: how many collisions it contains, and how little infrastructure surrounds it. That combined score gives SDOT a prioritized list of where targeted investment &mdash; protected lanes, signal retiming, traffic calming &mdash; would prevent the most harm per dollar spent.
+      Seattle&rsquo;s most dangerous corridor for pedestrians and cyclists, a cluster of 69 collisions near downtown, is also one of the most underserved by existing safety infrastructure. The pipeline scores every cluster on two dimensions: how many collisions it contains, and how little infrastructure surrounds it. That combined score gives SDOT a prioritized list of where targeted investment (protected lanes, signal retiming, traffic calming) would prevent the most harm per dollar spent.
     </div>
   </div>
 
   <div class="step" data-step="3">
-    <p class="step-label">04 &mdash; Method</p>
+    <p class="step-label">04. Method</p>
     <h2 class="step-title">DBSCAN clustering with ball-tree indexing, normalized risk scoring</h2>
-    <p class="step-body">Raw collision points are filtered to pedestrian/bike involvement, then clustered with DBSCAN (<code style="font-family:var(--font-mono);color:var(--accent)">eps=200ft, min_samples=5, algorithm=ball_tree</code>) to avoid O(n²) memory. Both dimensions of the risk score are MinMax-normalized independently before multiplication &mdash; preventing cluster size from dominating distance.</p>
+    <p class="step-body">Raw collision points are filtered to pedestrian/bike involvement, then clustered with DBSCAN (<code style="font-family:var(--font-mono);color:var(--accent)">eps=200ft, min_samples=5, algorithm=ball_tree</code>) to avoid O(n²) memory. Both dimensions of the risk score are MinMax-normalized independently before multiplication, preventing cluster size from dominating distance.</p>
     <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem">
       <span class="outcome-chip">scikit-learn DBSCAN</span>
       <span class="outcome-chip">MinMaxScaler</span>
@@ -308,9 +308,9 @@
 <div class="project-narrative" data-project="2" hidden>
 
   <div class="step active" data-step="0">
-    <p class="step-label">01 &mdash; Context</p>
+    <p class="step-label">01. Context</p>
     <h2 class="step-title">Which Seattle census tracts face the highest urban heat island risk?</h2>
-    <p class="step-body">Urban heat islands disproportionately affect dense, under-canopied neighborhoods &mdash; raising health risks for vulnerable populations. This model predicts which King County census tracts are at highest risk using land-use and tree canopy features, then explains the predictions with SHAP values.</p>
+    <p class="step-body">Urban heat islands disproportionately affect dense, under-canopied neighborhoods, raising health risks for vulnerable populations. This model predicts which King County census tracts are at highest risk using land-use and tree canopy features, then explains the predictions with SHAP values.</p>
     <div class="stat-row">
       <div><div class="stat-n">1,545</div><div class="stat-l">Census Tracts</div></div>
       <div><div class="stat-n">267k</div><div class="stat-l">Trees Aggregated</div></div>
@@ -319,9 +319,9 @@
   </div>
 
   <div class="step" data-step="1">
-    <p class="step-label">02 &mdash; Finding</p>
-    <h2 class="step-title">Urban village coverage is the strongest predictor &mdash; stronger than tree density</h2>
-    <p class="step-body">SHAP values show that <code style="font-family:var(--font-mono);color:var(--accent)">pct_urban_village</code> has the highest mean absolute impact on model output &mdash; nearly twice the contribution of tree density. Permit intensity and median tree diameter follow. New construction rate is nearly zero.</p>
+    <p class="step-label">02. Finding</p>
+    <h2 class="step-title">Urban village coverage is the strongest predictor, stronger than tree density</h2>
+    <p class="step-body">SHAP values show that <code style="font-family:var(--font-mono);color:var(--accent)">pct_urban_village</code> has the highest mean absolute impact on model output, nearly twice the contribution of tree density. Permit intensity and median tree diameter follow. New construction rate is nearly zero.</p>
     <div class="highlight-box" style="margin-top:1rem">
       <strong>Top feature:</strong> pct_urban_village (mean |SHAP| ≈ 0.127)<br>
       <strong>2nd:</strong> tree_density (≈ 0.060)<br>
@@ -330,17 +330,17 @@
   </div>
 
   <div class="step" data-step="2">
-    <p class="step-label">03 &mdash; What This Means</p>
+    <p class="step-label">03. What This Means</p>
     <h2 class="step-title">Seattle&rsquo;s heat vulnerability is a land-use problem, not just a canopy problem</h2>
     <div class="finding-box">
-      The model&rsquo;s most surprising finding: urban village designation &mdash; not tree density &mdash; is the strongest predictor of heat exposure. Tracts with high urban village coverage are hotter because they&rsquo;re denser, more impervious, and more built-up. Planting trees helps, but the data suggests Seattle&rsquo;s heat vulnerability is fundamentally a land-use problem, not just a canopy problem. Climate adaptation planning should target the intersection of urban density and social vulnerability, not just the neighborhoods with the fewest trees.
+      The model&rsquo;s most surprising finding: urban village designation (not tree density) is the strongest predictor of heat exposure. Tracts with high urban village coverage are hotter because they&rsquo;re denser, more impervious, and more built-up. Planting trees helps, but the data suggests Seattle&rsquo;s heat vulnerability is fundamentally a land-use problem, not just a canopy problem. Climate adaptation planning should target the intersection of urban density and social vulnerability, not just the neighborhoods with the fewest trees.
     </div>
   </div>
 
   <div class="step" data-step="3">
-    <p class="step-label">04 &mdash; Method</p>
+    <p class="step-label">04. Method</p>
     <h2 class="step-title">Tract-level spatial aggregation, Random Forest with stratified CV</h2>
-    <p class="step-body">Tree, permit, and urban village data are spatially joined to census tracts and aggregated to per-tract density features. The target (top-20% surface temperature anomaly) is derived from an independent UHI layer &mdash; no feature variable appears in the target definition, avoiding leakage. SHAP TreeExplainer translates the model into policy-readable importances.</p>
+    <p class="step-body">Tree, permit, and urban village data are spatially joined to census tracts and aggregated to per-tract density features. The target (top-20% surface temperature anomaly) is derived from an independent UHI layer. No feature variable appears in the target definition, avoiding leakage. SHAP TreeExplainer translates the model into policy-readable importances.</p>
     <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem">
       <span class="outcome-chip">RandomForestClassifier</span>
       <span class="outcome-chip">StratifiedKFold</span>
@@ -373,7 +373,7 @@
     <h2 class="section-title" style="margin-bottom:2rem">How Each Project Is Built</h2>
 
     <!-- P1 flow -->
-    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">01 &mdash; TOD Affordability</p>
+    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">01. TOD Affordability</p>
     <div class="pipeline-flow" style="margin-bottom:2rem;flex-wrap:wrap">
       <div class="flow-step"><div class="flow-step-label">Source</div><div class="flow-step-content">KC Parcel CSV</div></div>
       <div class="flow-arrow">&rarr;</div>
@@ -387,7 +387,7 @@
     </div>
 
     <!-- P2 flow -->
-    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">02 &mdash; Collision Risk</p>
+    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">02. Collision Risk</p>
     <div class="pipeline-flow" style="margin-bottom:2rem;flex-wrap:wrap">
       <div class="flow-step"><div class="flow-step-label">Source</div><div class="flow-step-content">SDOT Collisions</div></div>
       <div class="flow-arrow">&rarr;</div>
@@ -401,7 +401,7 @@
     </div>
 
     <!-- P3 flow -->
-    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">03 &mdash; Canopy ML</p>
+    <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem">03. Canopy ML</p>
     <div class="pipeline-flow" style="flex-wrap:wrap">
       <div class="flow-step"><div class="flow-step-label">Sources</div><div class="flow-step-content">267k Trees · Permits · UV</div></div>
       <div class="flow-arrow">&rarr;</div>
@@ -425,7 +425,7 @@
 
 <footer>
   <div class="footer-inner">
-    <span>&copy; 2026 Benjamin Lab &mdash; Seattle, WA</span>
+    <span>&copy; 2026 Benjamin Lab &middot; Seattle, WA</span>
     <div class="footer-links">
       <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
