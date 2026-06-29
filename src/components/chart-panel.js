@@ -29,6 +29,7 @@ export function renderChart(config) {
 
 function _renderBar({ data }) {
   // data: Array<{ name: string, value: number }>
+  if (!data.length) return;
   const m = { top: 8, right: 16, bottom: 8, left: 72 };
   const w = W - m.left - m.right;
   const h = H - m.top - m.bottom;
@@ -47,7 +48,7 @@ function _renderBar({ data }) {
     .attr('rx', 2);
 
   g.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', h)
-    .attr('stroke', 'rgba(255,255,255,0.15)').attr('stroke-width', 1);
+    .attr('stroke', 'var(--border)').attr('stroke-width', 1);
 
   g.append('g').call(d3.axisLeft(y).tickSize(0).tickPadding(6))
     .select('.domain').remove();
@@ -65,6 +66,11 @@ function _renderLine({ data }) {
   const yExtent = d3.extent(data, d => d.value);
   const y = d3.scaleLinear().domain([yExtent[0] * 0.95, yExtent[1] * 1.05]).range([h, 0]);
 
+  const defs = _svg.append('defs');
+  const grad = defs.append('linearGradient').attr('id', 'line-grad').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 1);
+  grad.append('stop').attr('offset', '0%').attr('stop-color', 'var(--accent-cyan)').attr('stop-opacity', 0.2);
+  grad.append('stop').attr('offset', '100%').attr('stop-color', 'var(--accent-cyan)').attr('stop-opacity', 0);
+
   g.append('path').datum(data)
     .attr('fill', 'none')
     .attr('stroke', 'var(--accent-cyan)')
@@ -75,11 +81,6 @@ function _renderLine({ data }) {
   g.append('path').datum(data)
     .attr('fill', 'url(#line-grad)')
     .attr('d', d3.area().x(d => x(d.date)).y0(h).y1(d => y(d.value)).curve(d3.curveMonotoneX));
-
-  const defs = _svg.append('defs');
-  const grad = defs.append('linearGradient').attr('id', 'line-grad').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 1);
-  grad.append('stop').attr('offset', '0%').attr('stop-color', 'var(--accent-cyan)').attr('stop-opacity', 0.2);
-  grad.append('stop').attr('offset', '100%').attr('stop-color', 'var(--accent-cyan)').attr('stop-opacity', 0);
 
   g.append('g').attr('transform', `translate(0,${h})`)
     .call(d3.axisBottom(x).ticks(4).tickFormat(d3.timeFormat('%b %y')));
@@ -114,6 +115,7 @@ function _renderScatter({ data }) {
 
 function _renderDonut({ data }) {
   // data: Array<{ label: string, count: number, color: string }>
+  if (!data.length) return;
   const radius = Math.min(W, H) / 2 - 24;
   const g = _svg.append('g').attr('transform', `translate(${W / 2},${H / 2})`);
 
@@ -132,6 +134,6 @@ function _renderDonut({ data }) {
     .attr('transform', d => `translate(${arc.centroid(d)})`)
     .attr('text-anchor', 'middle')
     .attr('font-size', 9)
-    .attr('fill', 'rgba(255,255,255,0.7)')
+    .attr('fill', 'var(--text-muted)')
     .text(d => d.data.label);
 }
