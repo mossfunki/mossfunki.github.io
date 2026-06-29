@@ -2,17 +2,17 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { toRgb } from '../risk-index.js';
 
 describe('toRgb', () => {
-  it('returns a 3-element array for valid cluster ids', () => {
+  it('returns a 4-element array for valid cluster ids', () => {
     for (let i = 0; i <= 4; i++) {
       const rgb = toRgb(i);
-      expect(rgb).toHaveLength(3);
+      expect(rgb).toHaveLength(4);
       rgb.forEach(v => expect(v).toBeGreaterThanOrEqual(0));
     }
   });
 
   it('returns a fallback for unknown cluster id', () => {
     const rgb = toRgb(99);
-    expect(rgb).toHaveLength(3);
+    expect(rgb).toHaveLength(4);
   });
 });
 

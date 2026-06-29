@@ -1,11 +1,11 @@
 import { GeoJsonLayer } from '@deck.gl/layers';
 
 const CLUSTER_COLORS = {
-  0: [34,  197,  94],   // green  — low risk / high resilience
-  1: [134, 239, 172],   // mint   — low-moderate
-  2: [245, 158,  11],   // amber  — moderate / mixed
-  3: [239,  68,  68],   // red    — high risk / low resilience
-  4: [ 59, 130, 246],   // blue   — coastal / weather-exposed
+  0: [34,  197,  94,  255],   // green  — low risk / high resilience
+  1: [134, 239, 172,  255],   // mint   — low-moderate
+  2: [245, 158,  11,  255],   // amber  — moderate / mixed
+  3: [239,  68,  68,  255],   // red    — high risk / low resilience
+  4: [ 59, 130, 246,  255],   // blue   — coastal / weather-exposed
 };
 
 const CLUSTER_LABELS = {
@@ -17,7 +17,7 @@ const CLUSTER_LABELS = {
 };
 
 export function toRgb(clusterId) {
-  return CLUSTER_COLORS[clusterId] || [100, 100, 100];
+  return CLUSTER_COLORS[clusterId] ?? [128, 128, 128, 255];
 }
 
 export default class RiskIndexModule {
@@ -74,9 +74,9 @@ export default class RiskIndexModule {
   getChartConfig() {
     if (!this._geojson) return null;
     const data = [0, 1, 2, 3, 4].map(id => ({
-      label: CLUSTER_LABELS[id],
-      count: this._geojson.features.filter(f => f.properties.cluster_id === id).length,
-      color: `rgb(${CLUSTER_COLORS[id].join(',')})`,
+      name: CLUSTER_LABELS[id],
+      value: this._geojson.features.filter(f => f.properties.cluster_id === id).length,
+      color: toRgb(id),
     }));
     return { type: 'donut', title: 'Cluster Distribution', data };
   }
