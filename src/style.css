@@ -14,6 +14,8 @@
   --font-ui: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --sidebar-w: 220px;
+  --btn-hover-bg: rgba(255, 255, 255, 0.03);
+  --btn-active-bg: rgba(0, 212, 255, 0.05);
 }
 
 /* === RESET === */
@@ -64,8 +66,8 @@ a:hover { opacity: 0.8; }
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
-.sidebar-btn:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-.sidebar-btn--active { color: var(--accent-cyan); border-left-color: var(--accent-cyan); background: rgba(0,212,255,0.05); }
+.sidebar-btn:hover { color: var(--text); background: var(--btn-hover-bg); }
+.sidebar-btn--active { color: var(--accent-cyan); border-left-color: var(--accent-cyan); background: var(--btn-active-bg); }
 .sidebar-nav { flex: 1; overflow-y: auto; }
 .sidebar-footer {
   padding: 1rem 1.25rem;
