@@ -1,19 +1,19 @@
 import { GeoJsonLayer } from '@deck.gl/layers';
 
 const CLUSTER_COLORS = {
-  0: [34,  197,  94,  255],   // green  — low risk / high resilience
-  1: [134, 239, 172,  255],   // mint   — low-moderate
-  2: [245, 158,  11,  255],   // amber  — moderate / mixed
-  3: [239,  68,  68,  255],   // red    — high risk / low resilience
-  4: [ 59, 130, 246,  255],   // blue   — coastal / weather-exposed
+  0: [ 52, 211, 153, 255],   // emerald — low risk / high resilience
+  1: [  0, 212, 255, 255],   // cyan    — low-moderate
+  2: [251, 191,  36, 255],   // amber   — moderate / mixed
+  3: [249, 115,  22, 255],   // orange  — elevated risk
+  4: [239,  68,  68, 255],   // red     — high risk / low resilience
 };
 
 const CLUSTER_LABELS = {
   0: 'Low Risk',
   1: 'Low-Mod',
   2: 'Moderate',
-  3: 'High Risk',
-  4: 'Coastal',
+  3: 'Elevated',
+  4: 'High Risk',
 };
 
 export function toRgb(clusterId) {
@@ -41,9 +41,13 @@ export default class RiskIndexModule {
         data: this._geojson,
         filled: true,
         stroked: true,
-        getFillColor: f => [...toRgb(f.properties.cluster_id), 180],
-        getLineColor: [255, 255, 255, 20],
-        getLineWidth: 500,
+        getFillColor: f => {
+          const c = toRgb(f.properties.cluster_id ?? -1);
+          return [c[0], c[1], c[2], 210];
+        },
+        getLineColor: [8, 13, 26, 120],
+        getLineWidth: 200,
+        lineWidthMinPixels: 0.3,
         pickable: true,
         autoHighlight: true,
         highlightColor: [255, 255, 255, 50],

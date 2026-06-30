@@ -1,4 +1,4 @@
-import { ArcLayer } from '@deck.gl/layers';
+import { ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
 
 export function normalizeArcs(rawArcs) {
   return rawArcs.map(a => ({
@@ -34,21 +34,56 @@ export default class FinancialFlowsModule {
     this._arcs = normalizeArcs(data.arcs);
   }
 
+  _metroNodes() {
+    const map = {};
+    this._arcs.forEach(a => {
+      ['from', 'to'].forEach(end => {
+        const m = a[end];
+        if (!map[m.name]) map[m.name] = { name: m.name, coordinates: m.coordinates, flow: 0 };
+        map[m.name].flow += a.volume;
+      });
+    });
+    return Object.values(map);
+  }
+
   getLayers() {
     if (!this._arcs) return [];
+    const nodes = this._metroNodes();
     return [
-      new ArcLayer({
-        id: 'financial-flows-arc',
-        data: this._arcs,
-        getSourcePosition: d => d.from.coordinates,
-        getTargetPosition: d => d.to.coordinates,
-        getSourceColor:    d => d.direction === 'in' ? [0, 212, 255, 200] : [245, 158, 11, 200],
-        getTargetColor:    d => d.direction === 'in' ? [0, 212, 255,  60] : [245, 158, 11,  60],
-        getWidth:          d => Math.max(1, Math.sqrt(d.volume / 4e9)),
-        greatCircle: true,
+      new ScatterplotLayer({
+        id: 'ff-nodes-outer',
+        data: nodes,
+        getPosition: d => d.coordinates,
+        getRadius: d => Math.max(60000, Math.sqrt(d.flow / 5e7) * 12000),
+        getFillColor: [0, 212, 255, 18],
+        getLineColor: [0, 212, 255, 120],
+        lineWidthMinPixels: 1,
+        stroked: true,
+        pickable: false,
+      }),
+      new ScatterplotLayer({
+        id: 'ff-nodes-inner',
+        data: nodes,
+        getPosition: d => d.coordinates,
+        getRadius: d => Math.max(20000, Math.sqrt(d.flow / 5e7) * 4000),
+        getFillColor: [0, 212, 255, 200],
         pickable: true,
         autoHighlight: true,
         highlightColor: [255, 255, 255, 80],
+      }),
+      new ArcLayer({
+        id: 'ff-arcs',
+        data: this._arcs,
+        getSourcePosition: d => d.from.coordinates,
+        getTargetPosition: d => d.to.coordinates,
+        getSourceColor: d => d.direction === 'in' ? [0, 212, 255, 230] : [245, 158, 11, 230],
+        getTargetColor: d => d.direction === 'in' ? [0, 212, 255,  40] : [245, 158, 11,  40],
+        getWidth:       d => Math.max(2, Math.sqrt(d.volume / 8e8)),
+        widthMinPixels: 2,
+        greatCircle: true,
+        pickable: true,
+        autoHighlight: true,
+        highlightColor: [255, 255, 255, 100],
       }),
     ];
   }

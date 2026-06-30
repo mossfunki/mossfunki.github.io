@@ -1,4 +1,5 @@
-import { HexagonLayer } from '@deck.gl/aggregation-layers';
+import { HeatmapLayer } from '@deck.gl/aggregation-layers';
+import { ScatterplotLayer, TextLayer } from '@deck.gl/layers';
 
 export function normalizePoints(rawPoints) {
   return rawPoints
@@ -29,26 +30,41 @@ export default class LaborMarketsModule {
 
   getLayers() {
     if (!this._points) return [];
+    const maxWage = Math.max(...this._points.map(p => p.medianWage), 1);
     return [
-      new HexagonLayer({
-        id: 'labor-markets-hex',
+      new HeatmapLayer({
+        id: 'lm-heat',
         data: this._points,
-        getPosition:        d => d.position,
-        getElevationWeight: d => d.employment,
-        getColorWeight:     d => d.medianWage,
-        elevationScale: 60,
-        radius: 50000,
-        extruded: true,
+        getPosition: d => d.position,
+        getWeight:   d => d.medianWage / maxWage,
+        radiusPixels: 120,
+        intensity: 3,
+        threshold: 0.03,
+        colorRange: [
+          [8,   13,  26 ],
+          [0,   40,  100],
+          [0,   90,  180],
+          [0,  160,  240],
+          [0,  212,  255],
+          [180, 240, 255],
+        ],
+        pickable: false,
+      }),
+      new ScatterplotLayer({
+        id: 'lm-dots',
+        data: this._points,
+        getPosition: d => d.position,
+        getRadius:   d => Math.max(30000, Math.sqrt(d.employment / 800) * 8000),
+        getFillColor: d => {
+          const t = Math.min(1, d.medianWage / maxWage);
+          return [Math.round(t * 0), Math.round(100 + t * 112), 255, 200];
+        },
+        getLineColor: [0, 212, 255, 160],
+        lineWidthMinPixels: 1,
+        stroked: true,
         pickable: true,
         autoHighlight: true,
-        colorRange: [
-          [8,   13,  26,  255],
-          [15,  30,  60,  255],
-          [0,   80,  150, 255],
-          [0,   150, 210, 255],
-          [0,   200, 255, 255],
-          [100, 230, 255, 255],
-        ],
+        highlightColor: [255, 255, 255, 100],
       }),
     ];
   }

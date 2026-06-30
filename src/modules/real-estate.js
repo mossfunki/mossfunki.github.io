@@ -17,16 +17,17 @@ export function normalizeCounties(rawCounties) {
 }
 
 export function appreciationColor(yoy) {
-  if (yoy < -5)  return [ 59, 130, 246, 210];  // blue — declining
-  if (yoy < 0)   return [134, 239, 172, 210];  // mint — slight decline
-  if (yoy < 8)   return [ 16, 185, 129, 210];  // green — stable
-  if (yoy < 15)  return [245, 158,  11, 210];  // amber — appreciating
-  return [239,  68,  68, 210];                  // red   — hot
+  if (yoy < -5)  return [ 56, 189, 248, 230];  // bright sky blue — declining
+  if (yoy < 0)   return [  0, 210, 200, 230];  // teal — slight decline
+  if (yoy < 5)   return [ 52, 211, 153, 230];  // emerald — flat
+  if (yoy < 10)  return [251, 191,  36, 230];  // amber — appreciating
+  if (yoy < 18)  return [249, 115,  22, 230];  // orange — hot
+  return [239,  68,  68, 230];                  // red — on fire
 }
 
 export function getElevationScale(counties) {
   const max = Math.max(...counties.map(c => Math.abs(c.yoyChange || 0)), 1);
-  return 40000 / max;
+  return 200000 / max;
 }
 
 export default class RealEstateModule {
@@ -53,15 +54,19 @@ export default class RealEstateModule {
       new ColumnLayer({
         id: 'real-estate-columns',
         data: this._counties,
-        diskResolution: 6,
-        radius: 10000,
+        diskResolution: 12,
+        radius: 55000,
         extruded: true,
         getPosition:   d => d.position,
         getElevation:  d => Math.abs(d.yoyChange) * this._elevScale,
         getFillColor:  d => appreciationColor(d.yoyChange),
+        getLineColor:  d => appreciationColor(d.yoyChange).map((v, i) => i === 3 ? 255 : v),
+        lineWidthMinPixels: 1,
         pickable: true,
         autoHighlight: true,
-        highlightColor: [255, 255, 255, 120],
+        highlightColor: [255, 255, 255, 140],
+        elevationScale: 1,
+        material: { ambient: 0.35, diffuse: 0.8, shininess: 32, specularColor: [60, 64, 70] },
         onClick: ({ object }) => {
           if (object) {
             this._selected = object;
