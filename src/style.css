@@ -179,6 +179,41 @@ em { font-style: italic; color: var(--accent-cyan); }
 }
 .hero-tools .sep { color: var(--border); }
 
+/* === HERO PORTRAIT === */
+.hero-inner { display: flex; align-items: center; gap: 4rem; }
+.hero-portrait-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: portrait-in 0.9s 1.2s ease forwards;
+}
+@keyframes portrait-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+.hero-portrait {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 0 6px rgba(0,212,255,0.08), 0 0 40px rgba(0,212,255,0.12);
+}
+.hero-portrait-caption {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+@media (max-width: 900px) {
+  .hero-inner { flex-direction: column-reverse; gap: 2rem; }
+  .hero-portrait { width: 180px; height: 180px; }
+}
+
 .hero-scroll-hint {
   position: absolute;
   bottom: 2.5rem;
