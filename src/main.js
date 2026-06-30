@@ -19,9 +19,9 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 const CHAPTER_VIEW = {
   'financial-flows': { center: [-96, 38],   zoom: 3.4, pitch: 0,  bearing: 0   },
-  'real-estate':     { center: [-96, 36],   zoom: 4.0, pitch: 50, bearing: -12 },
-  'labor-markets':   { center: [-96, 38],   zoom: 3.6, pitch: 30, bearing: 8   },
-  'risk-index':      { center: [-96, 38],   zoom: 3.4, pitch: 0,  bearing: 0   },
+  'real-estate':     { center: [-110, 36],  zoom: 4.2, pitch: 45, bearing: -8  },
+  'labor-markets':   { center: [-96, 38],   zoom: 3.6, pitch: 28, bearing: 5   },
+  'risk-index':      { center: [-96, 38],   zoom: 3.5, pitch: 40, bearing: -5  },
 };
 
 const map = new mapboxgl.Map({
@@ -82,6 +82,10 @@ function setActiveChapter(moduleId) {
 
 async function activateModule(id) {
   if (id === currentModuleId) return;
+
+  const prev = MODULES[currentModuleId];
+  if (prev?.deactivate) prev.deactivate();
+
   currentModuleId = id;
 
   const module = MODULES[id];
@@ -93,6 +97,7 @@ async function activateModule(id) {
   try {
     await module.load();
     overlay.setProps({ layers: module.getLayers() });
+    if (module.activate) module.activate();
     updateChapterStats(id, module);
     renderChart(module.getChartConfig());
     const view = CHAPTER_VIEW[id];
@@ -108,6 +113,8 @@ async function activateModule(id) {
 
 map.on('load', () => {
   initChartPanel(document.getElementById('chart-panel'));
+
+  Object.values(MODULES).forEach(m => { if (m.bindMap) m.bindMap(map); });
 
   /* First chapter loads silently on map ready */
   activateModule('financial-flows');

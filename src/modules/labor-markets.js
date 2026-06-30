@@ -1,6 +1,3 @@
-import { HeatmapLayer } from '@deck.gl/aggregation-layers';
-import { ScatterplotLayer, TextLayer } from '@deck.gl/layers';
-
 export function normalizePoints(rawPoints) {
   return rawPoints
     .filter(p => p.lat != null && p.lon != null)
@@ -12,12 +9,20 @@ export function normalizePoints(rawPoints) {
     }));
 }
 
+const SRC_ID  = 'lm-points-src';
+const HALO_ID = 'lm-halo';
+const RING_ID = 'lm-ring';
+const CORE_ID = 'lm-core';
+
 export default class LaborMarketsModule {
   constructor() {
     this._points = null;
     this._metros = [];
-    this.viewState = { pitch: 40 };
+    this._map    = null;
+    this.viewState = { pitch: 28 };
   }
+
+  bindMap(map) { this._map = map; }
 
   async load() {
     if (this._points) return;
@@ -28,46 +33,85 @@ export default class LaborMarketsModule {
     this._metros = data.metros || [];
   }
 
-  getLayers() {
-    if (!this._points) return [];
+  activate() {
+    const map = this._map;
+    if (!map || !this._points) return;
+
+    const maxEmp  = Math.max(...this._points.map(p => p.employment), 1);
     const maxWage = Math.max(...this._points.map(p => p.medianWage), 1);
-    return [
-      new HeatmapLayer({
-        id: 'lm-heat',
-        data: this._points,
-        getPosition: d => d.position,
-        getWeight:   d => d.medianWage / maxWage,
-        radiusPixels: 120,
-        intensity: 3,
-        threshold: 0.03,
-        colorRange: [
-          [8,   13,  26 ],
-          [0,   40,  100],
-          [0,   90,  180],
-          [0,  160,  240],
-          [0,  212,  255],
-          [180, 240, 255],
-        ],
-        pickable: false,
-      }),
-      new ScatterplotLayer({
-        id: 'lm-dots',
-        data: this._points,
-        getPosition: d => d.position,
-        getRadius:   d => Math.max(30000, Math.sqrt(d.employment / 800) * 8000),
-        getFillColor: d => {
-          const t = Math.min(1, d.medianWage / maxWage);
-          return [Math.round(t * 0), Math.round(100 + t * 112), 255, 200];
+
+    const geojson = {
+      type: 'FeatureCollection',
+      features: this._points.map(p => ({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: p.position },
+        properties: {
+          empNorm:  p.employment / maxEmp,
+          wageNorm: p.medianWage / maxWage,
         },
-        getLineColor: [0, 212, 255, 160],
-        lineWidthMinPixels: 1,
-        stroked: true,
-        pickable: true,
-        autoHighlight: true,
-        highlightColor: [255, 255, 255, 100],
-      }),
-    ];
+      })),
+    };
+
+    if (!map.getSource(SRC_ID)) {
+      map.addSource(SRC_ID, { type: 'geojson', data: geojson });
+    }
+
+    if (!map.getLayer(HALO_ID)) {
+      map.addLayer({
+        id: HALO_ID,
+        type: 'circle',
+        source: SRC_ID,
+        paint: {
+          'circle-radius':       ['interpolate', ['linear'], ['get', 'empNorm'], 0, 20, 1, 70],
+          'circle-color':        ['interpolate', ['linear'], ['get', 'wageNorm'],
+            0, 'rgba(212,98,42,0.03)', 1, 'rgba(212,98,42,0.07)'],
+          'circle-stroke-width': 0,
+          'circle-pitch-alignment': 'map',
+        },
+      });
+    }
+
+    if (!map.getLayer(RING_ID)) {
+      map.addLayer({
+        id: RING_ID,
+        type: 'circle',
+        source: SRC_ID,
+        paint: {
+          'circle-radius':       ['interpolate', ['linear'], ['get', 'empNorm'], 0, 12, 1, 42],
+          'circle-color':        'rgba(0,0,0,0)',
+          'circle-stroke-width': 1.5,
+          'circle-stroke-color': ['interpolate', ['linear'], ['get', 'wageNorm'],
+            0, 'rgba(140,60,15,0.5)', 1, 'rgba(212,98,42,0.75)'],
+          'circle-pitch-alignment': 'map',
+        },
+      });
+    }
+
+    if (!map.getLayer(CORE_ID)) {
+      map.addLayer({
+        id: CORE_ID,
+        type: 'circle',
+        source: SRC_ID,
+        paint: {
+          'circle-radius':       ['interpolate', ['linear'], ['get', 'empNorm'], 0, 5, 1, 14],
+          'circle-color':        ['interpolate', ['linear'], ['get', 'wageNorm'],
+            0, 'rgba(140,60,15,0.9)', 1, 'rgba(212,98,42,0.95)'],
+          'circle-stroke-width': 1,
+          'circle-stroke-color': 'rgba(255,255,255,0.5)',
+          'circle-pitch-alignment': 'map',
+        },
+      });
+    }
   }
+
+  deactivate() {
+    const map = this._map;
+    if (!map) return;
+    [HALO_ID, RING_ID, CORE_ID].forEach(id => { if (map.getLayer(id)) map.removeLayer(id); });
+    if (map.getSource(SRC_ID)) map.removeSource(SRC_ID);
+  }
+
+  getLayers() { return []; }
 
   getStats() {
     if (!this._points) return { cards: [] };

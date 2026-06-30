@@ -4,8 +4,8 @@
   --surface: #0f1629;
   --panel: rgba(15, 22, 41, 0.80);
   --border: rgba(255, 255, 255, 0.07);
-  --border-glow: rgba(0, 212, 255, 0.3);
-  --accent-cyan: #00d4ff;
+  --border-glow: rgba(212, 98, 42, 0.3);
+  --accent-cyan: #d4622a;
   --accent-amber: #f59e0b;
   --text: #e2e8f0;
   --text-muted: #4a5568;
@@ -15,7 +15,7 @@
   --font-ui: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --btn-hover-bg: rgba(255, 255, 255, 0.03);
-  --btn-active-bg: rgba(0, 212, 255, 0.05);
+  --btn-active-bg: rgba(212, 98, 42, 0.05);
   --max-w: 1200px;
   --section-pad: 6rem 2rem;
 }
@@ -86,7 +86,7 @@ em { font-style: italic; color: var(--accent-cyan); }
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 20% 50%, rgba(212, 98, 42, 0.04) 0%, transparent 60%),
     radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.03) 0%, transparent 50%),
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
@@ -97,7 +97,7 @@ em { font-style: italic; color: var(--accent-cyan); }
   position: absolute;
   bottom: -120px; left: -120px;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 98, 42, 0.06) 0%, transparent 70%);
   pointer-events: none;
   animation: pulse-glow 6s ease-in-out infinite;
 }
@@ -201,7 +201,7 @@ em { font-style: italic; color: var(--accent-cyan); }
   object-fit: cover;
   object-position: center top;
   border: 2px solid var(--accent-cyan);
-  box-shadow: 0 0 0 6px rgba(0,212,255,0.08), 0 0 40px rgba(0,212,255,0.12);
+  box-shadow: 0 0 0 6px rgba(212,98,42,0.08), 0 0 40px rgba(212,98,42,0.12);
 }
 .hero-portrait-caption {
   font-family: var(--font-mono);
@@ -369,8 +369,8 @@ em { font-style: italic; color: var(--accent-cyan); }
 }
 .badge {
   padding: 0.15rem 0.4rem;
-  background: rgba(0,212,255,0.1);
-  border: 1px solid rgba(0,212,255,0.25);
+  background: rgba(212,98,42,0.1);
+  border: 1px solid rgba(212,98,42,0.25);
   border-radius: 2px;
   color: var(--accent-cyan);
   font-size: 0.6rem;
@@ -386,8 +386,8 @@ em { font-style: italic; color: var(--accent-cyan); }
 .outcome-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .outcome-chips span {
   padding: 0.2rem 0.55rem;
-  background: rgba(0,212,255,0.06);
-  border: 1px solid rgba(0,212,255,0.15);
+  background: rgba(212,98,42,0.06);
+  border: 1px solid rgba(212,98,42,0.15);
   border-radius: 2px;
   font-size: 0.7rem;
   font-family: var(--font-mono);
@@ -453,7 +453,7 @@ em { font-style: italic; color: var(--accent-cyan); }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(212,98,42,0.05) 0%, transparent 70%);
   pointer-events: none;
 }
 .map-intro-inner { position: relative; max-width: 600px; margin: 0 auto; }
@@ -597,7 +597,7 @@ em { font-style: italic; color: var(--accent-cyan); }
 .progress-dot.active {
   background: var(--accent-cyan);
   transform: scale(1.4);
-  box-shadow: 0 0 8px rgba(0,212,255,0.6);
+  box-shadow: 0 0 8px rgba(212,98,42,0.6);
 }
 
 /* === LOADING === */

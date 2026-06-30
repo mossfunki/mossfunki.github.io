@@ -1,11 +1,9 @@
-import { GeoJsonLayer } from '@deck.gl/layers';
-
 const CLUSTER_COLORS = {
-  0: [ 52, 211, 153, 255],   // emerald — low risk / high resilience
-  1: [  0, 212, 255, 255],   // cyan    — low-moderate
-  2: [251, 191,  36, 255],   // amber   — moderate / mixed
-  3: [249, 115,  22, 255],   // orange  — elevated risk
-  4: [239,  68,  68, 255],   // red     — high risk / low resilience
+  0: [ 52, 211, 153, 255],
+  1: [  0, 212, 255, 255],
+  2: [251, 191,  36, 255],
+  3: [249, 115,  22, 255],
+  4: [239,  68,  68, 255],
 };
 
 const CLUSTER_LABELS = {
@@ -20,10 +18,18 @@ export function toRgb(clusterId) {
   return CLUSTER_COLORS[clusterId] ?? [128, 128, 128, 255];
 }
 
+const SOURCE_ID = 'risk-counties';
+const LAYER_ID  = 'risk-fill-extrusion';
+
 export default class RiskIndexModule {
   constructor() {
-    this._geojson = null;
-    this.viewState = null;
+    this._geojson  = null;
+    this._map      = null;
+    this.viewState = { pitch: 55, bearing: -10 };
+  }
+
+  bindMap(map) {
+    this._map = map;
   }
 
   async load() {
@@ -34,25 +40,44 @@ export default class RiskIndexModule {
   }
 
   getLayers() {
-    if (!this._geojson) return [];
-    return [
-      new GeoJsonLayer({
-        id: 'risk-index-geojson',
-        data: this._geojson,
-        filled: true,
-        stroked: true,
-        getFillColor: f => {
-          const c = toRgb(f.properties.cluster_id ?? -1);
-          return [c[0], c[1], c[2], 210];
+    return [];
+  }
+
+  activate() {
+    const map = this._map;
+    if (!map || !this._geojson) return;
+
+    if (!map.getSource(SOURCE_ID)) {
+      map.addSource(SOURCE_ID, { type: 'geojson', data: this._geojson });
+    }
+
+    if (!map.getLayer(LAYER_ID)) {
+      map.addLayer({
+        id: LAYER_ID,
+        type: 'fill-extrusion',
+        source: SOURCE_ID,
+        paint: {
+          'fill-extrusion-color': [
+            'interpolate', ['linear'], ['get', 'risk_score'],
+            0,   '#440154',
+            25,  '#31688e',
+            50,  '#35b779',
+            75,  '#90d743',
+            100, '#fde725',
+          ],
+          'fill-extrusion-height': ['*', ['get', 'risk_score'], 2500],
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.92,
         },
-        getLineColor: [8, 13, 26, 120],
-        getLineWidth: 200,
-        lineWidthMinPixels: 0.3,
-        pickable: true,
-        autoHighlight: true,
-        highlightColor: [255, 255, 255, 50],
-      }),
-    ];
+      });
+    }
+  }
+
+  deactivate() {
+    const map = this._map;
+    if (!map) return;
+    if (map.getLayer(LAYER_ID))  map.removeLayer(LAYER_ID);
+    if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
   }
 
   getStats() {
@@ -65,10 +90,10 @@ export default class RiskIndexModule {
       const st = f.properties.state || 'XX';
       byState[st] = (byState[st] || 0) + (f.properties.risk_score || 0);
     });
-    const mostVulnerable = Object.entries(byState).sort((a, b) => b[1] - a[1])[0]?.[0] || '—';
+    const mostVulnerable = Object.entries(byState).sort((a, b) => b[1] - a[1])[0]?.[0] || '-';
     return {
       cards: [
-        { label: 'High-Risk Counties',    value: String(highRisk),        accent: 'danger' },
+        { label: 'High-Risk Counties',    value: String(highRisk),         accent: 'danger' },
         { label: 'Avg Resilience Score',  value: avgResilience.toFixed(1), accent: 'cyan'   },
         { label: 'Most Vulnerable State', value: mostVulnerable,           accent: 'amber'  },
       ],
@@ -78,7 +103,7 @@ export default class RiskIndexModule {
   getChartConfig() {
     if (!this._geojson) return null;
     const data = [0, 1, 2, 3, 4].map(id => ({
-      name: CLUSTER_LABELS[id],
+      name:  CLUSTER_LABELS[id],
       value: this._geojson.features.filter(f => f.properties.cluster_id === id).length,
       color: toRgb(id),
     }));
