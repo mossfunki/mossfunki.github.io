@@ -2,23 +2,254 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Benjamin Lab — Analytics Dashboard</title>
+  <title>Benjamin Lab — Spatial Data Scientist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Benjamin Lab — Spatial Data Scientist building geospatial pipelines, econometric models, and interactive analytics dashboards." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="/assets/index-D6XQCFll.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CMlYn1S7.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-BGngNgvZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D0xmU72j.css">
 </head>
 <body>
-  <div id="app">
-    <aside id="sidebar"></aside>
-    <div id="main">
-      <div id="map"></div>
-      <div id="stat-cards"></div>
-      <div id="chart-panel"></div>
-      <div id="layer-toggles"></div>
+
+  <!-- NAV -->
+  <nav id="site-nav">
+    <div class="nav-inner">
+      <span class="nav-brand">Benjamin Lab</span>
+      <div class="nav-links">
+        <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:benjaminmonroelab@gmail.com">Contact</a>
+        <a href="#map-section" class="nav-cta">Explore Data ↓</a>
+      </div>
     </div>
-  </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow"><span class="live-dot"></span>San Diego, CA · Seattle, WA · Open to Work</p>
+        <h1 class="hero-title">Spatial Data Scientist<br><em>with an Economist's Lens</em></h1>
+        <p class="hero-subtitle">I build end-to-end geospatial pipelines — automated data ingestion, spatial feature engineering, econometric modeling, and interactive visualization. Grounded in economic theory, aimed at public-sector decisions.</p>
+        <div class="hero-cta">
+          <a href="#map-section" class="btn-primary">Explore the Data</a>
+          <a href="https://github.com/mossfunki" class="btn-secondary" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:benjaminmonroelab@gmail.com" class="btn-secondary">Get in Touch</a>
+        </div>
+        <div class="hero-tools">
+          <span>GeoPandas</span>
+          <span class="sep">·</span>
+          <span>deck.gl</span>
+          <span class="sep">·</span>
+          <span>Statsmodels OLS</span>
+          <span class="sep">·</span>
+          <span>SHAP</span>
+          <span class="sep">·</span>
+          <span>Python · SQL</span>
+          <span class="sep">·</span>
+          <span>D3.js</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <section id="proof-strip">
+    <div class="proof-inner">
+      <div class="proof-item">
+        <div class="proof-number-wrap">
+          <span class="proof-number" data-target="531" data-suffix="k+">0</span>
+        </div>
+        <span class="proof-label">King County Parcels Analyzed</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <div class="proof-number-wrap">
+          <span class="proof-number" data-target="303" data-suffix="">0</span>
+        </div>
+        <span class="proof-label">Collision Clusters Mapped</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <div class="proof-number-wrap">
+          <span class="proof-number" data-target="1545" data-suffix="">0</span>
+        </div>
+        <span class="proof-label">Census Tracts Scored</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <div class="proof-number-wrap">
+          <span class="proof-number" data-target="60" data-suffix="%">0</span>
+        </div>
+        <span class="proof-label">Retention Lift — Ix Analysis</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK -->
+  <section id="featured-work" class="portfolio-section">
+    <div class="section-header">
+      <span class="section-label">Featured Work</span>
+      <h2 class="section-title">Seattle Spatial Analysis</h2>
+      <p class="section-subtitle">Three pipelines. Real open data. Real policy questions.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card work-card--primary">
+        <div class="work-card-label">GIS Portfolio · King County Open Data <span class="badge">New</span></div>
+        <h3 class="work-card-title">Seattle Spatial Analysis Trilogy</h3>
+        <p class="work-card-desc">Three end-to-end geospatial pipelines: transit-oriented development pricing, pedestrian collision risk, and urban heat island prediction by census tract. Built in Python, explained in plain English.</p>
+        <div class="outcome-chips">
+          <span>531k parcels · OLS R²=0.50</span>
+          <span>303 collision clusters · DBSCAN</span>
+          <span>Random Forest + SHAP</span>
+        </div>
+        <div class="work-card-tags">GeoPandas · Statsmodels · scikit-learn · SHAP · MapLibre GL · Scrollama</div>
+        <div class="work-card-actions">
+          <a href="https://github.com/mossfunki/seattle-gis-portfolio" class="btn-primary" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-label">Analytics · Operations</div>
+        <h3 class="work-card-title">Demand Forecasting &amp; Inventory Optimization</h3>
+        <p class="work-card-desc">Prophet time-series forecasting on event-driven demand with dynamic safety stock recalculation. 31% fewer stockouts vs. static reorder model on held-out test data.</p>
+        <div class="outcome-chips">
+          <span>8.4% MAPE</span>
+          <span>31% fewer stockouts</span>
+        </div>
+        <div class="work-card-tags">Python · Prophet · XGBoost · Streamlit</div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-label">Analytics · Ix</div>
+        <h3 class="work-card-title">User Retention Analysis — 60% Lift</h3>
+        <p class="work-card-desc">Behavioral cohort analysis in Amplitude to identify drop-off drivers at an AI infrastructure startup. Findings adopted by product; retention increased 60% within 8 weeks.</p>
+        <div class="outcome-chips">
+          <span>60% retention increase</span>
+          <span>Deployed Dec 2025</span>
+        </div>
+        <div class="work-card-tags">Python · SQL · Amplitude · Cohort Analysis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="portfolio-section">
+    <div class="section-header">
+      <span class="section-label">Capabilities</span>
+      <h2 class="section-title">What I can do for your team</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">▲</div>
+        <h3>Analysis &amp; Modeling</h3>
+        <p>Forecasting, regression, clustering, cohort analysis, A/B testing. Python (pandas, scikit-learn, statsmodels) and SQL end-to-end.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">■</div>
+        <h3>Operations Intelligence</h3>
+        <p>KPI dashboards, logistics modeling, route optimization, supply chain analysis. Turns operational data into actionable decisions.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">●</div>
+        <h3>Business &amp; Product Analysis</h3>
+        <p>Cohort analysis, funnel metrics, A/B testing, stakeholder reporting. Translates ambiguous business questions into SQL and clear recommendations.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">◆</div>
+        <h3>Spatial &amp; GIS</h3>
+        <p>GeoPandas, deck.gl, ArcGIS, OSMnx. Network analysis, isochrone modeling, and spatial joins for location-based decisions.</p>
+      </div>
+    </div>
+    <div class="tools-row">
+      <span>SQL</span><span>Python</span><span>deck.gl</span><span>Tableau</span><span>pandas</span>
+      <span>scikit-learn</span><span>Prophet</span><span>GeoPandas</span><span>Amplitude</span>
+      <span>GitHub Actions</span><span>statsmodels</span><span>D3.js</span>
+    </div>
+  </section>
+
+  <!-- MAP INTRO -->
+  <section id="map-intro">
+    <div class="map-intro-inner">
+      <span class="section-label">Live Analytics Dashboard</span>
+      <h2 class="map-intro-title">Explore the Data</h2>
+      <p class="map-intro-sub">Four interactive analyses — financial flows, real estate appreciation, labor markets, and climate risk — rendered live with deck.gl and Mapbox. Scroll to navigate.</p>
+      <div class="map-intro-arrow">↓</div>
+    </div>
+  </section>
+
+  <!-- MAP SECTION -->
+  <section id="map-section">
+    <div id="map-sticky">
+      <div id="map"></div>
+
+      <!-- Chapter cards (show/hide per active chapter) -->
+      <div id="chapter-cards">
+        <div class="chapter-card glass-panel" data-chapter="financial-flows">
+          <div class="chapter-num">01 / 04</div>
+          <h2 class="chapter-title">Financial Flows</h2>
+          <p class="chapter-desc">Capital movement between US metro areas — tracing inflows and outflows across major financial corridors via great-circle arc visualization.</p>
+          <div class="chapter-stats"></div>
+        </div>
+        <div class="chapter-card glass-panel" data-chapter="real-estate">
+          <div class="chapter-num">02 / 04</div>
+          <h2 class="chapter-title">Real Estate Markets</h2>
+          <p class="chapter-desc">County-level home value appreciation rendered as 3D columns. Pitch the map to 45° and read the housing boom by elevation. Click any column to see price history.</p>
+          <div class="chapter-stats"></div>
+        </div>
+        <div class="chapter-card glass-panel" data-chapter="labor-markets">
+          <div class="chapter-num">03 / 04</div>
+          <h2 class="chapter-title">Labor Markets</h2>
+          <p class="chapter-desc">Hexagonal density heatmap of employment and wages across US metro areas — elevation shows job density, color tracks median wage.</p>
+          <div class="chapter-stats"></div>
+        </div>
+        <div class="chapter-card glass-panel" data-chapter="risk-index">
+          <div class="chapter-num">04 / 04</div>
+          <h2 class="chapter-title">Climate Risk Index</h2>
+          <p class="chapter-desc">FEMA NRI + K-Means clustering at county resolution. Five risk tiers derived from composite hazard, exposure, and community resilience scores.</p>
+          <div class="chapter-stats"></div>
+        </div>
+      </div>
+
+      <!-- Chart panel (bottom-right) -->
+      <div id="chart-panel" class="glass-panel"></div>
+
+      <!-- Progress indicator -->
+      <div id="chapter-progress">
+        <div class="progress-dot" data-chapter="financial-flows" title="Financial Flows"></div>
+        <div class="progress-dot" data-chapter="real-estate" title="Real Estate"></div>
+        <div class="progress-dot" data-chapter="labor-markets" title="Labor Markets"></div>
+        <div class="progress-dot" data-chapter="risk-index" title="Risk Index"></div>
+      </div>
+
+      <!-- Loading -->
+      <div id="loading">Loading…</div>
+    </div>
+
+    <!-- Invisible scroll spacers — drive scrollama -->
+    <div class="chapter-spacer" data-module="financial-flows"></div>
+    <div class="chapter-spacer" data-module="real-estate"></div>
+    <div class="chapter-spacer" data-module="labor-markets"></div>
+    <div class="chapter-spacer" data-module="risk-index"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="site-footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Benjamin Lab</span>
+      <span class="footer-copy">© 2026 · San Diego, CA</span>
+      <div class="footer-links">
+        <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
