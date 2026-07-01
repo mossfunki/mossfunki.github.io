@@ -34,7 +34,7 @@
       <div class="hero-content" style="flex:1">
         <p class="hero-eyebrow"><span class="live-dot"></span>Seattle, WA · Open to Work</p>
         <h1 class="hero-title">Spatial Data Analyst<br><em>with an Economist's Edge</em></h1>
-        <p class="hero-subtitle">I build analytical systems at the intersection of economics and spatial data. Transit affordability modeling across 531k parcels, automated collision risk pipelines, geospatial infrastructure optimization. My economics background means I model trade-offs and resource allocation — not just render maps.</p>
+        <p class="hero-subtitle">I build analytical systems at the intersection of economics and spatial data. Transit affordability modeling across 531k parcels, automated collision risk pipelines, geospatial infrastructure optimization. My economics background means I model trade-offs and resource allocation, not just render maps.</p>
         <div class="hero-cta">
           <a href="#map-section" class="btn-primary">Explore the Data</a>
           <a href="https://github.com/mossfunki" class="btn-secondary" target="_blank" rel="noopener">GitHub</a>
@@ -103,13 +103,13 @@
     <div class="section-header">
       <span class="section-label">Featured Work</span>
       <h2 class="section-title">Spatial Modeling & Analytics</h2>
-      <p class="section-subtitle">Each project answers a resource allocation question through spatial analysis — where to invest in housing, how to rank infrastructure risk, which route minimizes fuel cost, when and how much to reorder. Economics frames the constraint; spatial analysis finds where the answer lives.</p>
+      <p class="section-subtitle">Each project answers a resource allocation question through spatial analysis: where to invest in housing, how to rank infrastructure risk, which route minimizes fuel cost, when and how much to reorder. Economics frames the constraint; spatial analysis finds where the answer lives.</p>
     </div>
     <div class="work-grid">
       <div class="work-card work-card--primary">
         <div class="work-card-label">Housing Economics · Investment Allocation <span class="badge">Seattle</span></div>
         <h3 class="work-card-title">Transit-Oriented Development & Affordability Model</h3>
-        <p class="work-card-desc">Where are transit's benefits priced out of reach? OLS regression across 531k King County parcels quantifies the price premium of transit proximity, controlling for spatial autocorrelation via lag terms. Spatial joins link parcel records to GTFS stop distances, walk-score buffers, and zoning overlays. The output maps where affordability gaps widen most relative to access — actionable for where to target upzoning, density bonuses, or below-market unit requirements.</p>
+        <p class="work-card-desc">Where are transit's benefits priced out of reach? OLS regression across 531k King County parcels quantifies the price premium of transit proximity, controlling for spatial autocorrelation via lag terms. Spatial joins link parcel records to GTFS stop distances, walk-score buffers, and zoning overlays. The output maps where affordability gaps widen most relative to access, actionable for targeting upzoning, density bonuses, or below-market unit requirements.</p>
         <div class="outcome-chips">
           <span>531k parcels · OLS R²=0.50</span>
           <span>Spatial lag controls</span>
@@ -123,7 +123,7 @@
       <div class="work-card">
         <div class="work-card-label">Safety Infrastructure · Budget Prioritization</div>
         <h3 class="work-card-title">Automated Collision Risk Pipeline</h3>
-        <p class="work-card-desc">Which intersections should get the next dollar of safety infrastructure? This CLI pipeline ingests raw SDOT collision records, applies DBSCAN to identify and rank high-injury clusters, and outputs tiered risk scores for capital prioritization. Built to rerun automatically as new crash data drops — making infrastructure investment decisions systematic rather than reactive.</p>
+        <p class="work-card-desc">Which intersections should get the next dollar of safety infrastructure? This CLI pipeline ingests raw SDOT collision records, applies DBSCAN to identify and rank high-injury clusters, and outputs tiered risk scores for capital prioritization. Built to rerun automatically as new crash data drops, making infrastructure investment decisions systematic rather than reactive.</p>
         <div class="outcome-chips">
           <span>303 clusters identified</span>
           <span>Automated CLI pipeline</span>
@@ -134,7 +134,7 @@
       <div class="work-card">
         <div class="work-card-label">Transportation Energy · Network Optimization</div>
         <h3 class="work-card-title">Hydrogen Corridor Routing & Infrastructure Gap Analysis</h3>
-        <p class="work-card-desc">Which route minimizes fuel — and where do coverage gaps in the refueling network expose that route to range risk? Energy-weighted Dijkstra on the real OSM road network (SRTM terrain, NREL station data) finds the flat I-880 corridor uses 18.8% less H₂ than the shorter Niles Canyon route. Infrastructure gap analysis with spatial constraints (grade ≤ 5%, spacing ≥ 10 mi) identifies where new stations close coverage without over-building.</p>
+        <p class="work-card-desc">Which route minimizes fuel, and where do coverage gaps in the refueling network expose that route to range risk? Energy-weighted Dijkstra on the real OSM road network (SRTM terrain, NREL station data) finds the flat I-880 corridor uses 18.8% less H₂ than the shorter Niles Canyon route. Infrastructure gap analysis with spatial constraints (grade ≤ 5%, spacing ≥ 10 mi) identifies where new stations close coverage without over-building.</p>
         <div class="outcome-chips">
           <span>18.8% H₂ savings</span>
           <span>NREL coverage analysis</span>
@@ -149,7 +149,7 @@
       <div class="work-card">
         <div class="work-card-label">Supply Chain · Inventory Optimization</div>
         <h3 class="work-card-title">Demand Forecasting & Safety Stock Optimization</h3>
-        <p class="work-card-desc">How much inventory do you hold, and when do you reorder? Prophet time-series model captures event-driven demand seasonality and promotional spikes; safety stock thresholds recalculate dynamically as forecasts shift rather than sitting at a static reorder point. 31% fewer stockouts vs. a fixed-threshold baseline on held-out test data — a direct reduction in lost-sale cost without proportional increases in carrying cost.</p>
+        <p class="work-card-desc">How much inventory do you hold, and when do you reorder? Prophet time-series model captures event-driven demand seasonality and promotional spikes; safety stock thresholds recalculate dynamically as forecasts shift rather than sitting at a static reorder point. 31% fewer stockouts vs. a fixed-threshold baseline on held-out test data, a direct reduction in lost-sale cost without proportional increases in carrying cost.</p>
         <div class="outcome-chips">
           <span>8.4% MAPE</span>
           <span>31% fewer stockouts</span>
@@ -200,7 +200,7 @@
     <div class="map-intro-inner">
       <span class="section-label">Live Analytics Dashboard</span>
       <h2 class="map-intro-title">Explore the Data</h2>
-      <p class="map-intro-sub">Capital, housing value, wages, and climate exposure all concentrate in geographic patterns that shape where people and businesses invest. Four national-scale analyses — each asking where a macroeconomic or environmental outcome clusters in space. Scroll to navigate.</p>
+      <p class="map-intro-sub">Capital, housing value, wages, and climate exposure all concentrate in geographic patterns that shape where people and businesses invest. Four national-scale analyses, each asking where a macroeconomic or environmental outcome clusters in space. Scroll to navigate.</p>
       <div class="map-intro-arrow">↓</div>
     </div>
   </section>
@@ -215,25 +215,25 @@
         <div class="chapter-card glass-panel" data-chapter="financial-flows">
           <div class="chapter-num">01 / 04</div>
           <h2 class="chapter-title">Financial Flows</h2>
-          <p class="chapter-desc">Which cities attract capital — and which export it? Directional arcs map intermetro flows between major US financial hubs; arc weight reflects transaction volume. The network structure reveals which cities are capital sinks and which depend on external financial supply.</p>
+          <p class="chapter-desc">Which cities attract capital, and which export it? Directional arcs map intermetro flows between major US financial hubs; arc weight reflects transaction volume. The network structure reveals which cities are capital sinks and which depend on external financial supply.</p>
           <div class="chapter-stats"></div>
         </div>
         <div class="chapter-card glass-panel" data-chapter="real-estate">
           <div class="chapter-num">02 / 04</div>
           <h2 class="chapter-title">Real Estate Markets</h2>
-          <p class="chapter-desc">Where are housing markets heating up — and do appreciating markets cluster spatially? County-level YoY appreciation rates reveal regional co-movement: Sun Belt markets moving together, coastal markets diverging from inland. Heat intensity reflects rate of change, not price level.</p>
+          <p class="chapter-desc">Where are housing markets heating up, and do appreciating markets cluster spatially? County-level YoY appreciation rates reveal regional co-movement: Sun Belt markets moving together, coastal markets diverging from inland. Heat intensity reflects rate of change, not price level.</p>
           <div class="chapter-stats"></div>
         </div>
         <div class="chapter-card glass-panel" data-chapter="labor-markets">
           <div class="chapter-num">03 / 04</div>
           <h2 class="chapter-title">Labor Markets</h2>
-          <p class="chapter-desc">Where does high-wage work concentrate — and does it track with employment scale? Circle size reflects metro employment; color encodes median wages. The pattern shows the geographic concentration of economic opportunity and the gap between coastal metros and the interior.</p>
+          <p class="chapter-desc">Where does high-wage work concentrate, and does it track with employment scale? Circle size reflects metro employment; color encodes median wages. The pattern shows the geographic concentration of economic opportunity and the gap between coastal metros and the interior.</p>
           <div class="chapter-stats"></div>
         </div>
         <div class="chapter-card glass-panel" data-chapter="risk-index">
           <div class="chapter-num">04 / 04</div>
           <h2 class="chapter-title">Climate Risk Index</h2>
-          <p class="chapter-desc">Which counties face compounding climate risk — and does vulnerability cluster geographically? K-Means on FEMA NRI composite scores (hazard × exposure × resilience) produces five risk tiers at county resolution, averaged to the state level to surface regional patterns that county-level noise obscures.</p>
+          <p class="chapter-desc">Which counties face compounding climate risk, and does vulnerability cluster geographically? K-Means on FEMA NRI composite scores (hazard × exposure × resilience) produces five risk tiers at county resolution, averaged to the state level to surface regional patterns that county-level noise obscures.</p>
           <div class="chapter-stats"></div>
         </div>
       </div>

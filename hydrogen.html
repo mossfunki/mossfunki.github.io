@@ -189,19 +189,19 @@
 
     <div class="metric-strip" id="metric-strip">
       <div class="metric-item">
-        <div class="metric-value" id="m-nodes">—</div>
+        <div class="metric-value" id="m-nodes">...</div>
         <div class="metric-label">Road Network Nodes</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value" id="m-stations">—</div>
+        <div class="metric-value" id="m-stations">...</div>
         <div class="metric-label">CA H₂ Stations (NREL)</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value" id="m-savings">—</div>
+        <div class="metric-value" id="m-savings">...</div>
         <div class="metric-label">H₂ Savings vs. Shortest</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value" id="m-gap">—</div>
+        <div class="metric-value" id="m-gap">...</div>
         <div class="metric-label">Max Gap from Station</div>
       </div>
     </div>
@@ -222,7 +222,7 @@
   <section class="content-section">
     <span class="section-label">Interactive Map</span>
     <h2 class="section-title">Corridor Overview</h2>
-    <p class="section-desc">Energy-optimal route via I-880 (orange) vs. shortest-distance route via Niles Canyon (gray). Green circles are real NREL-reported H₂ stations. The two routes are nearly the same distance — the difference is entirely terrain. Dashed blue markers show where each route passes within range of a station.</p>
+    <p class="section-desc">Energy-optimal route via I-880 (orange) vs. shortest-distance route via Niles Canyon (gray). Green circles are real NREL-reported H₂ stations. The two routes are nearly the same distance. The difference is entirely terrain. Dashed blue markers show where each route passes within range of a station.</p>
     <div class="map-embed">
       <iframe src="/hydrogen/map.html" title="Hydrogen Corridor Map" loading="lazy"></iframe>
     </div>
@@ -232,10 +232,10 @@
   <section class="content-section">
     <div class="two-col">
       <div class="two-col-text">
-        <span class="section-label">Part 1 — Energy-Optimal Routing</span>
+        <span class="section-label">Part 1: Energy-Optimal Routing</span>
         <h2 class="section-title">Dijkstra's on Energy Cost</h2>
         <p>The road network is fetched from OpenStreetMap via OSMnx, filtered to major roads (motorway, trunk, primary, secondary). Each node gets an SRTM elevation from the Open-Elevation API; edge grades are computed from adjacent node elevation differences.</p>
-        <p>Edge weights: <code>weight = (dist_miles + elev_gain_m / 25) × H₂_kg_per_mile</code>. NetworkX Dijkstra finds the minimum-energy path. The two routes cover nearly the same distance (43.8 mi vs. 43.7 mi) — but the Niles Canyon route climbs 302m vs. just 43m on I-880.</p>
+        <p>Edge weights: <code>weight = (dist_miles + elev_gain_m / 25) × H₂_kg_per_mile</code>. NetworkX Dijkstra finds the minimum-energy path. The two routes cover nearly the same distance (43.8 mi vs. 43.7 mi). The Niles Canyon route climbs 302m vs. just 43m on I-880.</p>
         <p>Result: the energy-optimal route consumes 18.8% less hydrogen despite being the same length. Flat terrain beats shorter distance when the grade penalty is steep enough.</p>
       </div>
       <div class="chart-wrap">
@@ -246,9 +246,9 @@
 
   <!-- ELEVATION PROFILE -->
   <section class="content-section">
-    <span class="section-label">Part 1b — Terrain Analysis</span>
+    <span class="section-label">Part 1b: Terrain Analysis</span>
     <h2 class="section-title">SRTM Elevation Profile</h2>
-    <p class="section-desc">Elevation profiles for both routes overlaid. The orange line (I-880, energy-optimal) hugs sea level at 10–30m for the full 43.7 miles. The gray dashed line (Niles Canyon, shortest-distance) climbs through the East Bay Hills to a 330m peak before descending to Fremont — adding 302m of effective uphill work that directly translates to extra hydrogen consumption.</p>
+    <p class="section-desc">Elevation profiles for both routes overlaid. The orange line (I-880, energy-optimal) hugs sea level at 10–30m for the full 43.7 miles. The gray dashed line (Niles Canyon, shortest-distance) climbs through the East Bay Hills to a 330m peak before descending to Fremont, adding 302m of effective uphill work that directly translates to extra hydrogen consumption.</p>
     <div class="chart-wrap">
       <img src="/hydrogen/elevation-profile.svg" alt="Elevation profile along energy-optimal route" />
     </div>
@@ -261,10 +261,10 @@
         <img src="/hydrogen/coverage-analysis.svg" alt="Along-route H₂ infrastructure coverage" />
       </div>
       <div class="two-col-text">
-        <span class="section-label">Part 2 — Infrastructure Coverage</span>
+        <span class="section-label">Part 2: Infrastructure Coverage</span>
         <h2 class="section-title">Coverage Gap Analysis</h2>
-        <p>Operational H₂ stations are pulled from the NREL Alternative Fuels Station Locator API — real stations, not synthetic data. 7 stations appear in the Bay Area corridor (True Zero network + Shell). The route is sampled every 500m and the distance to the nearest station is computed in EPSG:3310 (California Albers).</p>
-        <p>At a 30-mile conservative threshold (appropriate for hydrogen buses in hilly terrain), the Bay Area portion of this corridor is fully covered — the True Zero network provides continuous coverage. This is actually a meaningful finding: the corridor is infrastructure-ready for hydrogen fleet deployment today.</p>
+        <p>Operational H₂ stations are pulled from the NREL Alternative Fuels Station Locator API (real stations, not synthetic data). 7 stations appear in the Bay Area corridor (True Zero network + Shell). The route is sampled every 500m and the distance to the nearest station is computed in EPSG:3310 (California Albers).</p>
+        <p>At a 30-mile conservative threshold (appropriate for hydrogen buses in hilly terrain), the Bay Area portion of this corridor is fully covered. The True Zero network provides continuous coverage. This is actually a meaningful finding: the corridor is infrastructure-ready for hydrogen fleet deployment today.</p>
         <p>Dotted green lines show where each station projects onto the route. The chart structure generalizes to any corridor where coverage gaps would emerge.</p>
       </div>
     </div>
@@ -272,9 +272,9 @@
 
   <!-- FINDINGS GRID -->
   <section class="content-section">
-    <span class="section-label">Part 3 — Optimal Siting</span>
+    <span class="section-label">Part 3: Optimal Siting</span>
     <h2 class="section-title">Infrastructure Placement Under Spatial Constraints</h2>
-    <p class="section-desc">Candidate new station sites are placed at midpoints of coverage gap segments. Candidates are filtered by two spatial constraints — road grade ≤ 5% (flat terrain lowers construction cost and improves heavy-vehicle access) and minimum 10-mile inter-site spacing. The Bay Area corridor at a 30-mile threshold shows no gaps; the siting algorithm is designed to trigger on longer or underserved corridors where gaps do exist.</p>
+    <p class="section-desc">Candidate new station sites are placed at midpoints of coverage gap segments. Candidates are filtered by two spatial constraints: road grade ≤ 5% (flat terrain lowers construction cost and improves heavy-vehicle access) and minimum 10-mile inter-site spacing. The Bay Area corridor at a 30-mile threshold shows no gaps; the siting algorithm is designed to trigger on longer or underserved corridors where gaps do exist.</p>
 
     <div class="findings-grid">
       <div class="finding-card">
@@ -290,7 +290,7 @@
       <div class="finding-card">
         <div class="finding-card-label">Bay Area finding</div>
         <div class="finding-card-value">Covered</div>
-        <div class="finding-card-desc">At a 30-mile conservative threshold, the Bay Area I-880 corridor is fully served by existing stations. No new siting required — corridor is infrastructure-ready.</div>
+        <div class="finding-card-desc">At a 30-mile conservative threshold, the Bay Area I-880 corridor is fully served by existing stations. No new siting required. Corridor is infrastructure-ready.</div>
       </div>
       <div class="finding-card">
         <div class="finding-card-label">Data source</div>
@@ -326,35 +326,35 @@
       <div class="method-step">
         <span class="step-num">01</span>
         <div class="step-content">
-          <h4>Road Network — OpenStreetMap via OSMnx</h4>
+          <h4>Road Network: OpenStreetMap via OSMnx</h4>
           <p>Fetches the drivable road network within the Oakland–San Jose bounding box, filtered to major road types via <code>["highway"~"motorway|trunk|primary|secondary|..."]</code>. Graph is simplified to merge parallel edges and remove intermediate degree-2 nodes.</p>
         </div>
       </div>
       <div class="method-step">
         <span class="step-num">02</span>
         <div class="step-content">
-          <h4>Terrain Elevation — NASA SRTM via Open-Elevation API</h4>
-          <p>Batch-queries SRTM 30m elevation data for every node in the graph. SRTM (Shuttle Radar Topography Mission, NASA 2000) provides near-global terrain coverage at 30m resolution — a real remote sensing product. Edge grades are computed from adjacent node elevation differences.</p>
+          <h4>Terrain Elevation: NASA SRTM via Open-Elevation API</h4>
+          <p>Batch-queries SRTM 30m elevation data for every node in the graph. SRTM (Shuttle Radar Topography Mission, NASA 2000) provides near-global terrain coverage at 30m resolution, a real remote sensing product. Edge grades are computed from adjacent node elevation differences.</p>
         </div>
       </div>
       <div class="method-step">
         <span class="step-num">03</span>
         <div class="step-content">
-          <h4>Energy-Weighted Routing — NetworkX Dijkstra</h4>
+          <h4>Energy-Weighted Routing: NetworkX Dijkstra</h4>
           <p>Each edge gets <code>energy_cost = (dist_miles + elev_gain_m / 25) × (1/60)</code>. The 25m constant comes from empirical H₂ vehicle efficiency data: 25m elevation gain ≈ 1 extra effective mile of consumption. NetworkX finds the shortest path on this energy graph.</p>
         </div>
       </div>
       <div class="method-step">
         <span class="step-num">04</span>
         <div class="step-content">
-          <h4>Station Coverage — NREL Alternative Fuels Station API</h4>
-          <p>Pulls all operational (<code>status=E</code>) hydrogen (<code>fuel_type=HY</code>) stations in California. The route is sampled every 500m and for each sample point the distance to the nearest station is computed in projected EPSG:3310 (California Albers). Coverage threshold: 30 miles — conservative for heavy vehicles on varied terrain.</p>
+          <h4>Station Coverage: NREL Alternative Fuels Station API</h4>
+          <p>Pulls all operational (<code>status=E</code>) hydrogen (<code>fuel_type=HY</code>) stations in California. The route is sampled every 500m and for each sample point the distance to the nearest station is computed in projected EPSG:3310 (California Albers). Coverage threshold: 30 miles (conservative for heavy vehicles on varied terrain). </p>
         </div>
       </div>
       <div class="method-step">
         <span class="step-num">05</span>
         <div class="step-content">
-          <h4>Optimal Siting — Spatial Constraints</h4>
+          <h4>Optimal Siting: Spatial Constraints</h4>
           <p>Contiguous gap segments are identified and midpoints become candidate sites. Grade at each candidate is computed from incident edge <code>grade_abs</code> values from the OSM graph. Candidates failing grade &gt; 5% or spacing &lt; 10 mi are eliminated. Remaining candidates are ranked by distance from nearest existing station.</p>
         </div>
       </div>
@@ -383,11 +383,11 @@
     fetch('/hydrogen/summary.json')
       .then(r => r.json())
       .then(s => {
-        document.getElementById('m-nodes').textContent     = s.nodes ? s.nodes.toLocaleString() : '—';
-        document.getElementById('m-stations').textContent  = s.stations_ca ? s.stations_ca.toLocaleString() : '—';
-        document.getElementById('m-savings').textContent   = s.h2_savings_pct != null ? s.h2_savings_pct + '%' : '—';
-        document.getElementById('m-gap').textContent       = s.max_gap_mi != null ? s.max_gap_mi.toFixed(1) + ' mi' : '—';
-        document.getElementById('m-sites').textContent     = s.new_sites != null ? s.new_sites.toString() : '—';
+        document.getElementById('m-nodes').textContent     = s.nodes ? s.nodes.toLocaleString() : '...';
+        document.getElementById('m-stations').textContent  = s.stations_ca ? s.stations_ca.toLocaleString() : '...';
+        document.getElementById('m-savings').textContent   = s.h2_savings_pct != null ? s.h2_savings_pct + '%' : '...';
+        document.getElementById('m-gap').textContent       = s.max_gap_mi != null ? s.max_gap_mi.toFixed(1) + ' mi' : '...';
+        document.getElementById('m-sites').textContent     = s.new_sites != null ? s.new_sites.toString() : '...';
       })
       .catch(() => {
         // Leave placeholder dashes if not yet available
