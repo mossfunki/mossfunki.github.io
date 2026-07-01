@@ -103,13 +103,13 @@
     <div class="section-header">
       <span class="section-label">Featured Work</span>
       <h2 class="section-title">Spatial Modeling & Analytics</h2>
-      <p class="section-subtitle">End-to-end pipelines. Real open data. Economic reasoning behind every model.</p>
+      <p class="section-subtitle">Each project answers a resource allocation question through spatial analysis — where to invest in housing, how to rank infrastructure risk, which route minimizes fuel cost, when and how much to reorder. Economics frames the constraint; spatial analysis finds where the answer lives.</p>
     </div>
     <div class="work-grid">
       <div class="work-card work-card--primary">
-        <div class="work-card-label">Spatial Econometrics · King County Open Data <span class="badge">Seattle</span></div>
+        <div class="work-card-label">Housing Economics · Investment Allocation <span class="badge">Seattle</span></div>
         <h3 class="work-card-title">Transit-Oriented Development & Affordability Model</h3>
-        <p class="work-card-desc">Regression model quantifying the price premium of proximity to transit across 531k King County parcels. Spatial joins link parcel records to GTFS stop distances, walk-score buffers, and zoning overlays. OLS with spatial lag controls for neighborhood autocorrelation. Identifies where affordability gaps are widest relative to transit access — actionable for planners and housing policy.</p>
+        <p class="work-card-desc">Where are transit's benefits priced out of reach? OLS regression across 531k King County parcels quantifies the price premium of transit proximity, controlling for spatial autocorrelation via lag terms. Spatial joins link parcel records to GTFS stop distances, walk-score buffers, and zoning overlays. The output maps where affordability gaps widen most relative to access — actionable for where to target upzoning, density bonuses, or below-market unit requirements.</p>
         <div class="outcome-chips">
           <span>531k parcels · OLS R²=0.50</span>
           <span>Spatial lag controls</span>
@@ -121,9 +121,9 @@
         </div>
       </div>
       <div class="work-card">
-        <div class="work-card-label">Risk Classification · SDOT Open Data</div>
+        <div class="work-card-label">Safety Infrastructure · Budget Prioritization</div>
         <h3 class="work-card-title">Automated Collision Risk Pipeline</h3>
-        <p class="work-card-desc">CLI-based Python pipeline that ingests raw collision records, applies DBSCAN clustering to isolate high-injury network concentrations, and outputs ranked risk tiers for infrastructure prioritization. Built to rerun automatically as new data drops — no manual steps.</p>
+        <p class="work-card-desc">Which intersections should get the next dollar of safety infrastructure? This CLI pipeline ingests raw SDOT collision records, applies DBSCAN to identify and rank high-injury clusters, and outputs tiered risk scores for capital prioritization. Built to rerun automatically as new crash data drops — making infrastructure investment decisions systematic rather than reactive.</p>
         <div class="outcome-chips">
           <span>303 clusters identified</span>
           <span>Automated CLI pipeline</span>
@@ -132,22 +132,12 @@
         <div class="work-card-tags">Python · scikit-learn · DBSCAN · GeoPandas · Click</div>
       </div>
       <div class="work-card">
-        <div class="work-card-label">Predictive Modeling · Forecasting</div>
-        <h3 class="work-card-title">Demand Forecasting & Inventory Optimization</h3>
-        <p class="work-card-desc">Prophet time-series model on event-driven demand with dynamic safety stock recalculation. Captures seasonality and promotional spikes; 31% fewer simulated stockouts vs. static reorder baseline on held-out test data.</p>
-        <div class="outcome-chips">
-          <span>8.4% MAPE</span>
-          <span>31% fewer stockouts</span>
-        </div>
-        <div class="work-card-tags">Python · Prophet · XGBoost · pandas · Streamlit</div>
-      </div>
-      <div class="work-card">
-        <div class="work-card-label">Transportation Energy · OSMnx · NREL · SRTM</div>
+        <div class="work-card-label">Transportation Energy · Network Optimization</div>
         <h3 class="work-card-title">Hydrogen Corridor Routing & Infrastructure Gap Analysis</h3>
-        <p class="work-card-desc">GIS workflow for energy-optimal routing and infrastructure siting along the Oakland–San Jose hydrogen corridor. Downloads the real OSM road network, augments edges with NASA SRTM elevation (remote sensing), and finds an energy-cost-weighted shortest path via NetworkX. Fetches operational H₂ station locations from the NREL Alternative Fuels API, computes along-route coverage gaps at 500m intervals, then identifies optimal new station locations filtered by spatial constraints: road grade ≤ 5%, minimum 10-mile inter-site spacing.</p>
+        <p class="work-card-desc">Which route minimizes fuel — and where do coverage gaps in the refueling network expose that route to range risk? Energy-weighted Dijkstra on the real OSM road network (SRTM terrain, NREL station data) finds the flat I-880 corridor uses 18.8% less H₂ than the shorter Niles Canyon route. Infrastructure gap analysis with spatial constraints (grade ≤ 5%, spacing ≥ 10 mi) identifies where new stations close coverage without over-building.</p>
         <div class="outcome-chips">
-          <span>Real OSM road network</span>
-          <span>NREL H₂ station coverage</span>
+          <span>18.8% H₂ savings</span>
+          <span>NREL coverage analysis</span>
           <span>Grade-constrained siting</span>
         </div>
         <div class="work-card-tags">Python · OSMnx · NetworkX · GeoPandas · NREL API · SRTM · Folium</div>
@@ -155,6 +145,17 @@
           <a href="/hydrogen.html" class="btn-primary">View Analysis →</a>
           <a href="https://github.com/mossfunki" class="btn-secondary" target="_blank" rel="noopener">GitHub</a>
         </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-label">Supply Chain · Inventory Optimization</div>
+        <h3 class="work-card-title">Demand Forecasting & Safety Stock Optimization</h3>
+        <p class="work-card-desc">How much inventory do you hold, and when do you reorder? Prophet time-series model captures event-driven demand seasonality and promotional spikes; safety stock thresholds recalculate dynamically as forecasts shift rather than sitting at a static reorder point. 31% fewer stockouts vs. a fixed-threshold baseline on held-out test data — a direct reduction in lost-sale cost without proportional increases in carrying cost.</p>
+        <div class="outcome-chips">
+          <span>8.4% MAPE</span>
+          <span>31% fewer stockouts</span>
+          <span>Dynamic safety stock</span>
+        </div>
+        <div class="work-card-tags">Python · Prophet · XGBoost · pandas · Streamlit</div>
       </div>
     </div>
   </section>
@@ -169,22 +170,22 @@
       <div class="skill-card">
         <div class="skill-icon">▲</div>
         <h3>Spatial Modeling &amp; Analysis</h3>
-        <p>Spatial joins, network analysis, DBSCAN clustering, and regression with spatial lag controls. GeoPandas, PostGIS, ArcGIS Pro. Turns geographic structure into quantitative signal.</p>
+        <p>Spatial joins, network analysis, DBSCAN clustering, regression with spatial lag controls. GeoPandas, PostGIS, OSMnx, ArcGIS Pro. Finds the geographic structure that changes the answer.</p>
       </div>
       <div class="skill-card">
         <div class="skill-icon">■</div>
-        <h3>Data Engineering &amp; Pipelines</h3>
-        <p>Automated ingestion, cleaning, and processing pipelines in Python. CLI tools, GitHub Actions workflows, PostgreSQL/PostGIS. Builds systems that run without babysitting.</p>
+        <h3>Optimization &amp; Operations</h3>
+        <p>Energy-weighted routing, coverage gap analysis, safety stock recalculation, infrastructure siting under spatial constraints. Builds models that output a ranked decision, not just a chart.</p>
       </div>
       <div class="skill-card">
         <div class="skill-icon">●</div>
-        <h3>Predictive Modeling</h3>
-        <p>Regression, time-series forecasting, Random Forest, SHAP interpretation. scikit-learn, statsmodels, Prophet. Focused on decisions and resource allocation, not just model accuracy.</p>
+        <h3>Data Engineering &amp; Pipelines</h3>
+        <p>Automated ingestion, cleaning, and processing in Python. CLI tools, GitHub Actions, PostgreSQL/PostGIS. Builds systems that rerun without manual intervention when new data drops.</p>
       </div>
       <div class="skill-card">
         <div class="skill-icon">◆</div>
         <h3>Economics &amp; Domain Reasoning</h3>
-        <p>Quantitative economics, TOD, real estate affordability, energy markets. Brings trade-off and constraint thinking to analytical problems that pure engineers miss.</p>
+        <p>Quantitative economics, TOD, real estate markets, energy pricing, inventory theory. Brings constraint and trade-off thinking to problems that pure engineers model without context.</p>
       </div>
     </div>
     <div class="tools-row">
