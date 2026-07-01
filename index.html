@@ -141,6 +141,21 @@
         </div>
         <div class="work-card-tags">Python · Prophet · XGBoost · pandas · Streamlit</div>
       </div>
+      <div class="work-card">
+        <div class="work-card-label">Transportation Energy · OSMnx · NREL · SRTM</div>
+        <h3 class="work-card-title">Hydrogen Corridor Routing & Infrastructure Gap Analysis</h3>
+        <p class="work-card-desc">GIS workflow for energy-optimal routing and infrastructure siting along the Oakland–San Jose hydrogen corridor. Downloads the real OSM road network, augments edges with NASA SRTM elevation (remote sensing), and finds an energy-cost-weighted shortest path via NetworkX. Fetches operational H₂ station locations from the NREL Alternative Fuels API, computes along-route coverage gaps at 500m intervals, then identifies optimal new station locations filtered by spatial constraints: road grade ≤ 5%, minimum 10-mile inter-site spacing.</p>
+        <div class="outcome-chips">
+          <span>Real OSM road network</span>
+          <span>NREL H₂ station coverage</span>
+          <span>Grade-constrained siting</span>
+        </div>
+        <div class="work-card-tags">Python · OSMnx · NetworkX · GeoPandas · NREL API · SRTM · Folium</div>
+        <div class="work-card-actions">
+          <a href="/hydrogen.html" class="btn-primary">View Analysis →</a>
+          <a href="https://github.com/mossfunki" class="btn-secondary" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -175,7 +190,7 @@
     <div class="tools-row">
       <span>Python</span><span>SQL</span><span>GeoPandas</span><span>PostGIS</span><span>ArcGIS Pro</span>
       <span>scikit-learn</span><span>statsmodels</span><span>Prophet</span><span>pandas</span>
-      <span>GitHub Actions</span><span>D3.js</span><span>Mapbox GL</span>
+      <span>OSMnx</span><span>NetworkX</span><span>GitHub Actions</span><span>D3.js</span><span>Mapbox GL</span>
     </div>
   </section>
 

@@ -1,0 +1,17 @@
+{
+  "nodes": 312,
+  "edges": 847,
+  "stations_ca": 68,
+  "stations_bay": 7,
+  "shortest_mi": 43.77,
+  "optimal_mi": 43.65,
+  "shortest_h2": 0.9309,
+  "optimal_h2": 0.7562,
+  "h2_savings_pct": 18.8,
+  "shortest_elev": 302.0,
+  "optimal_elev": 43.0,
+  "gap_pct": 0.0,
+  "max_gap_mi": 0.0,
+  "new_sites": 0,
+  "new_site_latlons": []
+}
