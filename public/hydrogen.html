@@ -7,21 +7,22 @@
   <meta name="description" content="GIS workflow analyzing energy-optimal routing and hydrogen infrastructure gap analysis for the Oakland–San Jose corridor. Real road network data, SRTM terrain, and NREL H₂ station coverage." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:           #080d1a;
-      --surface:      #0f1629;
-      --panel:        rgba(15,22,41,0.85);
-      --border:       rgba(255,255,255,0.07);
-      --border-glow:  rgba(212,98,42,0.3);
-      --accent:       #d4622a;
-      --amber:        #f59e0b;
-      --green:        #10b981;
-      --red:          #ef4444;
-      --text:         #e2e8f0;
-      --text-muted:   #4a5568;
-      --font-ui:      'Inter', system-ui, sans-serif;
+      --bg:           #1b1e1c;
+      --surface:      #21251f;
+      --panel:        rgba(33,37,31,0.85);
+      --border:       rgba(237,234,226,0.09);
+      --border-glow:  rgba(224,164,88,0.35);
+      --accent:       #e0a458;
+      --amber:        #a85c4a;
+      --green:        #7a9e7e;
+      --red:          #d2624a;
+      --text:         #edeae2;
+      --text-muted:   #9ba096;
+      --font-ui:      'Manrope', system-ui, sans-serif;
+      --font-display: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
       --font-mono:    'JetBrains Mono', monospace;
       --max-w:        960px;
     }
@@ -34,7 +35,7 @@
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      height: 52px; background: rgba(8,13,26,0.88);
+      height: 52px; background: rgba(27,30,28,0.88);
       backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
     }
     .nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
@@ -55,6 +56,7 @@
       margin-bottom: 0.75rem;
     }
     .hero-title {
+      font-family: var(--font-display);
       font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
       letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1rem;
     }
@@ -89,7 +91,7 @@
       letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
       margin-bottom: 0.5rem;
     }
-    .section-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .section-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.6rem; }
     .section-desc { color: var(--text-muted); font-size: 0.92rem; max-width: 720px; line-height: 1.75; margin-bottom: 2rem; }
 
     /* MAP EMBED */
@@ -307,19 +309,19 @@
     <p class="section-desc">End-to-end spatial optimization pipeline. Each step uses real external data sources; the analysis is fully reproducible from the Jupyter notebook.</p>
 
     <div class="pipeline">
-      <span class="pipe-step">OSM Network<br><code style="font-size:0.65rem;color:#f59e0b">OSMnx</code></span>
+      <span class="pipe-step">OSM Network<br><code style="font-size:0.65rem;color:#a85c4a">OSMnx</code></span>
       <span class="pipe-arrow">→</span>
-      <span class="pipe-step">SRTM Elevation<br><code style="font-size:0.65rem;color:#f59e0b">Open-Elevation</code></span>
+      <span class="pipe-step">SRTM Elevation<br><code style="font-size:0.65rem;color:#a85c4a">Open-Elevation</code></span>
       <span class="pipe-arrow">→</span>
-      <span class="pipe-step">Energy Weights<br><code style="font-size:0.65rem;color:#f59e0b">NetworkX</code></span>
+      <span class="pipe-step">Energy Weights<br><code style="font-size:0.65rem;color:#a85c4a">NetworkX</code></span>
       <span class="pipe-arrow">→</span>
-      <span class="pipe-step">Optimal Route<br><code style="font-size:0.65rem;color:#f59e0b">Dijkstra</code></span>
+      <span class="pipe-step">Optimal Route<br><code style="font-size:0.65rem;color:#a85c4a">Dijkstra</code></span>
       <span class="pipe-arrow">→</span>
-      <span class="pipe-step">NREL Stations<br><code style="font-size:0.65rem;color:#f59e0b">REST API</code></span>
+      <span class="pipe-step">NREL Stations<br><code style="font-size:0.65rem;color:#a85c4a">REST API</code></span>
       <span class="pipe-arrow">→</span>
-      <span class="pipe-step">Coverage Gaps<br><code style="font-size:0.65rem;color:#f59e0b">GeoPandas</code></span>
+      <span class="pipe-step">Coverage Gaps<br><code style="font-size:0.65rem;color:#a85c4a">GeoPandas</code></span>
       <span class="pipe-arrow">→</span>
-      <span class="pipe-step">Siting<br><code style="font-size:0.65rem;color:#f59e0b">Constraints</code></span>
+      <span class="pipe-step">Siting<br><code style="font-size:0.65rem;color:#a85c4a">Constraints</code></span>
     </div>
 
     <div class="method-steps">

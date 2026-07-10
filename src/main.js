@@ -158,21 +158,24 @@ ScrollTrigger.create({
   once: true,
   onEnter: () => {
     document.querySelectorAll('.proof-number').forEach(el => {
-      const target = parseInt(el.dataset.target, 10);
+      const target = parseFloat(el.dataset.target);
       const suffix = el.dataset.suffix || '';
+      const decimals = (el.dataset.target.split('.')[1] || '').length;
+      const format = (n) => n.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      });
       gsap.fromTo(el,
         { innerText: 0 },
         {
           innerText: target,
           duration: 1.8,
           ease: 'power2.out',
-          snap: { innerText: 1 },
           onUpdate() {
-            const val = Math.round(parseFloat(this.targets()[0].innerText));
-            el.textContent = val.toLocaleString() + suffix;
+            el.textContent = format(parseFloat(this.targets()[0].innerText)) + suffix;
           },
           onComplete() {
-            el.textContent = target.toLocaleString() + suffix;
+            el.textContent = format(target) + suffix;
           }
         }
       );

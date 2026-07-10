@@ -7,21 +7,23 @@
   <meta name="description" content="Benjamin Lab, Spatial Data Scientist and Economist building geospatial pipelines and econometric models." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #080d1a;
-      --surface: #0f1629;
-      --panel: rgba(15,22,41,0.80);
-      --border: rgba(255,255,255,0.07);
-      --border-glow: rgba(212,98,42,0.3);
-      --accent-cyan: #d4622a;
-      --accent-amber: #f59e0b;
-      --text: #e2e8f0;
-      --text-muted: #4a5568;
-      --text-dim: #2d3748;
-      --success: #10b981;
-      --font-ui: 'Inter', system-ui, sans-serif;
+      --bg: #1b1e1c;
+      --surface: #21251f;
+      --panel: rgba(33,37,31,0.85);
+      --border: rgba(237,234,226,0.09);
+      --border-glow: rgba(224,164,88,0.35);
+      --accent-cyan: #e0a458;
+      --accent-amber: #a85c4a;
+      --accent-sage: #7a9e7e;
+      --text: #edeae2;
+      --text-muted: #9ba096;
+      --text-dim: #565c52;
+      --success: #7a9e7e;
+      --font-ui: 'Manrope', system-ui, sans-serif;
+      --font-display: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --max-w: 900px;
     }
@@ -35,7 +37,7 @@
     nav {
       position: sticky; top: 0; z-index: 100;
       height: 52px;
-      background: rgba(8,13,26,0.88);
+      background: rgba(27,30,28,0.88);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -59,7 +61,7 @@
       display: inline-block; font-family: var(--font-mono); font-size: 0.68rem;
       letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 0.75rem;
     }
-    .page-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
+    .page-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1rem; }
     .page-subtitle { color: var(--text-muted); font-size: 1rem; max-width: 560px; }
 
     /* PORTRAIT */
@@ -69,11 +71,11 @@
     .portrait-img {
       width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: center top;
       border: 2px solid var(--accent-cyan);
-      box-shadow: 0 0 0 6px rgba(212,98,42,0.08), 0 0 40px rgba(212,98,42,0.1);
+      box-shadow: 0 0 0 6px rgba(224,164,88,0.10), 0 0 40px rgba(224,164,88,0.12);
       flex-shrink: 0;
     }
     .portrait-bio { flex: 1; }
-    .portrait-bio h2 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; }
+    .portrait-bio h2 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; }
     .portrait-bio p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.75; }
 
     /* SECTIONS */
@@ -87,7 +89,7 @@
     /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
     .exp-item { display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
-    .exp-role { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .exp-role { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--text); }
     .exp-org { font-size: 0.8rem; color: var(--accent-cyan); font-family: var(--font-mono); }
     .exp-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-top: 0.25rem; }
 
@@ -107,7 +109,7 @@
 
     /* EDUCATION */
     .edu-item { padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
-    .edu-degree { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.2rem; }
+    .edu-degree { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.2rem; }
     .edu-school { font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono); }
 
     /* OUTSIDE THE WORK */
@@ -119,7 +121,7 @@
     .photo-item figcaption {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 0.5rem 0.75rem;
-      background: linear-gradient(transparent, rgba(8,13,26,0.85));
+      background: linear-gradient(transparent, rgba(27,30,28,0.85));
       font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em;
       color: var(--text-muted); text-transform: uppercase;
     }
