@@ -393,7 +393,7 @@ em { font-style: italic; color: var(--accent-cyan); }
   color: var(--accent-cyan);
 }
 .work-card-tags { font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono); }
-.work-card-actions { margin-top: auto; padding-top: 0.5rem; }
+.work-card-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.5rem; }
 
 .work-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
 .work-tab-btn {

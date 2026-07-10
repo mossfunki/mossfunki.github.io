@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0e7dbf474b5777f8d3ae31608129badd {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    <div style="position:fixed;bottom:20px;left:20px;z-index:1000;
+     background:rgba(8,13,26,0.92);padding:14px 18px;border-radius:8px;
+     font-family:monospace;font-size:12px;color:#e2e8f0;line-height:2;
+     border:1px solid rgba(255,255,255,0.08)">
+  <b>Hydrogen Corridor</b><br>
+  <span style="color:#d4622a">━━</span>&nbsp;Energy-optimal (I-880, flat)<br>
+  <span style="color:#6b7280">━━</span>&nbsp;Shortest distance (Niles Canyon)<br>
+  <span style="color:#ef4444">━━</span>&nbsp;Coverage gap (&gt;30 mi from station)<br>
+  <span style="color:#10b981">●</span>&nbsp;Existing H₂ station (NREL)
+</div>
+    
+            <div class="folium-map" id="map_0e7dbf474b5777f8d3ae31608129badd" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0e7dbf474b5777f8d3ae31608129badd = L.map(
+                "map_0e7dbf474b5777f8d3ae31608129badd",
+                {
+                    center: [37.5713, -122.0787],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_1ad00b923e804d6fff221f95c822989e = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1ad00b923e804d6fff221f95c822989e.addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+            var poly_line_182d8babdfc6b419c633d4d455ef7074 = L.polyline(
+                [[37.8044, -122.2711], [37.79, -122.23], [37.76, -122.18], [37.74, -122.12], [37.71, -122.08], [37.68, -122.03], [37.65, -122.0], [37.62, -121.97], [37.59, -121.95], [37.56, -121.96], [37.533, -122.003], [37.5, -121.97], [37.46, -121.95], [37.42, -121.92], [37.39, -121.9], [37.3382, -121.8863]],
+                {"bubblingMouseEvents": true, "color": "#6b7280", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#6b7280", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.65, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+            poly_line_182d8babdfc6b419c633d4d455ef7074.bindTooltip(
+                `<div>
+                     Shortest Distance (Niles Canyon — hilly)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_bdc2fec0fe912c556904d816db104737 = L.polyline(
+                [[37.8044, -122.2711], [37.785, -122.25], [37.765, -122.22], [37.745, -122.19], [37.72, -122.16], [37.7, -122.13], [37.68, -122.1], [37.6688, -122.0808], [37.65, -122.07], [37.62, -122.065], [37.5953, -122.06], [37.57, -122.04], [37.55, -122.02], [37.533, -122.003], [37.51, -121.98], [37.49, -121.96], [37.47, -121.95], [37.44, -121.93], [37.41, -121.91], [37.383, -121.9673], [37.3618, -121.9288], [37.3382, -121.8863]],
+                {"bubblingMouseEvents": true, "color": "#d4622a", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#d4622a", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+            poly_line_bdc2fec0fe912c556904d816db104737.bindTooltip(
+                `<div>
+                     Energy-Optimal Route (I-880 — flat bay corridor)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_269256be24bf0f6f2932d47922af8d8d = L.circleMarker(
+                [37.7519, -122.2001],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_ba531c5dc1d306b584c4c584e23adf54 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ffa1642eb825df4bf7ed0ccc7c3496a6 = $(`<div id="html_ffa1642eb825df4bf7ed0ccc7c3496a6" style="width: 100.0%; height: 100.0%;"><b>Shell Oakland (Coliseum)</b><br>Oakland</div>`)[0];
+                popup_ba531c5dc1d306b584c4c584e23adf54.setContent(html_ffa1642eb825df4bf7ed0ccc7c3496a6);
+            
+        
+
+        circle_marker_269256be24bf0f6f2932d47922af8d8d.bindPopup(popup_ba531c5dc1d306b584c4c584e23adf54)
+        ;
+
+        
+    
+    
+            circle_marker_269256be24bf0f6f2932d47922af8d8d.bindTooltip(
+                `<div>
+                     Shell Oakland (Coliseum)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_197d8ccaa96cb3d1f07bc0cf5f603cdc = L.circleMarker(
+                [37.6688, -122.0808],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_3a5fea31114ac9c9fbcd1518d878d4d7 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c19acfcee5f620940bf55a2d128c2686 = $(`<div id="html_c19acfcee5f620940bf55a2d128c2686" style="width: 100.0%; height: 100.0%;"><b>True Zero Hayward</b><br>Hayward</div>`)[0];
+                popup_3a5fea31114ac9c9fbcd1518d878d4d7.setContent(html_c19acfcee5f620940bf55a2d128c2686);
+            
+        
+
+        circle_marker_197d8ccaa96cb3d1f07bc0cf5f603cdc.bindPopup(popup_3a5fea31114ac9c9fbcd1518d878d4d7)
+        ;
+
+        
+    
+    
+            circle_marker_197d8ccaa96cb3d1f07bc0cf5f603cdc.bindTooltip(
+                `<div>
+                     True Zero Hayward
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a738c2c490007b541ffb398970530c4a = L.circleMarker(
+                [37.5953, -122.06],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_d0b32a859308b264a4caa9dd554adc6b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8854eade6a4d60db051066f8ae5346c5 = $(`<div id="html_8854eade6a4d60db051066f8ae5346c5" style="width: 100.0%; height: 100.0%;"><b>True Zero Union City</b><br>Union City</div>`)[0];
+                popup_d0b32a859308b264a4caa9dd554adc6b.setContent(html_8854eade6a4d60db051066f8ae5346c5);
+            
+        
+
+        circle_marker_a738c2c490007b541ffb398970530c4a.bindPopup(popup_d0b32a859308b264a4caa9dd554adc6b)
+        ;
+
+        
+    
+    
+            circle_marker_a738c2c490007b541ffb398970530c4a.bindTooltip(
+                `<div>
+                     True Zero Union City
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_35645c027fd022e5b5c2396551a29540 = L.circleMarker(
+                [37.533, -122.003],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_ff84eb422fae6676b90d958abc1f6e94 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_43c47be5c44487b6a8e2d3265e1ec20e = $(`<div id="html_43c47be5c44487b6a8e2d3265e1ec20e" style="width: 100.0%; height: 100.0%;"><b>True Zero Fremont</b><br>Fremont</div>`)[0];
+                popup_ff84eb422fae6676b90d958abc1f6e94.setContent(html_43c47be5c44487b6a8e2d3265e1ec20e);
+            
+        
+
+        circle_marker_35645c027fd022e5b5c2396551a29540.bindPopup(popup_ff84eb422fae6676b90d958abc1f6e94)
+        ;
+
+        
+    
+    
+            circle_marker_35645c027fd022e5b5c2396551a29540.bindTooltip(
+                `<div>
+                     True Zero Fremont
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f62891d391ddb660d7918537dafa5f3f = L.circleMarker(
+                [37.3713, -122.0341],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_41ed327e9c09c1141b44b2265d8e1386 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_6b6f5baca1e84065b55a8c5aa172870f = $(`<div id="html_6b6f5baca1e84065b55a8c5aa172870f" style="width: 100.0%; height: 100.0%;"><b>True Zero Sunnyvale</b><br>Sunnyvale</div>`)[0];
+                popup_41ed327e9c09c1141b44b2265d8e1386.setContent(html_6b6f5baca1e84065b55a8c5aa172870f);
+            
+        
+
+        circle_marker_f62891d391ddb660d7918537dafa5f3f.bindPopup(popup_41ed327e9c09c1141b44b2265d8e1386)
+        ;
+
+        
+    
+    
+            circle_marker_f62891d391ddb660d7918537dafa5f3f.bindTooltip(
+                `<div>
+                     True Zero Sunnyvale
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8859da092b0b7a419ba5d29d925ce6cf = L.circleMarker(
+                [37.3618, -121.9288],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_c152fda460ab25916a13befdecb8e9ee = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_211acaf5857926117e3421266737ce36 = $(`<div id="html_211acaf5857926117e3421266737ce36" style="width: 100.0%; height: 100.0%;"><b>True Zero San Jose (1)</b><br>San Jose</div>`)[0];
+                popup_c152fda460ab25916a13befdecb8e9ee.setContent(html_211acaf5857926117e3421266737ce36);
+            
+        
+
+        circle_marker_8859da092b0b7a419ba5d29d925ce6cf.bindPopup(popup_c152fda460ab25916a13befdecb8e9ee)
+        ;
+
+        
+    
+    
+            circle_marker_8859da092b0b7a419ba5d29d925ce6cf.bindTooltip(
+                `<div>
+                     True Zero San Jose (1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2dcae86e8ee323428843a36ae5904976 = L.circleMarker(
+                [37.383, -121.9673],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+        var popup_0524738d2c821a5c044e17462ec0e98f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_91f0a98e1d47606f30901e2c82b17386 = $(`<div id="html_91f0a98e1d47606f30901e2c82b17386" style="width: 100.0%; height: 100.0%;"><b>True Zero San Jose (2)</b><br>San Jose</div>`)[0];
+                popup_0524738d2c821a5c044e17462ec0e98f.setContent(html_91f0a98e1d47606f30901e2c82b17386);
+            
+        
+
+        circle_marker_2dcae86e8ee323428843a36ae5904976.bindPopup(popup_0524738d2c821a5c044e17462ec0e98f)
+        ;
+
+        
+    
+    
+            circle_marker_2dcae86e8ee323428843a36ae5904976.bindTooltip(
+                `<div>
+                     True Zero San Jose (2)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0b95d3efb25ae7f2bb8504ff1edf914a = L.circleMarker(
+                [37.8044, -122.2711],
+                {"bubblingMouseEvents": true, "color": "#e2e8f0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e2e8f0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+            circle_marker_0b95d3efb25ae7f2bb8504ff1edf914a.bindTooltip(
+                `<div>
+                     Oakland (Origin)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05224c7a25396aad4c91ca15630bd101 = L.circleMarker(
+                [37.3382, -121.8863],
+                {"bubblingMouseEvents": true, "color": "#e2e8f0", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e2e8f0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_0e7dbf474b5777f8d3ae31608129badd);
+        
+    
+            circle_marker_05224c7a25396aad4c91ca15630bd101.bindTooltip(
+                `<div>
+                     San Jose (Destination)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
