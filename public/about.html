@@ -123,6 +123,11 @@
       font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em;
       color: var(--text-muted); text-transform: uppercase;
     }
+    .about-section--quiet h2 { font-size: 0.72rem; color: var(--text-muted); border-bottom-color: transparent; opacity: 0.75; }
+    .about-section--quiet .blurb { font-size: 0.8rem; max-width: 480px; }
+    .photo-strip { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .photo-strip .photo-item { width: 110px; flex-shrink: 0; }
+    .photo-strip .photo-item img { height: 90px; }
 
     /* FOOTER */
     footer { background: var(--surface); border-top: 1px solid var(--border); padding: 2rem; }
@@ -148,6 +153,7 @@
         <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:benjaminmonroelab@gmail.com">Contact</a>
         <a href="/about.html" class="active">About</a>
+        <a href="/resume.html" target="_blank" rel="noopener">Resume</a>
       </div>
     </div>
   </nav>
@@ -228,10 +234,10 @@
       </div>
     </div>
 
-    <div class="about-section">
+    <div class="about-section about-section--quiet">
       <h2>Outside the work</h2>
       <p class="blurb">When I'm not at a desk, I'm usually outside: road biking, backpacking, rock climbing, or on the water. The PNW and California coastline are hard to beat.</p>
-      <div class="photo-grid">
+      <div class="photo-strip">
         <figure class="photo-item">
           <img src="/IMG_3849.png" alt="Hiking by a mountain lake in the PNW" loading="lazy" />
           <figcaption>PNW lake hiking</figcaption>
