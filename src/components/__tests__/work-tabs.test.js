@@ -58,4 +58,31 @@ describe('work-tabs', () => {
     document.querySelector('[data-category="logistics"]').click();
     expect(getActiveTab()).toBe('logistics');
   });
+
+  it('gives every tab button role="tab"', async () => {
+    const { initWorkTabs } = await import('../work-tabs.js');
+    initWorkTabs();
+    const buttons = document.querySelectorAll('.work-tab-btn');
+    expect(buttons.length).toBeGreaterThan(0);
+    buttons.forEach(btn => {
+      expect(btn.getAttribute('role')).toBe('tab');
+    });
+  });
+
+  it('sets aria-selected="true" on the initially-active "All" tab and "false" on the rest', async () => {
+    const { initWorkTabs } = await import('../work-tabs.js');
+    initWorkTabs();
+    expect(document.querySelector('[data-category="all"]').getAttribute('aria-selected')).toBe('true');
+    ['logistics', 'gis', 'economics'].forEach(category => {
+      expect(document.querySelector(`[data-category="${category}"]`).getAttribute('aria-selected')).toBe('false');
+    });
+  });
+
+  it('flips aria-selected between the previously-active and newly-active tab on setActiveTab', async () => {
+    const { initWorkTabs, setActiveTab } = await import('../work-tabs.js');
+    initWorkTabs();
+    setActiveTab('gis');
+    expect(document.querySelector('[data-category="all"]').getAttribute('aria-selected')).toBe('false');
+    expect(document.querySelector('[data-category="gis"]').getAttribute('aria-selected')).toBe('true');
+  });
 });

@@ -19,6 +19,8 @@ export function initWorkTabs() {
     btn.type = 'button';
     btn.className = 'work-tab-btn';
     btn.dataset.category = category;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', 'false');
     btn.textContent = CATEGORY_LABELS[category];
     btn.addEventListener('click', () => setActiveTab(category));
     tabBar.appendChild(btn);
@@ -34,7 +36,9 @@ export function setActiveTab(category) {
   activeCategory = category;
 
   tabBar.querySelectorAll('.work-tab-btn').forEach(btn => {
-    btn.classList.toggle('work-tab-btn--active', btn.dataset.category === category);
+    const isActive = btn.dataset.category === category;
+    btn.classList.toggle('work-tab-btn--active', isActive);
+    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
   });
 
   document.querySelectorAll('.work-card').forEach(card => {
