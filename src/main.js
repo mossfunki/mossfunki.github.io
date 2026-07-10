@@ -5,6 +5,7 @@ import scrollama from 'scrollama';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initChartPanel, renderChart } from './components/chart-panel.js';
+import { initWorkTabs } from './components/work-tabs.js';
 import FinancialFlowsModule from './modules/financial-flows.js';
 import RealEstateModule from './modules/real-estate.js';
 import LaborMarketsModule from './modules/labor-markets.js';
@@ -189,6 +190,10 @@ gsap.from('.work-card', {
   stagger: 0.12,
   ease: 'power3.out',
 });
+
+/* ── Featured work tabs ─────────────────────────────────── */
+
+initWorkTabs();
 
 /* ── GSAP skill cards stagger ───────────────────────────── */
 

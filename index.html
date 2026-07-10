@@ -100,43 +100,80 @@
   <section id="featured-work" class="portfolio-section">
     <div class="section-header">
       <span class="section-label">Featured Work</span>
-      <h2 class="section-title">Seattle Spatial Analysis</h2>
-      <p class="section-subtitle">Three pipelines. Real open data. Real policy questions.</p>
+      <h2 class="section-title">Spatial &amp; Logistics Analysis</h2>
+      <p class="section-subtitle">Six pipelines across GIS, logistics, and economics. Real open data, real operational and policy questions.</p>
     </div>
+    <div class="work-tabs" id="work-tabs" role="tablist"></div>
     <div class="work-grid">
-      <div class="work-card work-card--primary">
-        <div class="work-card-label">GIS Portfolio · King County Open Data <span class="badge">New</span></div>
-        <h3 class="work-card-title">Seattle Spatial Analysis Trilogy</h3>
-        <p class="work-card-desc">Three end-to-end geospatial pipelines: transit-oriented development pricing, pedestrian collision risk, and urban heat island prediction by census tract. Built in Python, explained in plain English.</p>
+      <div class="work-card" data-categories="gis,economics">
+        <div class="work-card-label">GIS · Economics · King County Open Data</div>
+        <h3 class="work-card-title">Transit-Oriented Development &amp; Affordability Model</h3>
+        <p class="work-card-desc">Hedonic OLS regression across 531,000+ King County parcels quantifying how transit proximity shapes property values and housing affordability.</p>
         <div class="outcome-chips">
-          <span>531k parcels · OLS R²=0.50</span>
-          <span>303 collision clusters · DBSCAN</span>
-          <span>Random Forest + SHAP</span>
+          <span>531k parcels</span>
+          <span>OLS R²=0.50</span>
         </div>
-        <div class="work-card-tags">GeoPandas · Statsmodels · scikit-learn · SHAP · MapLibre GL · Scrollama</div>
+        <div class="work-card-tags">GeoPandas · Statsmodels · PostGIS</div>
         <div class="work-card-actions">
           <a href="https://github.com/mossfunki/seattle-gis-portfolio" class="btn-primary" target="_blank" rel="noopener">View on GitHub →</a>
         </div>
       </div>
-      <div class="work-card">
-        <div class="work-card-label">Analytics · Operations</div>
-        <h3 class="work-card-title">Demand Forecasting &amp; Inventory Optimization</h3>
+      <div class="work-card" data-categories="gis">
+        <div class="work-card-label">GIS · SDOT Open Data</div>
+        <h3 class="work-card-title">Automated Collision Risk Pipeline</h3>
+        <p class="work-card-desc">DBSCAN clustering pipeline on SDOT collision data identifying 303 high-injury pedestrian and cyclist clusters for infrastructure prioritization.</p>
+        <div class="outcome-chips">
+          <span>303 clusters</span>
+          <span>DBSCAN</span>
+        </div>
+        <div class="work-card-tags">scikit-learn · GeoPandas · Python</div>
+        <div class="work-card-actions">
+          <a href="https://github.com/mossfunki/seattle-gis-portfolio" class="btn-primary" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="work-card" data-categories="gis">
+        <div class="work-card-label">GIS · Climate</div>
+        <h3 class="work-card-title">Urban Heat Island Prediction</h3>
+        <p class="work-card-desc">Random Forest classifier with SHAP explainability predicting urban heat island risk across 1,545 census tracts; urban village designation outweighs tree density as a predictor.</p>
+        <div class="outcome-chips">
+          <span>1,545 tracts</span>
+          <span>Random Forest + SHAP</span>
+        </div>
+        <div class="work-card-tags">scikit-learn · SHAP · GeoPandas</div>
+        <div class="work-card-actions">
+          <a href="https://github.com/mossfunki/seattle-gis-portfolio" class="btn-primary" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="work-card" data-categories="logistics,gis">
+        <div class="work-card-label">Logistics · GIS <span class="badge">New</span></div>
+        <h3 class="work-card-title">Hydrogen Corridor Routing &amp; Infrastructure Gap Analysis</h3>
+        <p class="work-card-desc">Elevation- and traffic-adjusted routing model built on OSMnx, SRTM, and NREL data, cutting projected fuel consumption 18.8% versus standard routing.</p>
+        <div class="outcome-chips">
+          <span>18.8% fuel savings</span>
+        </div>
+        <div class="work-card-tags">OSMnx · SRTM · NREL · Python</div>
+        <div class="work-card-actions">
+          <a href="https://github.com/mossfunki/hydrogen-route-elevation-analysis" class="btn-primary" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="work-card" data-categories="logistics,economics">
+        <div class="work-card-label">Logistics · Operations</div>
+        <h3 class="work-card-title">Demand Forecasting &amp; Safety Stock Optimization</h3>
         <p class="work-card-desc">Prophet time-series forecasting on event-driven demand with dynamic safety stock recalculation. 31% fewer stockouts vs. static reorder model on held-out test data.</p>
         <div class="outcome-chips">
           <span>8.4% MAPE</span>
           <span>31% fewer stockouts</span>
         </div>
         <div class="work-card-tags">Python · Prophet · XGBoost · Streamlit</div>
-      </div>
-      <div class="work-card">
-        <div class="work-card-label">Analytics · Ix</div>
-        <h3 class="work-card-title">User Retention Analysis: 60% Lift</h3>
-        <p class="work-card-desc">Behavioral cohort analysis in Amplitude to identify drop-off drivers at an AI infrastructure startup. Findings adopted by product; retention increased 60% within 8 weeks.</p>
-        <div class="outcome-chips">
-          <span>60% retention increase</span>
-          <span>Deployed Dec 2025</span>
+        <div class="work-card-actions">
+          <a href="https://github.com/mossfunki/demand-inventory-forecast" class="btn-primary" target="_blank" rel="noopener">View on GitHub →</a>
         </div>
-        <div class="work-card-tags">Python · SQL · Amplitude · Cohort Analysis</div>
+      </div>
+      <div class="work-card" data-categories="logistics,economics">
+        <div class="work-card-label">Logistics · Economics <span class="badge">New</span></div>
+        <h3 class="work-card-title">Energy-Adjusted Logistics Forecasting</h3>
+        <p class="work-card-desc">Autonomous prediction model tracking how energy pricing moves through supply chain logistics costs, using multi-source public data for freight cost-variance analysis.</p>
+        <div class="work-card-tags">Python · Multi-source public data</div>
       </div>
     </div>
   </section>
