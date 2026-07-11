@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Energy-Adjusted Logistics Forecasting | Benjamin Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Distributed-lag OLS and Granger causality testing: does West Coast diesel price movement predict national truck freight rates? Real EIA and FRED data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:           #1b1e1c;
+      --surface:      #21251f;
+      --panel:        rgba(33,37,31,0.85);
+      --border:       rgba(237,234,226,0.09);
+      --border-glow:  rgba(224,164,88,0.35);
+      --accent:       #e0a458;
+      --amber:        #a85c4a;
+      --green:        #7a9e7e;
+      --red:          #d2624a;
+      --text:         #edeae2;
+      --text-muted:   #9ba096;
+      --font-ui:      'Manrope', system-ui, sans-serif;
+      --font-display: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+      --max-w:        960px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.75; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: 52px; background: rgba(27,30,28,0.88);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { max-width: var(--max-w); margin: 0 auto; height: 100%; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); opacity: 1; }
+    .back-row { max-width: var(--max-w); margin: 0 auto; padding: 1.25rem 2rem 0; }
+    .back-link { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+    .back-link:hover { color: var(--accent); opacity: 1; }
+
+    .hero { padding: 2.5rem 2rem 3.5rem; max-width: var(--max-w); margin: 0 auto; border-bottom: 1px solid var(--border); }
+    .hero-label { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1rem; }
+    .hero-subtitle { color: var(--text-muted); font-size: 1rem; max-width: 680px; line-height: 1.7; margin-bottom: 2rem; }
+
+    .metric-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 2rem; }
+    .metric-item { background: var(--surface); padding: 1.1rem 1.25rem; }
+    .metric-value { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .metric-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { padding: 0.25rem 0.65rem; border: 1px solid var(--border); border-radius: 3px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); background: var(--surface); }
+
+    .content-section { max-width: var(--max-w); margin: 0 auto; padding: 3.5rem 2rem; border-bottom: 1px solid var(--border); }
+    .section-label { display: block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .section-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .section-desc { color: var(--text-muted); font-size: 0.92rem; max-width: 720px; line-height: 1.75; margin-bottom: 2rem; }
+
+    .chart-wrap img { width: 100%; display: block; border-radius: 6px; border: 1px solid var(--border); }
+
+    .method-steps { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .method-step { display: flex; gap: 1.25rem; }
+    .step-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); font-weight: 700; flex-shrink: 0; padding-top: 0.15rem; }
+    .step-content h4 { font-size: 0.92rem; margin-bottom: 0.4rem; }
+    .step-content p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.65; }
+    .step-content code { font-family: var(--font-mono); font-size: 0.8rem; background: var(--surface); padding: 0.1rem 0.35rem; border-radius: 2px; color: var(--accent); }
+
+    .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--border-glow); border-radius: 4px; padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-top: 1.5rem; }
+    .callout strong { color: var(--text); }
+
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 2rem; margin-top: 4rem; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .footer-brand { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.78rem; color: var(--text-muted); }
+
+    @media (max-width: 680px) {
+      .metric-strip { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Benjamin Lab</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:benjaminmonroelab@gmail.com">Contact</a>
+        <a href="/about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="back-row"><a href="/" class="back-link">← Back to portfolio</a></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-label">Energy Economics · Time-Series Econometrics</span>
+    <h1 class="hero-title">Energy-Adjusted Logistics Forecasting</h1>
+    <p class="hero-subtitle">Does West Coast diesel price movement predict national truck freight rate movement, and at what lag? Distributed-lag OLS and Granger causality testing on 32 years of real public data (EIA diesel prices, FRED freight PPI), then an honest held-out forecast evaluation against a naive baseline.</p>
+
+    <div class="metric-strip">
+      <div class="metric-item">
+        <div class="metric-value">R&sup2;=0.282</div>
+        <div class="metric-label">Diesel &#8594; Freight PPI</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">p&lt;0.001</div>
+        <div class="metric-label">Granger Causality, All Lags</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">1 mo</div>
+        <div class="metric-label">Best-Fit Lag</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">26.0%</div>
+        <div class="metric-label">MAE Improvement vs. Naive</div>
+      </div>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">Python</span>
+      <span class="tag">statsmodels</span>
+      <span class="tag">Granger Causality</span>
+      <span class="tag">Distributed-Lag OLS</span>
+      <span class="tag">EIA API</span>
+      <span class="tag">FRED</span>
+    </div>
+  </div>
+
+  <!-- TIME SERIES -->
+  <section class="content-section">
+    <span class="section-label">Part 1: The Data</span>
+    <h2 class="section-title">West Coast Diesel vs. National Truck Freight PPI</h2>
+    <p class="section-desc">387 months (1994–2026) of West Coast (PADD 5) weekly diesel retail prices from EIA, resampled monthly, plotted against the national Producer Price Index for Truck Transportation of Freight from FRED. Both series are freely downloadable, no API key required.</p>
+    <div class="chart-wrap">
+      <img src="/energy-logistics/timeseries.svg" alt="West Coast diesel price vs national truck freight PPI, 1994-2026" />
+    </div>
+  </section>
+
+  <!-- GRANGER -->
+  <section class="content-section">
+    <span class="section-label">Part 2: Does Diesel Actually Predict Freight?</span>
+    <h2 class="section-title">Granger Causality by Lag</h2>
+    <p class="section-desc">Granger causality asks a narrow, testable question: do past diesel price changes improve prediction of freight rate changes, beyond what freight's own history already tells you? Tested at lags 1 through 6 months on month-over-month percent changes (raw price levels aren't stationary, so percent-change is the right transform here).</p>
+    <div class="chart-wrap">
+      <img src="/energy-logistics/granger-pvalues.svg" alt="Granger causality p-values by lag" />
+    </div>
+    <p class="section-desc" style="margin-top:1.5rem;margin-bottom:0;">Every lag from 1–6 months is significant at p &lt; 0.001. Lag 1 (one month) has the strongest signal (F=43.6, p=1.4×10⁻¹⁰).</p>
+  </section>
+
+  <!-- OLS -->
+  <section class="content-section">
+    <span class="section-label">Part 3: How Much, Not Just Whether</span>
+    <h2 class="section-title">Distributed-Lag OLS</h2>
+    <p class="section-desc">Granger causality tells you a relationship exists; it doesn't size it. A distributed-lag regression — <code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">freight_pct ~ diesel_pct_lag0 + diesel_pct_lag1</code> — quantifies it: both the same-month and 1-month-lagged diesel price change are significant predictors (both p &lt; 0.001), together explaining 28.2% of month-over-month variance in the freight PPI (R² = 0.282). A 1 percentage-point increase in diesel prices is associated with roughly a 0.15 percentage-point increase in freight rates over the same and following month (sum of both lag coefficients).</p>
+
+    <div class="method-steps">
+      <div class="method-step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h4>Data: EIA + FRED, aligned to monthly</h4>
+          <p>EIA weekly West Coast diesel retail prices resampled to monthly mean; joined with FRED's monthly Truck Transportation of Freight PPI (series <code>PCU4841214841212</code>). 387 aligned months, 1994-03 to 2026-05.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h4>Percent-change transform</h4>
+          <p>Both series converted to month-over-month % change before any testing — regressing raw index/price levels on each other would produce spurious correlation from shared trend, not a real relationship.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h4>Granger causality, lags 1–6</h4>
+          <p><code>statsmodels.tsa.stattools.grangercausalitytests</code> on the percent-change pair, identifying the lag with the strongest (lowest-p) relationship.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h4>Distributed-lag OLS at the best-fit lag</h4>
+          <p><code>statsmodels.OLS</code> regression of freight % change on same-month and lagged diesel % change, using the lag identified in step 3.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-num">05</span>
+        <div class="step-content">
+          <h4>Held-out forecast evaluation</h4>
+          <p>Model refit on all but the last 12 months, then forecasts compared against actuals on those 12 held-out months — the honest test of whether the in-sample relationship is actually forecast-useful.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORECAST EVAL -->
+  <section class="content-section">
+    <span class="section-label">Part 4: Held-Out Forecast</span>
+    <h2 class="section-title">Does It Actually Forecast Better Than a Naive Guess?</h2>
+    <p class="section-desc">The model is fit on all data except the most recent 12 months, then used to forecast those 12 months blind. Compared against the simplest possible baseline: predicting the in-sample average every month.</p>
+    <div class="chart-wrap">
+      <img src="/energy-logistics/forecast-eval.svg" alt="Held-out forecast vs actual freight PPI percent change, last 12 months" />
+    </div>
+    <div class="callout">
+      <strong>Result:</strong> Model MAE 1.73 percentage points vs. naive-baseline MAE 2.34 percentage points — a <strong>26.0% reduction in forecast error</strong> on genuinely held-out data. That's the difference between a statistically significant in-sample relationship and one that's actually useful for a near-term freight budget forecast.
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="content-section">
+    <span class="section-label">Why This Matters</span>
+    <h2 class="section-title">A Short, Real Lead Time</h2>
+    <p class="section-desc">A 1-month lead time between a diesel price move and its effect on national freight rates is short, but real and statistically defensible — enough to inform near-term freight budget forecasts, the timing of rate lock-ins, or mode-shift decisions (e.g. toward rail) when diesel prices are trending up. The point of the held-out evaluation above is that this isn't just a curve-fit: it beats a naive baseline on data the model never saw.</p>
+
+    <div style="margin-top:1rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="https://github.com/mossfunki/energy-adjusted-logistics-forecasting" target="_blank" rel="noopener" style="display:inline-block;padding:0.6rem 1.25rem;background:var(--accent);color:#1b1e1c;border-radius:4px;font-size:0.85rem;font-weight:700">View Notebook on GitHub →</a>
+      <a href="/" style="display:inline-block;padding:0.6rem 1.25rem;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;font-size:0.85rem;font-weight:600">← Back to portfolio</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-brand">Benjamin Lab</span>
+      <span style="font-size:0.78rem;color:var(--text-muted)">© 2026 · Seattle, WA</span>
+      <div class="footer-links">
+        <a href="mailto:benjaminmonroelab@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/benjamin-lab-577792240/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/mossfunki" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "months_of_data": 387,
+  "date_range": [
+    "1994-03-01",
+    "2026-05-01"
+  ],
+  "granger_pvalues_by_lag": {
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0
+  },
+  "best_lag_months": 1,
+  "best_lag_pvalue": 0.0,
+  "ols_r_squared": 0.2822,
+  "coef_at_best_lag": 0.0778,
+  "pvalue_at_best_lag": 0.0,
+  "holdout_model_mae_pp": 1.729,
+  "holdout_naive_mae_pp": 2.336,
+  "holdout_improvement_pct": 26.0
+}
