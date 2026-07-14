@@ -121,7 +121,7 @@
   <div class="hero">
     <span class="hero-label">Retail Operations · Time-Series Forecasting</span>
     <h1 class="hero-title">Demand Forecasting &amp; Safety Stock Optimization</h1>
-    <p class="hero-subtitle">Static reorder models miss event-driven demand spikes — Seahawks games, PAX West, Mariners season — causing stockouts during events and excess carrying cost in the quiet weeks between. A weekly-updating Prophet forecast with Seattle event regressors feeds directly into dynamic safety stock and reorder point calculations, replacing static tables with forward-looking signals.</p>
+    <p class="hero-subtitle">Static reorder models miss event-driven demand spikes (Seahawks games, PAX West, Mariners season), causing stockouts during events and excess carrying cost in the quiet weeks between. A weekly-updating Prophet forecast with Seattle event regressors feeds directly into dynamic safety stock and reorder point calculations, replacing static tables with forward-looking signals.</p>
 
     <div class="metric-strip">
       <div class="metric-item">
@@ -156,7 +156,7 @@
   <section class="content-section">
     <span class="section-label">Part 1: Forecast Accuracy</span>
     <h2 class="section-title">Prophet vs. XGBoost, 8-Week Held-Out Test</h2>
-    <p class="section-desc">Prophet with an event-calendar regressor consistently beats XGBoost on this problem — it handles the weekly/annual seasonality and event spikes directly, where XGBoost needs hand-engineered lag features to catch up.</p>
+    <p class="section-desc">Prophet with an event-calendar regressor consistently beats XGBoost on this problem: it handles the weekly/annual seasonality and event spikes directly, where XGBoost needs hand-engineered lag features to catch up.</p>
 
     <table class="results">
       <thead>
@@ -188,10 +188,10 @@
       <div>
         <span class="section-label">Part 2: Inventory Math</span>
         <h2 class="section-title">From Forecast to Reorder Point</h2>
-        <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Forecasts alone don't prevent stockouts — the forecast has to feed a reorder policy. Safety stock is computed at a 95% service level: <code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">SS = Z × σ_LT × √LT</code>, and the dynamic reorder point is <code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">ROP = (avg daily demand × LT) + SS</code> — using the Prophet forecast's demand estimate instead of a trailing historical average, so the reorder point moves ahead of known events instead of reacting after the fact.</p>
+        <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.7;">Forecasts alone don't prevent stockouts. The forecast has to feed a reorder policy. Safety stock is computed at a 95% service level: <code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">SS = Z × σ_LT × √LT</code>, and the dynamic reorder point is <code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">ROP = (avg daily demand × LT) + SS</code>, using the Prophet forecast's demand estimate instead of a trailing historical average, so the reorder point moves ahead of known events instead of reacting after the fact.</p>
       </div>
       <div class="callout">
-        <strong>Why Prophet over ARIMA?</strong> Prophet handles multiple seasonalities (weekly, annual) and accepts external regressors cleanly — event attendance buckets plug in directly. ARIMA requires separate exogenous variable handling that adds complexity without accuracy gains here.
+        <strong>Why Prophet over ARIMA?</strong> Prophet handles multiple seasonalities (weekly, annual) and accepts external regressors cleanly: event attendance buckets plug in directly. ARIMA requires separate exogenous variable handling that adds complexity without accuracy gains here.
         <br><br>
         <strong>Why 95% service level?</strong> Standard for consumer retail; adjustable per SKU value (0.98 for high-value, 0.90 for commodity items).
       </div>
@@ -237,13 +237,13 @@
         <span class="step-num">05</span>
         <div class="step-content">
           <h4>Ops Dashboard</h4>
-          <p>Streamlit + Plotly dashboard surfacing the current forecast, reorder recommendations, and stockout risk — built for an operations manager, not a data scientist.</p>
+          <p>Streamlit + Plotly dashboard surfacing the current forecast, reorder recommendations, and stockout risk, built for an operations manager, not a data scientist.</p>
         </div>
       </div>
     </div>
 
     <div class="callout">
-      <strong>On the data:</strong> Demand figures are simulated using realistic retail parameters calibrated to BLS retail trade indices — real proprietary retail data isn't available for a portfolio project. The event calendar itself is real (Seattle Special Events Office, team schedules). Simulating demand keeps the forecasting methodology fully inspectable and reproducible: the generation logic is in <code style="font-family:var(--font-mono);background:var(--bg);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">data/generate_data.py</code> and any analyst can substitute real data without changing the pipeline.
+      <strong>On the data:</strong> Demand figures are simulated using realistic retail parameters calibrated to BLS retail trade indices. Real proprietary retail data isn't available for a portfolio project. The event calendar itself is real (Seattle Special Events Office, team schedules). Simulating demand keeps the forecasting methodology fully inspectable and reproducible: the generation logic is in <code style="font-family:var(--font-mono);background:var(--bg);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">data/generate_data.py</code> and any analyst can substitute real data without changing the pipeline.
     </div>
 
     <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap">

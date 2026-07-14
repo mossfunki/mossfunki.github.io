@@ -163,7 +163,7 @@
   <section class="content-section">
     <span class="section-label">Part 3: How Much, Not Just Whether</span>
     <h2 class="section-title">Distributed-Lag OLS</h2>
-    <p class="section-desc">Granger causality tells you a relationship exists; it doesn't size it. A distributed-lag regression — <code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">freight_pct ~ diesel_pct_lag0 + diesel_pct_lag1</code> — quantifies it: both the same-month and 1-month-lagged diesel price change are significant predictors (both p &lt; 0.001), together explaining 28.2% of month-over-month variance in the freight PPI (R² = 0.282). A 1 percentage-point increase in diesel prices is associated with roughly a 0.15 percentage-point increase in freight rates over the same and following month (sum of both lag coefficients).</p>
+    <p class="section-desc">Granger causality tells you a relationship exists; it doesn't size it. A distributed-lag regression (<code style="font-family:var(--font-mono);background:var(--surface);padding:0.1rem 0.35rem;border-radius:2px;color:var(--accent);">freight_pct ~ diesel_pct_lag0 + diesel_pct_lag1</code>) quantifies it: both the same-month and 1-month-lagged diesel price change are significant predictors (both p &lt; 0.001), together explaining 28.2% of month-over-month variance in the freight PPI (R² = 0.282). A 1 percentage-point increase in diesel prices is associated with roughly a 0.15 percentage-point increase in freight rates over the same and following month (sum of both lag coefficients).</p>
 
     <div class="method-steps">
       <div class="method-step">
@@ -177,7 +177,7 @@
         <span class="step-num">02</span>
         <div class="step-content">
           <h4>Percent-change transform</h4>
-          <p>Both series converted to month-over-month % change before any testing — regressing raw index/price levels on each other would produce spurious correlation from shared trend, not a real relationship.</p>
+          <p>Both series converted to month-over-month % change before any testing: regressing raw index/price levels on each other would produce spurious correlation from shared trend, not a real relationship.</p>
         </div>
       </div>
       <div class="method-step">
@@ -198,7 +198,7 @@
         <span class="step-num">05</span>
         <div class="step-content">
           <h4>Held-out forecast evaluation</h4>
-          <p>Model refit on all but the last 12 months, then forecasts compared against actuals on those 12 held-out months — the honest test of whether the in-sample relationship is actually forecast-useful.</p>
+          <p>Model refit on all but the last 12 months, then forecasts compared against actuals on those 12 held-out months, the honest test of whether the in-sample relationship is actually forecast-useful.</p>
         </div>
       </div>
     </div>
@@ -213,7 +213,7 @@
       <img src="/energy-logistics/forecast-eval.svg" alt="Held-out forecast vs actual freight PPI percent change, last 12 months" />
     </div>
     <div class="callout">
-      <strong>Result:</strong> Model MAE 1.73 percentage points vs. naive-baseline MAE 2.34 percentage points — a <strong>26.0% reduction in forecast error</strong> on genuinely held-out data. That's the difference between a statistically significant in-sample relationship and one that's actually useful for a near-term freight budget forecast.
+      <strong>Result:</strong> Model MAE 1.73 percentage points vs. naive-baseline MAE 2.34 percentage points: a <strong>26.0% reduction in forecast error</strong> on genuinely held-out data. That's the difference between a statistically significant in-sample relationship and one that's actually useful for a near-term freight budget forecast.
     </div>
   </section>
 
@@ -221,7 +221,7 @@
   <section class="content-section">
     <span class="section-label">Why This Matters</span>
     <h2 class="section-title">A Short, Real Lead Time</h2>
-    <p class="section-desc">A 1-month lead time between a diesel price move and its effect on national freight rates is short, but real and statistically defensible — enough to inform near-term freight budget forecasts, the timing of rate lock-ins, or mode-shift decisions (e.g. toward rail) when diesel prices are trending up. The point of the held-out evaluation above is that this isn't just a curve-fit: it beats a naive baseline on data the model never saw.</p>
+    <p class="section-desc">A 1-month lead time between a diesel price move and its effect on national freight rates is short, but real and statistically defensible: enough to inform near-term freight budget forecasts, the timing of rate lock-ins, or mode-shift decisions (e.g. toward rail) when diesel prices are trending up. The point of the held-out evaluation above is that this isn't just a curve-fit: it beats a naive baseline on data the model never saw.</p>
 
     <div style="margin-top:1rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap">
       <a href="https://github.com/mossfunki/energy-adjusted-logistics-forecasting" target="_blank" rel="noopener" style="display:inline-block;padding:0.6rem 1.25rem;background:var(--accent);color:#1b1e1c;border-radius:4px;font-size:0.85rem;font-weight:700">View Notebook on GitHub →</a>
