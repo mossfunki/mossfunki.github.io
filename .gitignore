@@ -1,7 +1,9 @@
-node_modules/
-dist/
+node_modules
+.next
+out
 .env
-public/data/_raw/
-.superpowers/
-.vercel
-.env*
+.env.local
+.DS_Store
+next-env.d.ts
+*.tsbuildinfo
+.superpowers

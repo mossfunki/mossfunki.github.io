@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* day ops (light) */
+  --bg: #eceee7;
+  --panel: #f7f8f3;
+  --panel-raised: #ffffff;
+  --ink: #1b1d1f;
+  --ink-dim: #5b6360;
+  --flap-amber: #a35d00;
+  --flap-teal: #1f5551;
+  --alert: #a53321;
+  --line: rgba(27, 29, 31, 0.14);
+}
+
+.dark {
+  /* night ops (dark) */
+  --bg: #1b1d1f;
+  --panel: #232629;
+  --panel-raised: #2a2d30;
+  --ink: #eef0ee;
+  --ink-dim: #9a9f9c;
+  --flap-amber: #f2a900;
+  --flap-teal: #3f8f89;
+  --alert: #e4553a;
+  --line: rgba(238, 240, 238, 0.14);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--flap-amber);
+  outline-offset: 2px;
+}
+
+/* ---- Placard / tag typography ---- */
+
+.placard-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+}
+
+.tag-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-dim);
+}
+
+/* ---- Split-flap board ---- */
+
+.flap-row {
+  display: inline-flex;
+  gap: 0.15em;
+}
+
+.flap-char {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  background-color: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 1px 0 var(--line) inset;
+}
+
+.flap-char::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background-color: var(--bg);
+  opacity: 0.7;
+}
+
+.flap-char.is-cycling {
+  color: var(--ink-dim);
+}
+
+/* ---- Shop traveler card (signature motif) ---- */
+
+.traveler-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  background-color: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.traveler-stub {
+  border-right: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  padding: 0.75rem 0;
+}
+
+.traveler-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.reg-mark {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--ink-dim);
+  opacity: 0.5;
+}
+
+.reg-mark.tl {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.reg-mark.br {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+@media print {
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --panel: #ffffff;
+    --panel-raised: #ffffff;
+    --ink: #111111;
+    --ink-dim: #444444;
+    --flap-amber: #a35d00;
+    --flap-teal: #1f5551;
+    --line: rgba(0, 0, 0, 0.2);
+  }
+}
